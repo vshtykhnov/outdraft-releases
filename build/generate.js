@@ -239,7 +239,7 @@ ${generateJsonLd(lang)}
   <header class="top">
     <a class="brand" href="${brandHref}"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#141414"/><g fill="none" stroke-width="7"><circle cx="32" cy="32" r="17" stroke="#5DCAA5" stroke-dasharray="48 59" transform="rotate(-90 32 32)"/><circle cx="32" cy="32" r="17" stroke="#E24B4A" stroke-dasharray="48 59" transform="rotate(90 32 32)"/></g></svg>Outdraft</a>
     <div class="right">
-      <nav class="links"><a href="#features">${dict.navFeatures}</a><a href="#start">${dict.navStart}</a><a href="#faq">${dict.navFaq}</a></nav>
+      <nav class="links"><a href="/${lang}/guides/">${dict.navGuides}</a><a href="#features">${dict.navFeatures}</a><a href="#start">${dict.navStart}</a><a href="#faq">${dict.navFaq}</a></nav>
       <a class="tg-top" href="https://t.me/d2_outdraft" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg></a>
       <nav class="lang" role="group" aria-label="Language"><a href="/en/"${lang === 'en' ? ' aria-current="page"' : ''}>EN</a><a href="/ru/"${lang === 'ru' ? ' aria-current="page"' : ''}>RU</a><a href="/uk/"${lang === 'uk' ? ' aria-current="page"' : ''}>UA</a></nav>
     </div>
@@ -456,7 +456,7 @@ ${generateJsonLd('en')}
   <header class="top">
     <a class="brand" href="/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#141414"/><g fill="none" stroke-width="7"><circle cx="32" cy="32" r="17" stroke="#5DCAA5" stroke-dasharray="48 59" transform="rotate(-90 32 32)"/><circle cx="32" cy="32" r="17" stroke="#E24B4A" stroke-dasharray="48 59" transform="rotate(90 32 32)"/></g></svg>Outdraft</a>
     <div class="right">
-      <nav class="links"><a href="#features">${dict.navFeatures}</a><a href="#start">${dict.navStart}</a><a href="#faq">${dict.navFaq}</a></nav>
+      <nav class="links"><a href="/en/guides/">${dict.navGuides}</a><a href="#features">${dict.navFeatures}</a><a href="#start">${dict.navStart}</a><a href="#faq">${dict.navFaq}</a></nav>
       <a class="tg-top" href="https://t.me/d2_outdraft" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg></a>
       <nav class="lang" role="group" aria-label="Language"><a href="/en/">EN</a><a href="/ru/">RU</a><a href="/uk/">UA</a></nav>
     </div>

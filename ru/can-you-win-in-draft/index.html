@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Можно ли выиграть на драфте в Dota 2: 10 лет исследований | Outdraft</title>
+  <link rel="canonical" href="https://outdraft.org/ru/can-you-win-in-draft/">
+  <meta name="description" content="Насколько драфт решает исход в Dota 2: OpenAI Five, работы Stanford и ВШЭ, бенчмарк на 3,5 млн матчей. Почему средние винрейты врут и что значит «Dire 64%».">
+  <link rel="alternate" hreflang="en" href="https://outdraft.org/en/can-you-win-in-draft/">
+  <link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/can-you-win-in-draft/">
+  <link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/can-you-win-in-draft/">
+  <link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/can-you-win-in-draft/">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Outdraft">
+  <meta property="og:url" content="https://outdraft.org/ru/can-you-win-in-draft/">
+  <meta property="og:title" content="Можно ли выиграть на драфте в Dota 2: 10 лет исследований | Outdraft">
+  <meta property="og:description" content="Насколько драфт решает исход в Dota 2: OpenAI Five, работы Stanford и ВШЭ, бенчмарк на 3,5 млн матчей. Почему средние винрейты врут и что значит «Dire 64%».">
+  <meta property="og:image" content="https://outdraft.org/media/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="uk_UA">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Можно ли выиграть на драфте в Dota 2: 10 лет исследований | Outdraft">
+  <meta name="twitter:description" content="Насколько драфт решает исход в Dota 2: OpenAI Five, работы Stanford и ВШЭ, бенчмарк на 3,5 млн матчей. Почему средние винрейты врут и что значит «Dire 64%».">
+  <meta name="twitter:image" content="https://outdraft.org/media/og-image.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Можно ли выиграть игру на драфте? Что говорит наука","description":"Насколько драфт решает исход в Dota 2: OpenAI Five, работы Stanford и ВШЭ, бенчмарк на 3,5 млн матчей. Почему средние винрейты врут и что значит «Dire 64%».","inLanguage":"ru","datePublished":"2026-10-19","dateModified":"2026-10-19","mainEntityOfPage":"https://outdraft.org/ru/can-you-win-in-draft/","image":"https://outdraft.org/media/og-image.png","author":{"@type":"Organization","name":"Outdraft","url":"https://outdraft.org"},"publisher":{"@type":"Organization","name":"Outdraft","logo":{"@type":"ImageObject","url":"https://outdraft.org/apple-touch-icon.png"}},"citation":["https://openai.com/index/openai-five-benchmark-results/","https://cs229.stanford.edu/proj2013/PerryConley-HowDoesHeSawMeARecommendationEngineForPickingHeroesInDota2.pdf","https://cseweb.ucsd.edu/classes/wi15/cse255-a/reports/wi15/Kaushik_Kalyanaraman.pdf","https://www.researchgate.net/publication/313010005","https://ceur-ws.org/Vol-1842/paper_05.pdf","https://dr.ntu.edu.sg/entities/publication/be15e66e-8de1-460b-a569-3053ebd97b88","https://batru.gg/dota2/benchmark","https://eprints.whiterose.ac.uk/id/eprint/152931/","https://dota2protracker.com/radiant-dire"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Насколько драфт решает в Dota 2?","acceptedAnswer":{"@type":"Answer","text":"По одним пикам исследования угадывают победителя в 56–70% игр, а на современных больших выборках — около 58–60%. Драфт заметно сдвигает шансы, но не решает игру сам по себе."}},{"@type":"Question","name":"Что делать, если драфт проигран?","acceptedAnswer":{"@type":"Answer","text":"Играть от своей сильной линии и тайминга, собирать предметы против состава врага и не драться на его условиях. Даже драфт с прогнозом 2,9% у OpenAI Five шёл 35 минут."}},{"@type":"Question","name":"Почему нельзя просто брать героев с высоким винрейтом?","acceptedAnswer":{"@type":"Answer","text":"Средний винрейт не учитывает матчапы и синергию. На 3,58 млн матчей усреднение винрейтов предсказало исход хуже, чем стратегия «всегда ставь на Radiant»."}},{"@type":"Question","name":"Что значит «Dire 64%» в Outdraft?","acceptedAnswer":{"@type":"Answer","text":"Это оценка шансов: в похожих драфтах Dire выигрывает около 64 игр из 100. Это не гарантия на конкретную игру, а преимущество на дистанции."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://outdraft.org/ru/"},{"@type":"ListItem","position":2,"name":"Статьи","item":"https://outdraft.org/ru/guides/"},{"@type":"ListItem","position":3,"name":"Можно ли выиграть на драфте","item":"https://outdraft.org/ru/can-you-win-in-draft/"}]}</script>
+  <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face { font-family: 'Inter'; src: url('/fonts/inter-var.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+    :root { --bg: #0a0d12; --panel: #10151c; --card: #141a22; --line: #222b37; --text: #e8edf4; --muted: #8b95a5; --r: #5DCAA5; --d: #E24B4A; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 Inter, system-ui, sans-serif; }
+    a { color: inherit; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; text-decoration: none; }
+    .brand svg { width: 32px; height: 32px; }
+    .right { display: flex; align-items: center; gap: 22px; }
+    .links { display: flex; gap: 22px; font-size: 14px; color: var(--muted); }
+    .links a { text-decoration: none; } .links a:hover, .links a[aria-current] { color: var(--text); }
+    .lang { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+    .lang a { color: var(--muted); font: 600 13px Inter, sans-serif; padding: 6px 10px; text-decoration: none; }
+    .lang a:hover { color: var(--text); } .lang a[aria-current="page"] { background: #1c2430; color: var(--text); }
+    .tg-top { display: inline-flex; align-items: center; color: var(--muted); } .tg-top:hover { color: #2aabee; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 10px; background: var(--r); color: #05140e; font-weight: 700; text-decoration: none; }
+    .btn:hover { filter: brightness(1.08); }
+    .btn.ghost { background: none; color: var(--text); border: 1px solid var(--line); font-weight: 600; } .btn.ghost:hover { border-color: var(--r); color: var(--r); filter: none; }
+    .tag { display: inline-block; font-size: 13px; color: var(--r); border: 1px solid #2c4a40; background: #10221c; padding: 4px 10px; border-radius: 999px; margin-bottom: 18px; }
+    .crumbs { font-size: 13px; color: var(--muted); margin: 8px 0 26px; } .crumbs a { text-decoration: none; } .crumbs a:hover { color: var(--text); } .crumbs span { margin: 0 8px; opacity: .5; }
+    .ahead { padding: 24px 0 40px; border-bottom: 1px solid #141b24; background: radial-gradient(60% 120% at 0% 0%, #12261f 0%, transparent 60%), radial-gradient(50% 120% at 100% 0%, #2a1515 0%, transparent 55%); }
+    h1 { font-size: 46px; line-height: 1.08; margin: 0 0 18px; letter-spacing: -1.4px; font-weight: 800; max-width: 18em; }
+    h1 .r { color: var(--r); } h1 .d { color: var(--d); }
+    .lead { color: #c3cbd7; font-size: 19px; margin: 0 0 22px; max-width: 40em; }
+    .meta { font-size: 13px; color: var(--muted); display: flex; gap: 18px; flex-wrap: wrap; }
+    .layout { display: grid; grid-template-columns: 1fr 250px; gap: 56px; padding: 44px 0 24px; }
+    .toc { position: sticky; top: 24px; align-self: start; font-size: 14px; border-left: 1px solid var(--line); padding-left: 18px; }
+    .toc b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; }
+    .toc a { display: block; color: var(--muted); text-decoration: none; padding: 5px 0; line-height: 1.35; } .toc a:hover { color: var(--text); }
+    .toc .btn { margin-top: 18px; padding: 10px 14px; font-size: 14px; color: #05140e; display: inline-flex; }
+    article { max-width: 720px; font-size: 17px; line-height: 1.7; }
+    article h2 { font-size: 28px; line-height: 1.2; margin: 48px 0 14px; letter-spacing: -.5px; scroll-margin-top: 16px; }
+    article h2:first-child { margin-top: 0; }
+    article h3 { font-size: 19px; margin: 28px 0 8px; }
+    article p { margin: 0 0 16px; color: #d3d9e2; }
+    article ul, article ol { padding-left: 22px; margin: 0 0 18px; color: #d3d9e2; } article li { margin-bottom: 6px; }
+    article a { color: var(--r); text-decoration: underline; text-decoration-color: #2c4a40; text-underline-offset: 3px; } article a:hover { text-decoration-color: var(--r); }
+    article b, article strong { color: var(--text); }
+    sup a { text-decoration: none !important; font-size: 12px; color: var(--muted) !important; padding-left: 1px; }
+    .tbl { overflow-x: auto; margin: 8px 0 22px; border: 1px solid var(--line); border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; background: var(--card); }
+    th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); background: #10151c; font-weight: 600; }
+    tr:last-child td { border-bottom: 0; } td.num { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 700; }
+    .up { color: var(--r); } .dn { color: var(--d); }
+    .callout { border: 1px solid #2c4a40; background: #0f1d18; border-radius: 12px; padding: 16px 20px; margin: 8px 0 22px; }
+    .callout.warn { border-color: #4a2c2c; background: #1c1111; }
+    .callout.od { border-color: #2a3a52; background: #0f1724; }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout .k { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--r); font-weight: 700; margin-bottom: 6px; }
+    .callout.warn .k { color: var(--d); } .callout.od .k { color: #8fb3ff; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 8px 0 24px; }
+    .stat { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+    .stat b { display: block; font-size: 30px; line-height: 1.1; letter-spacing: -1px; color: var(--r); }
+    .stat.d b { color: var(--d); } .stat span { display: block; font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+    .pill { display: inline-block; font-size: 13px; font-weight: 700; padding: 1px 8px; border-radius: 6px; background: #1c2430; white-space: nowrap; }
+    .pill.g { color: var(--r); background: #10221c; } .pill.h { color: #f0b35a; background: #2a2010; } .pill.vh { color: var(--d); background: #2a1414; } .pill.e { color: #c3cbd7; }
+    section.blk { padding: 44px 0; border-top: 1px solid #141b24; }
+    section.blk h2 { font-size: 26px; margin: 0 0 20px; letter-spacing: -.5px; }
+    details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; max-width: 820px; }
+    summary { cursor: pointer; font-weight: 700; list-style: none; } summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; float: right; color: var(--muted); } details[open] summary::after { content: "–"; }
+    details p { color: var(--muted); margin: 10px 0 0; }
+    .ctabox { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; border-radius: 16px; padding: 28px; border: 1px solid var(--line);
+              background: radial-gradient(120% 120% at 0% 0%, #17322a 0%, transparent 55%), radial-gradient(120% 120% at 100% 100%, #3a1a1a 0%, transparent 55%), var(--panel); }
+    .ctabox h2 { margin: 0 0 8px !important; } .ctabox p { margin: 0; color: var(--muted); max-width: 36em; }
+    .ctabox .acts { display: flex; flex-direction: column; gap: 10px; }
+    .ctabox img { width: 100%; max-width: 220px; height: auto; border-radius: 10px; display: block; -webkit-mask-image: linear-gradient(#000 80%, transparent); mask-image: linear-gradient(#000 80%, transparent); }
+    .ctabox .row { display: grid; grid-template-columns: 220px 1fr; gap: 24px; align-items: center; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .grid.g3 { grid-template-columns: repeat(3, 1fr); }
+    .card { display: block; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; text-decoration: none; transition: border-color .15s; }
+    a.card:hover { border-color: #2c4a40; }
+    .card .n { font-size: 12px; color: var(--r); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .card h3 { margin: 6px 0 6px; font-size: 17px; line-height: 1.3; } .card p { margin: 0; color: var(--muted); font-size: 14px; }
+    ol.src { font-size: 14px; color: var(--muted); padding-left: 22px; margin: 0; columns: 1; } ol.src li { margin-bottom: 6px; word-break: break-word; }
+    ol.src a { color: #b9c3d0; } ol.src a:hover { color: var(--r); }
+    .note { font-size: 13px; color: var(--muted); margin-top: 14px; }
+    footer { padding: 32px 0 48px; border-top: 1px solid #141b24; color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    footer .links { display: flex; flex-wrap: wrap; row-gap: 8px; }
+    @media (max-width: 920px) { .layout { grid-template-columns: 1fr; gap: 0; } .toc { display: none; } }
+    @media (max-width: 820px) {
+      .wrap { padding: 0 16px; } h1 { font-size: 32px; letter-spacing: -1px; } .lead { font-size: 17px; }
+      article { font-size: 16px; } article h2 { font-size: 23px; margin-top: 38px; }
+      .stats { grid-template-columns: 1fr; } .grid, .grid.g3 { grid-template-columns: 1fr; }
+      .ctabox { grid-template-columns: 1fr; padding: 20px; } .ctabox .row { grid-template-columns: 1fr; } .ctabox img { max-width: 260px; }
+      .btn { justify-content: center; } .top .links { display: none; } footer { flex-direction: column; }
+      th, td { padding: 9px 10px; font-size: 14px; }
+    }
+  </style>
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once unregister identify alias set_config reset opt_in_capturing opt_out_capturing has_opted_out_capturing get_distinct_id get_property".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init("phc_tXqHeZPMF6h8Ls2ETXPWwyt8392FjHPi3TkW8wiMrmcf", {api_host: "https://eu.i.posthog.com", persistence: "memory", person_profiles: "never"});
+  </script>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/ru/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#141414"/><g fill="none" stroke-width="7"><circle cx="32" cy="32" r="17" stroke="#5DCAA5" stroke-dasharray="48 59" transform="rotate(-90 32 32)"/><circle cx="32" cy="32" r="17" stroke="#E24B4A" stroke-dasharray="48 59" transform="rotate(90 32 32)"/></g></svg>Outdraft</a>
+    <div class="right">
+      <nav class="links"><a href="/ru/guides/">Статьи</a><a href="/ru/#features">Возможности</a><a href="/ru/#faq">Вопросы</a></nav>
+      <a class="tg-top" href="https://t.me/d2_outdraft" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg></a>
+      <nav class="lang" role="group" aria-label="Language"><a href="/en/can-you-win-in-draft/" hreflang="en">EN</a><a href="/ru/can-you-win-in-draft/" hreflang="ru" aria-current="page">RU</a><a href="/uk/can-you-win-in-draft/" hreflang="uk">UA</a></nav>
+    </div>
+  </header>
+</div>
+
+<div class="ahead"><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a><span>/</span><a href="/ru/guides/">Статьи</a><span>/</span>Можно ли выиграть на драфте</nav>
+  <span class="tag">Наука о драфте</span>
+  <h1>Можно ли выиграть игру <span class="r">на драфте?</span> Что говорит наука</h1>
+  <p class="lead">Выиграть игру <i>только</i> драфтом нельзя, а сдвинуть шансы — вполне. Модели, которые видят одни пики, угадывают победителя в 56–70% игр, и честный потолок на современных больших выборках — около 58–60%. Это много: драфт — самый большой рычаг, который есть у тебя до первой минуты.</p>
+  <div class="meta"><span>Обновлено: 19.10.2026</span><span>5 мин чтения</span><span>Живые цифры: Dotabuff / OpenDota / D2PT, 19.10.2026, патч 7.41</span></div>
+</div></div>
+
+<div class="wrap"><div class="layout">
+  <article>
+
+<h2 id="s1">OpenAI Five: 95% и 2,9%</h2>
+<p>В августе 2018 года OpenAI показала бота OpenAI Five в матчах против людей <sup><a href="#src1">[1]</a></sup>. Перед первой игрой нейросеть оценила драфт и дала себе <b>95%</b> на победу, хотя людям матчап казался ровным. Бот выиграл за 21:37. Во второй игре прогноз был 76,2%, снова победа.</p>
+<p>В третьей игре героев боту подобрала аудитория. Прогноз после драфта: <b>2,9%</b>. По ходу игры он поднимался максимум до 17%, и бот проиграл на 35:47.</p>
+<div class="callout "><span class="k">Что из этого следует</span><p>Модель видит в драфте то, чего не видят даже сильные игроки. Но обрати внимание: игра с прогнозом 2,9% длилась больше получаса. Плохой драфт не означает мгновенное поражение, он означает, что тебе придётся играть лучше соперника.</p></div>
+
+<h2 id="s2">10 лет исследований: от 69,8% до 58,7%</h2>
+<p>Предсказывать победу по пикам пробовали студенты Stanford, ВШЭ, NTU и независимые команды. Вот что получилось:</p>
+<div class="tbl"><table><thead><tr><th>Год</th><th>Работа</th><th>Матчей</th><th>Только по пикам</th></tr></thead><tbody><tr><td>2013</td><td>Stanford, Conley & Perry <sup><a href="#src2">[2]</a></sup></td><td>56 691</td><td class="num">69,8%</td></tr><tr><td>2015</td><td>UCSD, Kalyanaraman <sup><a href="#src3">[3]</a></sup></td><td>30 426</td><td class="num">69,4%</td></tr><tr><td>2015</td><td>Kinkade & Lim, по обзору <sup><a href="#src5">[5]</a></sup></td><td>—</td><td class="num">72,9%</td></tr><tr><td>2017</td><td>ВШЭ / Yandex Data Factory, Semenov и др. <sup><a href="#src4">[4]</a></sup></td><td>5 071 858</td><td class="num">AUC 0,66–0,71</td></tr><tr><td>2020</td><td>NTU, Wu Hao <sup><a href="#src6">[6]</a></sup></td><td>181 717</td><td class="num">60,1%</td></tr><tr><td>2026</td><td>Бенчмарк batru.gg <sup><a href="#src7">[7]</a></sup></td><td>3 579 956</td><td class="num">58,7%</td></tr></tbody></table></div>
+<p>Почему цифра упала? Ранние работы брали небольшие или отфильтрованные выборки старых патчей, часто только высокий скилл и без ливеров. Современные бенчмарки проверяют модель на миллионах обычных игр всех рангов. Авторы batru прямо пишут, что сильно более высокие цифры обычно означают утечку информации из уже сыгранного матча <sup><a href="#src7">[7]</a></sup>. Поэтому к громким заявлениям вроде «81% точности» стоит относиться скептически.</p>
+<p>Честный итог: по одним пикам можно предсказать примерно 58–60 игр из 100. Остальное решают люди. Но 58–60 — это заметно больше 50, и разница появляется ещё до выхода из фонтана.</p>
+
+<h2 id="s3">Почему средние винрейты врут</h2>
+<p>Самая частая ошибка — смотреть на общий винрейт героя. В бенчмарке batru простое усреднение винрейтов героев угадало исход в <b>52,2%</b> игр. Это <i>хуже</i>, чем стратегия «всегда ставь на Radiant», которая даёт 53,1% просто из-за преимущества стороны <sup><a href="#src7">[7]</a></sup> <sup><a href="#src9">[9]</a></sup>. Даже когда усреднение уверенно предсказывало 65% и больше, оно оказывалось право только в 56,0% случаев.</p>
+<p>То же видно в старых работах. По обзору 2017 года, модель на сумме индивидуальных винрейтов давала 63%, а с учётом пар героев, то есть синергии и контрпиков, — 72,9% <sup><a href="#src5">[5]</a></sup>. В исследовании ВШЭ модели, которые учитывают взаимодействие героев (Factorization Machines и XGBoost), обошли простую логистическую регрессию <sup><a href="#src4">[4]</a></sup>.</p>
+<div class="callout "><span class="k">Главное</span><p>Важно не «какой герой сильный», а «кто против кого и кто с кем». Тир-лист отвечает на первый вопрос, драфт — на второй.</p></div>
+
+<h2 id="s4">Драфт важнее на низких рангах</h2>
+<p>Исследование ВШЭ на 5 млн матчей разделило игры по уровню скилла, и разница оказалась заметной <sup><a href="#src4">[4]</a></sup>:</p>
+<div class="tbl"><table><thead><tr><th>Уровень скилла</th><th>ROC AUC по пикам (лучшая модель)</th></tr></thead><tbody><tr><td>Normal</td><td class="num">0,706</td></tr><tr><td>High</td><td class="num">0,670</td></tr><tr><td>Very High</td><td class="num">0,660</td></tr></tbody></table></div>
+<p>ROC AUC — это не процент угаданных игр, а мера того, насколько хорошо модель отделяет победы от поражений: 0,5 — монетка, 1,0 — идеальный прогноз. Смысл простой: на обычных рангах исход сильнее зависит от пиков. Авторы объясняют это тем, что сильные игроки умеют играть против контрпиков, а на низком скилле люди уверенно играют меньше героев. Если ты не на высоком рейтинге, драфт для тебя важнее, чем для про-игроков.</p>
+
+<h2 id="s5">Почему преимущество так быстро растёт</h2>
+<p>Если добавить данные из самой игры, прогноз становится точным очень быстро. В работе Hodge и соавторов модель на живых матчах ESL One Hamburg 2017 доходила до <b>85% уже после 5 минут</b> <sup><a href="#src8">[8]</a></sup>. По обзору 2017 года, другая работа получала 82,23% на 5-й минуте <sup><a href="#src5">[5]</a></sup>. Преимущество с драфта превращается в выигранные линии, а выигранные линии — в снежный ком. Поэтому драфт и линии обычно нужно рассматривать вместе.</p>
+
+<h2 id="s6">Что значит «Dire 64%» в Outdraft</h2>
+<p>Outdraft считает драфт по тысячам матчей за последние четыре недели и показывает результат как шанс на победу. «Dire 64%» значит: в похожих драфтах Dire выигрывает примерно 64 игры из 100. Это не гарантия. В 36 таких играх из 100 побеждает Radiant.</p>
+<p>У хорошего прогноза есть простая проверка — калибровка. Если модель говорит «60–65%», такие игры должны заканчиваться победой примерно в 60–65% случаев. Например, batru публикует такую проверку для своей модели: прогнозы 60–65% сбылись в 62,8% игр <sup><a href="#src7">[7]</a></sup>. Это правильный способ читать любой «процент драфта»: как шансы на дистанции, а не обещание на одну игру.</p>
+<p>Вместе с общим процентом Outdraft показывает вклад каждого героя, ⭐ у самого влиятельного героя и 🔻 у самого слабого, а также расклад по линиям: <span class="pill g">Good</span> <span class="pill e">Even</span> <span class="pill h">Hard</span> <span class="pill vh">Very hard</span>.</p>
+
+<h2 id="s7">Признаки проигранного драфта и что с ним делать</h2>
+<ul>
+<li><b>Нечем убить ключевого героя врага.</b> Нет ни среза лечения, ни сайленса, ни урона по площади против иллюзий. Подробнее — в статье <a href="/ru/cant-kill-this-hero/">«Почему этого героя невозможно убить»</a>.</li>
+<li><b>Две-три тяжёлые линии.</b> Если почти все линии Hard или Very hard, к 10-й минуте у врага будет заметный перевес.</li>
+<li><b>Нет контроля и инициации.</b> Команда не может начать драку или поймать одного героя.</li>
+</ul>
+<p>Если драфт всё-таки проигран: играй от своей самой сильной линии и своего тайминга, собирай предметы против конкретного состава врага и не дерись на его условиях. И помни про 2,9% у OpenAI Five: даже очень плохой драфт оставляет игру, просто её придётся вытаскивать головой.</p>
+
+  </article>
+  <aside class="toc"><b>Содержание</b><a href="#s1">OpenAI Five: 95% и 2,9%</a><a href="#s2">10 лет исследований: от 69,8% до 58,7%</a><a href="#s3">Почему средние винрейты врут</a><a href="#s4">Драфт важнее на низких рангах</a><a href="#s5">Почему преимущество так быстро растёт</a><a href="#s6">Что значит «Dire 64%» в Outdraft</a><a href="#s7">Признаки проигранного драфта и что с ним делать</a><a class="btn download-btn" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft.exe">⬇ Скачать для Windows</a></aside>
+</div></div>
+
+<section class="blk" id="faq"><div class="wrap">
+  <h2>Частые вопросы</h2>
+  <details open><summary>Насколько драфт решает в Dota 2?</summary><p>По одним пикам исследования угадывают победителя в 56–70% игр, а на современных больших выборках — около 58–60%. Драфт заметно сдвигает шансы, но не решает игру сам по себе.</p></details>
+  <details><summary>Что делать, если драфт проигран?</summary><p>Играть от своей сильной линии и тайминга, собирать предметы против состава врага и не драться на его условиях. Даже драфт с прогнозом 2,9% у OpenAI Five шёл 35 минут.</p></details>
+  <details><summary>Почему нельзя просто брать героев с высоким винрейтом?</summary><p>Средний винрейт не учитывает матчапы и синергию. На 3,58 млн матчей усреднение винрейтов предсказало исход хуже, чем стратегия «всегда ставь на Radiant».</p></details>
+  <details><summary>Что значит «Dire 64%» в Outdraft?</summary><p>Это оценка шансов: в похожих драфтах Dire выигрывает около 64 игр из 100. Это не гарантия на конкретную игру, а преимущество на дистанции.</p></details>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <div class="ctabox">
+    <div class="row"><img src="/media/overlay.png" alt="Outdraft overlay" width="488" height="468">
+      <div><h2>Смотри шансы своего драфта вживую</h2><p>Outdraft — бесплатный оверлей для Dota 2. Он читает пики с экрана и показывает вклад каждого героя в процентах, расклад по линиям и общий шанс драфта на победу.</p></div></div>
+    <div class="acts"><a class="btn download-btn" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft.exe">⬇ Скачать для Windows</a><a class="btn ghost" href="/ru/#start">Как это работает</a></div>
+  </div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <h2>Читать дальше</h2>
+  <div class="grid">
+    <a class="card" href="/ru/why-i-keep-losing/"><span class="n">Статьи</span><h3>Почему я проигрываю в Доте, <span class="d">хотя играю нормально</span></h3><p>Форс 50%, серии поражений и тильт: что говорят Valve, исследования и статистика пабов.</p></a>
+    <a class="card" href="/ru/last-pick-counter-math/"><span class="n">Статьи</span><h3>Кого пикать последним: <span class="r">математика контрпика</span></h3><p>Сколько процентов даёт контрпик, почему тир-листы не работают на твоём ранге и как выбрать пятый пик.</p></a>
+    <a class="card" href="/ru/cant-kill-this-hero/"><span class="n">Статьи</span><h3>Почему этого героя <span class="d">невозможно убить</span></h3><p>Huskar, Meepo и другие «неубиваемые»: какие механики их закрывают и почему это вопрос драфта.</p></a>
+  </div>
+</div></section>
+
+<section class="blk" id="sources"><div class="wrap">
+  <h2>Источники</h2>
+  <ol class="src"><li id="src1">OpenAI — OpenAI Five Benchmark: Results, 5 Aug 2018. <a href="https://openai.com/index/openai-five-benchmark-results/" target="_blank" rel="noopener nofollow">openai.com/index/openai-five-benchmark-results/</a></li><li id="src2">Conley, Perry — How Does He Saw Me? A Recommendation Engine for Picking Heroes in Dota 2, Stanford CS229, 2013. <a href="https://cs229.stanford.edu/proj2013/PerryConley-HowDoesHeSawMeARecommendationEngineForPickingHeroesInDota2.pdf" target="_blank" rel="noopener nofollow">cs229.stanford.edu/proj2013/PerryConley-HowDoesHeSawMeARecommendationEngineForPickingHeroesInDota2.pdf</a></li><li id="src3">Kalyanaraman — To win or not to win? A prediction model to determine the outcome of a Dota 2 match, UCSD CSE255, 2015. <a href="https://cseweb.ucsd.edu/classes/wi15/cse255-a/reports/wi15/Kaushik_Kalyanaraman.pdf" target="_blank" rel="noopener nofollow">cseweb.ucsd.edu/classes/wi15/cse255-a/reports/wi15/Kaushik_Kalyanaraman.pdf</a></li><li id="src4">Semenov, Romov, Korolev, Yashkov, Neklyudov — Performance of Machine Learning Algorithms in Predicting Game Outcome from Drafts in Dota 2, AIST 2016 (Springer 2017). <a href="https://www.researchgate.net/publication/313010005" target="_blank" rel="noopener nofollow">www.researchgate.net/publication/313010005</a></li><li id="src5">Semenov et al. — Applications of Machine Learning in Dota 2: Literature Review and Practical Knowledge Sharing, CEUR-WS Vol-1842, 2017. <a href="https://ceur-ws.org/Vol-1842/paper_05.pdf" target="_blank" rel="noopener nofollow">ceur-ws.org/Vol-1842/paper_05.pdf</a></li><li id="src6">Wu Hao — Dota 2 pre-game prediction, Nanyang Technological University, 2020. <a href="https://dr.ntu.edu.sg/entities/publication/be15e66e-8de1-460b-a569-3053ebd97b88" target="_blank" rel="noopener nofollow">dr.ntu.edu.sg/entities/publication/be15e66e-8de1-460b-a569-3053ebd97b88</a></li><li id="src7">batru.gg — Dota 2 prediction benchmark, 3,579,956 held-out ranked matches (publisher's own numbers). <a href="https://batru.gg/dota2/benchmark" target="_blank" rel="noopener nofollow">batru.gg/dota2/benchmark</a></li><li id="src8">Hodge et al. — Win Prediction in Multi-Player Esports: Live Professional Match Prediction, IEEE Transactions on Games, 2021. <a href="https://eprints.whiterose.ac.uk/id/eprint/152931/" target="_blank" rel="noopener nofollow">eprints.whiterose.ac.uk/id/eprint/152931/</a></li><li id="src9">Dota2ProTracker — Radiant vs Dire, patch 7.41 (1,087,115 pub and 3,153 pro matches, 18 Oct 2026). <a href="https://dota2protracker.com/radiant-dire" target="_blank" rel="noopener nofollow">dota2protracker.com/radiant-dire</a></li></ol>
+  <p class="note">Цифры Kinkade & Lim и Johansson & Wikström взяты из обзора CEUR 2017, оригиналы мы не открывали. Бенчмарк batru опубликован самим сервисом и независимо не проверялся.</p>
+</div></section>
+
+<div class="wrap">
+  <footer><span>© 2026 Outdraft · Не связан с Valve</span>
+    <nav class="links"><a href="/ru/guides/">Статьи</a><a href="https://t.me/d2_outdraft" target="_blank" rel="noopener">Telegram</a><a href="https://www.youtube.com/@comaapp" target="_blank" rel="noopener">YouTube</a><a href="https://tally.so/r/D4lK4E">Обратная связь</a><a href="https://github.com/vshtykhnov/outdraft-releases/releases">Все версии</a></nav>
+  </footer>
+</div>
+<script>
+  document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked", { from: location.pathname })));
+</script>
+</body>
+</html>

@@ -33,4 +33,127 @@
     <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/"/>
   </url>
+
+  <!-- guides -->
+  <url>
+    <loc>https://outdraft.org/en/guides/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/guides/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/guides/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/guides/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/guides/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/ru/guides/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/guides/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/guides/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/guides/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/guides/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/uk/guides/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/guides/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/guides/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/guides/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/guides/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/en/why-i-keep-losing/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/why-i-keep-losing/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/why-i-keep-losing/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/why-i-keep-losing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/why-i-keep-losing/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/ru/why-i-keep-losing/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/why-i-keep-losing/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/why-i-keep-losing/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/why-i-keep-losing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/why-i-keep-losing/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/uk/why-i-keep-losing/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/why-i-keep-losing/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/why-i-keep-losing/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/why-i-keep-losing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/why-i-keep-losing/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/en/can-you-win-in-draft/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/can-you-win-in-draft/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/can-you-win-in-draft/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/can-you-win-in-draft/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/can-you-win-in-draft/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/ru/can-you-win-in-draft/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/can-you-win-in-draft/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/can-you-win-in-draft/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/can-you-win-in-draft/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/can-you-win-in-draft/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/uk/can-you-win-in-draft/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/can-you-win-in-draft/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/can-you-win-in-draft/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/can-you-win-in-draft/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/can-you-win-in-draft/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/en/last-pick-counter-math/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/last-pick-counter-math/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/last-pick-counter-math/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/last-pick-counter-math/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/last-pick-counter-math/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/ru/last-pick-counter-math/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/last-pick-counter-math/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/last-pick-counter-math/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/last-pick-counter-math/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/last-pick-counter-math/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/uk/last-pick-counter-math/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/last-pick-counter-math/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/last-pick-counter-math/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/last-pick-counter-math/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/last-pick-counter-math/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/en/cant-kill-this-hero/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/cant-kill-this-hero/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/cant-kill-this-hero/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/cant-kill-this-hero/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/cant-kill-this-hero/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/ru/cant-kill-this-hero/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/cant-kill-this-hero/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/cant-kill-this-hero/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/cant-kill-this-hero/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/cant-kill-this-hero/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/uk/cant-kill-this-hero/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/cant-kill-this-hero/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/cant-kill-this-hero/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/cant-kill-this-hero/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/cant-kill-this-hero/"/>
+  </url>
+  <!-- /guides -->
 </urlset>
