@@ -1,4 +1,5 @@
 const EN = {
+  navGuides: "Guides",
   navFeatures: "Features",
   navStart: "How it works",
   navFaq: "FAQ",
@@ -49,6 +50,7 @@ const EN = {
 };
 
 const RU = {
+  navGuides: "Статьи",
   navFeatures: "Возможности",
   navStart: "Как начать",
   navFaq: "Вопросы",
@@ -99,6 +101,7 @@ const RU = {
 };
 
 const UK = {
+  navGuides: "Статті",
   navFeatures: "Можливості",
   navStart: "Як почати",
   navFaq: "Питання",

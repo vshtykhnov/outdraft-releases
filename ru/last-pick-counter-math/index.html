@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Кого пикать последним в Dota 2: математика контрпика | Outdraft</title>
+  <link rel="canonical" href="https://outdraft.org/ru/last-pick-counter-math/">
+  <meta name="description" content="Насколько контрпик меняет шансы в Dota 2: Huskar против AA — 38,7%, Meepo против ES — 44,9%. Почему «сильный герой» зависит от ранга и как выбрать последний пик по шагам.">
+  <link rel="alternate" hreflang="en" href="https://outdraft.org/en/last-pick-counter-math/">
+  <link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/last-pick-counter-math/">
+  <link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/last-pick-counter-math/">
+  <link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/last-pick-counter-math/">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Outdraft">
+  <meta property="og:url" content="https://outdraft.org/ru/last-pick-counter-math/">
+  <meta property="og:title" content="Кого пикать последним в Dota 2: математика контрпика | Outdraft">
+  <meta property="og:description" content="Насколько контрпик меняет шансы в Dota 2: Huskar против AA — 38,7%, Meepo против ES — 44,9%. Почему «сильный герой» зависит от ранга и как выбрать последний пик по шагам.">
+  <meta property="og:image" content="https://outdraft.org/media/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="uk_UA">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Кого пикать последним в Dota 2: математика контрпика | Outdraft">
+  <meta name="twitter:description" content="Насколько контрпик меняет шансы в Dota 2: Huskar против AA — 38,7%, Meepo против ES — 44,9%. Почему «сильный герой» зависит от ранга и как выбрать последний пик по шагам.">
+  <meta name="twitter:image" content="https://outdraft.org/media/og-image.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Кого пикать последним: математика контрпика","description":"Насколько контрпик меняет шансы в Dota 2: Huskar против AA — 38,7%, Meepo против ES — 44,9%. Почему «сильный герой» зависит от ранга и как выбрать последний пик по шагам.","inLanguage":"ru","datePublished":"2026-10-19","dateModified":"2026-10-19","mainEntityOfPage":"https://outdraft.org/ru/last-pick-counter-math/","image":"https://outdraft.org/media/og-image.png","author":{"@type":"Organization","name":"Outdraft","url":"https://outdraft.org"},"publisher":{"@type":"Organization","name":"Outdraft","logo":{"@type":"ImageObject","url":"https://outdraft.org/apple-touch-icon.png"}},"citation":["https://www.dotabuff.com/heroes/meepo/counters","https://www.dotabuff.com/heroes/huskar/counters","https://www.gosugamers.net/dota2/features/73236-analyzing-the-first-pick-advantage-at-the-international-2024","https://ceur-ws.org/Vol-1842/paper_05.pdf","https://www.researchgate.net/publication/313010005","https://api.opendota.com/api/heroStats","https://batru.gg/dota2/benchmark","https://dota2protracker.com/radiant-dire"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Кого пикать последним в Dota 2?","acceptedAnswer":{"@type":"Answer","text":"Героя, который закрывает самого опасного врага, не проигрывает свою линию и есть в твоём пуле. Сильнейший герой патча без привязки к драфту — не лучший выбор для последнего пика."}},{"@type":"Question","name":"Насколько контрпик меняет шансы?","acceptedAnswer":{"@type":"Answer","text":"Обычный матчап — на 0–3 п.п., жёсткий контрпик — на 6–8 п.п. Например, Huskar против Ancient Apparition выигрывает 38,7% при общем винрейте 45,8%."}},{"@type":"Question","name":"Что важнее: синергия или контрпик?","acceptedAnswer":{"@type":"Answer","text":"Важно и то и другое. Модели, которые учитывают пары героев (союзников и врагов), предсказывают исход заметно лучше, чем средние винрейты."}},{"@type":"Question","name":"Почему тир-листы не работают на моём ранге?","acceptedAnswer":{"@type":"Answer","text":"Сила героя зависит от бракета. Bristleback выигрывает 53,8% в Herald и только 45,4% в Divine, а Shadow Demon — наоборот."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://outdraft.org/ru/"},{"@type":"ListItem","position":2,"name":"Статьи","item":"https://outdraft.org/ru/guides/"},{"@type":"ListItem","position":3,"name":"Кого пикать последним","item":"https://outdraft.org/ru/last-pick-counter-math/"}]}</script>
+  <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face { font-family: 'Inter'; src: url('/fonts/inter-var.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+    :root { --bg: #0a0d12; --panel: #10151c; --card: #141a22; --line: #222b37; --text: #e8edf4; --muted: #8b95a5; --r: #5DCAA5; --d: #E24B4A; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 Inter, system-ui, sans-serif; }
+    a { color: inherit; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; text-decoration: none; }
+    .brand svg { width: 32px; height: 32px; }
+    .right { display: flex; align-items: center; gap: 22px; }
+    .links { display: flex; gap: 22px; font-size: 14px; color: var(--muted); }
+    .links a { text-decoration: none; } .links a:hover, .links a[aria-current] { color: var(--text); }
+    .lang { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+    .lang a { color: var(--muted); font: 600 13px Inter, sans-serif; padding: 6px 10px; text-decoration: none; }
+    .lang a:hover { color: var(--text); } .lang a[aria-current="page"] { background: #1c2430; color: var(--text); }
+    .tg-top { display: inline-flex; align-items: center; color: var(--muted); } .tg-top:hover { color: #2aabee; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 10px; background: var(--r); color: #05140e; font-weight: 700; text-decoration: none; }
+    .btn:hover { filter: brightness(1.08); }
+    .btn.ghost { background: none; color: var(--text); border: 1px solid var(--line); font-weight: 600; } .btn.ghost:hover { border-color: var(--r); color: var(--r); filter: none; }
+    .tag { display: inline-block; font-size: 13px; color: var(--r); border: 1px solid #2c4a40; background: #10221c; padding: 4px 10px; border-radius: 999px; margin-bottom: 18px; }
+    .crumbs { font-size: 13px; color: var(--muted); margin: 8px 0 26px; } .crumbs a { text-decoration: none; } .crumbs a:hover { color: var(--text); } .crumbs span { margin: 0 8px; opacity: .5; }
+    .ahead { padding: 24px 0 40px; border-bottom: 1px solid #141b24; background: radial-gradient(60% 120% at 0% 0%, #12261f 0%, transparent 60%), radial-gradient(50% 120% at 100% 0%, #2a1515 0%, transparent 55%); }
+    h1 { font-size: 46px; line-height: 1.08; margin: 0 0 18px; letter-spacing: -1.4px; font-weight: 800; max-width: 18em; }
+    h1 .r { color: var(--r); } h1 .d { color: var(--d); }
+    .lead { color: #c3cbd7; font-size: 19px; margin: 0 0 22px; max-width: 40em; }
+    .meta { font-size: 13px; color: var(--muted); display: flex; gap: 18px; flex-wrap: wrap; }
+    .layout { display: grid; grid-template-columns: 1fr 250px; gap: 56px; padding: 44px 0 24px; }
+    .toc { position: sticky; top: 24px; align-self: start; font-size: 14px; border-left: 1px solid var(--line); padding-left: 18px; }
+    .toc b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; }
+    .toc a { display: block; color: var(--muted); text-decoration: none; padding: 5px 0; line-height: 1.35; } .toc a:hover { color: var(--text); }
+    .toc .btn { margin-top: 18px; padding: 10px 14px; font-size: 14px; color: #05140e; display: inline-flex; }
+    article { max-width: 720px; font-size: 17px; line-height: 1.7; }
+    article h2 { font-size: 28px; line-height: 1.2; margin: 48px 0 14px; letter-spacing: -.5px; scroll-margin-top: 16px; }
+    article h2:first-child { margin-top: 0; }
+    article h3 { font-size: 19px; margin: 28px 0 8px; }
+    article p { margin: 0 0 16px; color: #d3d9e2; }
+    article ul, article ol { padding-left: 22px; margin: 0 0 18px; color: #d3d9e2; } article li { margin-bottom: 6px; }
+    article a { color: var(--r); text-decoration: underline; text-decoration-color: #2c4a40; text-underline-offset: 3px; } article a:hover { text-decoration-color: var(--r); }
+    article b, article strong { color: var(--text); }
+    sup a { text-decoration: none !important; font-size: 12px; color: var(--muted) !important; padding-left: 1px; }
+    .tbl { overflow-x: auto; margin: 8px 0 22px; border: 1px solid var(--line); border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; background: var(--card); }
+    th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); background: #10151c; font-weight: 600; }
+    tr:last-child td { border-bottom: 0; } td.num { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 700; }
+    .up { color: var(--r); } .dn { color: var(--d); }
+    .callout { border: 1px solid #2c4a40; background: #0f1d18; border-radius: 12px; padding: 16px 20px; margin: 8px 0 22px; }
+    .callout.warn { border-color: #4a2c2c; background: #1c1111; }
+    .callout.od { border-color: #2a3a52; background: #0f1724; }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout .k { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--r); font-weight: 700; margin-bottom: 6px; }
+    .callout.warn .k { color: var(--d); } .callout.od .k { color: #8fb3ff; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 8px 0 24px; }
+    .stat { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+    .stat b { display: block; font-size: 30px; line-height: 1.1; letter-spacing: -1px; color: var(--r); }
+    .stat.d b { color: var(--d); } .stat span { display: block; font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+    .pill { display: inline-block; font-size: 13px; font-weight: 700; padding: 1px 8px; border-radius: 6px; background: #1c2430; white-space: nowrap; }
+    .pill.g { color: var(--r); background: #10221c; } .pill.h { color: #f0b35a; background: #2a2010; } .pill.vh { color: var(--d); background: #2a1414; } .pill.e { color: #c3cbd7; }
+    section.blk { padding: 44px 0; border-top: 1px solid #141b24; }
+    section.blk h2 { font-size: 26px; margin: 0 0 20px; letter-spacing: -.5px; }
+    details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; max-width: 820px; }
+    summary { cursor: pointer; font-weight: 700; list-style: none; } summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; float: right; color: var(--muted); } details[open] summary::after { content: "–"; }
+    details p { color: var(--muted); margin: 10px 0 0; }
+    .ctabox { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; border-radius: 16px; padding: 28px; border: 1px solid var(--line);
+              background: radial-gradient(120% 120% at 0% 0%, #17322a 0%, transparent 55%), radial-gradient(120% 120% at 100% 100%, #3a1a1a 0%, transparent 55%), var(--panel); }
+    .ctabox h2 { margin: 0 0 8px !important; } .ctabox p { margin: 0; color: var(--muted); max-width: 36em; }
+    .ctabox .acts { display: flex; flex-direction: column; gap: 10px; }
+    .ctabox img { width: 100%; max-width: 220px; height: auto; border-radius: 10px; display: block; -webkit-mask-image: linear-gradient(#000 80%, transparent); mask-image: linear-gradient(#000 80%, transparent); }
+    .ctabox .row { display: grid; grid-template-columns: 220px 1fr; gap: 24px; align-items: center; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .grid.g3 { grid-template-columns: repeat(3, 1fr); }
+    .card { display: block; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; text-decoration: none; transition: border-color .15s; }
+    a.card:hover { border-color: #2c4a40; }
+    .card .n { font-size: 12px; color: var(--r); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .card h3 { margin: 6px 0 6px; font-size: 17px; line-height: 1.3; } .card p { margin: 0; color: var(--muted); font-size: 14px; }
+    ol.src { font-size: 14px; color: var(--muted); padding-left: 22px; margin: 0; columns: 1; } ol.src li { margin-bottom: 6px; word-break: break-word; }
+    ol.src a { color: #b9c3d0; } ol.src a:hover { color: var(--r); }
+    .note { font-size: 13px; color: var(--muted); margin-top: 14px; }
+    footer { padding: 32px 0 48px; border-top: 1px solid #141b24; color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    footer .links { display: flex; flex-wrap: wrap; row-gap: 8px; }
+    @media (max-width: 920px) { .layout { grid-template-columns: 1fr; gap: 0; } .toc { display: none; } }
+    @media (max-width: 820px) {
+      .wrap { padding: 0 16px; } h1 { font-size: 32px; letter-spacing: -1px; } .lead { font-size: 17px; }
+      article { font-size: 16px; } article h2 { font-size: 23px; margin-top: 38px; }
+      .stats { grid-template-columns: 1fr; } .grid, .grid.g3 { grid-template-columns: 1fr; }
+      .ctabox { grid-template-columns: 1fr; padding: 20px; } .ctabox .row { grid-template-columns: 1fr; } .ctabox img { max-width: 260px; }
+      .btn { justify-content: center; } .top .links { display: none; } footer { flex-direction: column; }
+      th, td { padding: 9px 10px; font-size: 14px; }
+    }
+  </style>
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once unregister identify alias set_config reset opt_in_capturing opt_out_capturing has_opted_out_capturing get_distinct_id get_property".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init("phc_tXqHeZPMF6h8Ls2ETXPWwyt8392FjHPi3TkW8wiMrmcf", {api_host: "https://eu.i.posthog.com", persistence: "memory", person_profiles: "never"});
+  </script>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/ru/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#141414"/><g fill="none" stroke-width="7"><circle cx="32" cy="32" r="17" stroke="#5DCAA5" stroke-dasharray="48 59" transform="rotate(-90 32 32)"/><circle cx="32" cy="32" r="17" stroke="#E24B4A" stroke-dasharray="48 59" transform="rotate(90 32 32)"/></g></svg>Outdraft</a>
+    <div class="right">
+      <nav class="links"><a href="/ru/guides/">Статьи</a><a href="/ru/#features">Возможности</a><a href="/ru/#faq">Вопросы</a></nav>
+      <a class="tg-top" href="https://t.me/d2_outdraft" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg></a>
+      <nav class="lang" role="group" aria-label="Language"><a href="/en/last-pick-counter-math/" hreflang="en">EN</a><a href="/ru/last-pick-counter-math/" hreflang="ru" aria-current="page">RU</a><a href="/uk/last-pick-counter-math/" hreflang="uk">UA</a></nav>
+    </div>
+  </header>
+</div>
+
+<div class="ahead"><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Главная</a><span>/</span><a href="/ru/guides/">Статьи</a><span>/</span>Кого пикать последним</nav>
+  <span class="tag">Контрпик</span>
+  <h1>Кого пикать последним: <span class="r">математика контрпика</span></h1>
+  <p class="lead">Последним стоит брать не «самого сильного героя патча», а того, кто закрывает главную угрозу врага и не проигрывает свою линию. Обычный матчап сдвигает шансы на 0–3 п.п., жёсткий контрпик — на 6–8 п.п. Поэтому важно не «контрить всех», а понять, <b>кого именно</b> закрывать.</p>
+  <div class="meta"><span>Обновлено: 19.10.2026</span><span>4 мин чтения</span><span>Живые цифры: Dotabuff / OpenDota / D2PT, 19.10.2026, патч 7.41</span></div>
+</div></div>
+
+<div class="wrap"><div class="layout">
+  <article>
+
+<h2 id="s1">Насколько силён контрпик: цифры</h2>
+<p>Возьмём двух героев, которых чаще всего называют «неудобными», и посмотрим на их худшие матчапы по Dotabuff <sup><a href="#src1">[1]</a></sup> <sup><a href="#src2">[2]</a></sup>:</p>
+<div class="tbl"><table><thead><tr><th>Матчап</th><th>Винрейт в матчапе</th><th>Общий винрейт</th><th>Матчей</th></tr></thead><tbody><tr><td>Meepo против Earthshaker</td><td class="num"><span class="dn">44,88%</span></td><td class="num">52,95%</td><td class="num">28 458</td></tr><tr><td>Huskar против Ancient Apparition</td><td class="num"><span class="dn">38,70%</span></td><td class="num">45,76%</td><td class="num">28 846</td></tr><tr><td>Huskar против Viper</td><td class="num"><span class="dn">41,16%</span></td><td class="num">45,76%</td><td class="num">48 510</td></tr><tr><td>Huskar против Wraith King</td><td class="num"><span class="dn">38,68%</span></td><td class="num">45,76%</td><td class="num">—</td></tr></tbody></table></div>
+<p>У Meepo показатель Disadvantage на Dotabuff против Earthshaker — 8,38%, против Elder Titan — 8,40%, против Winter Wyvern — 8,04%, против Underlord — 8,00%. Но у основной массы его матчапов он меньше 3% <sup><a href="#src1">[1]</a></sup>. Huskar даже в своём лучшем матчапе (против Anti-Mage) выигрывает только 51,06% <sup><a href="#src2">[2]</a></sup>.</p>
+<p>Отсюда правило: большинство матчапов почти ничего не решают, а несколько конкретных решают много. Хороший последний пик — тот, который попадает в такой «жёсткий» матчап против самого опасного врага.</p>
+
+<h2 id="s2">Почему последний пик такой ценный</h2>
+<p>У последнего пика есть главное преимущество — информация. Ты видишь всех пятерых врагов и можешь закрыть того, кто для них важнее всего. Первому пику остаётся брать сильного героя «вслепую».</p>
+<p>В про-сцене всё немного сложнее. На TI 2024 команда с first pick выиграла 58,8% из 51 игры плей-офф, а на Royal Arena — 63,6% из 22 <sup><a href="#src3">[3]</a></sup>. Там важнее забрать самого сильного героя патча. Но даже про-драфт — это игра в информацию: в игре 2 гранд-финала Liquid специально оставили Naga Siren (её банили в первой фазе в 48 из 51 игры плей-офф) и вынудили GG её взять <sup><a href="#src3">[3]</a></sup>. В пабе у последнего пика просто больше информации, чем у первого, и этим стоит пользоваться.</p>
+
+<h2 id="s3">Синергия или контрпик: что важнее</h2>
+<p>Оба. По обзору исследований 2017 года, модель на сумме индивидуальных винрейтов героев давала 63% точности, а с учётом пар героев — 72,9% <sup><a href="#src4">[4]</a></sup>. В эти пары входят и союзники (синергия), и враги (контрпики). Исследование ВШЭ на 5 млн матчей тоже показало, что модели, которые учитывают взаимодействие героев, предсказывают лучше простых <sup><a href="#src5">[5]</a></sup>.</p>
+<p>И наоборот: если смотреть только на средний винрейт героя, прогноз почти бесполезен. В бенчмарке на 3,58 млн матчей усреднение винрейтов угадало исход хуже, чем «всегда ставь на Radiant» <sup><a href="#src7">[7]</a></sup>. Так что последний пик нужно проверять в обе стороны: против кого он играет и с кем.</p>
+
+<h2 id="s4">«Сильный герой» зависит от ранга</h2>
+<p>Ещё одна причина не доверять тир-листам: одни и те же герои ведут себя по-разному на разных рангах. Данные OpenDota за 19.10.2026 <sup><a href="#src6">[6]</a></sup>:</p>
+<div class="tbl"><table><thead><tr><th>Герой</th><th>Herald</th><th>Divine</th><th>Разница</th></tr></thead><tbody><tr><td>Bristleback</td><td class="num">53,8%</td><td class="num">45,4%</td><td class="num"><span class="dn">−8,4</span></td></tr><tr><td>Ogre Magi</td><td class="num">53,6%</td><td class="num">48,5%</td><td class="num"><span class="dn">−5,1</span></td></tr><tr><td>Shadow Fiend</td><td class="num">45,7%</td><td class="num">40,7%</td><td class="num"><span class="dn">−5,0</span></td></tr><tr><td>Bane</td><td class="num">43,3%</td><td class="num">50,3%</td><td class="num"><span class="up">+7,0</span></td></tr><tr><td>Visage</td><td class="num">48,6%</td><td class="num">55,6%</td><td class="num"><span class="up">+7,0</span></td></tr><tr><td>Enigma</td><td class="num">48,2%</td><td class="num">56,1%</td><td class="num"><span class="up">+7,9</span></td></tr><tr><td>Shadow Demon</td><td class="num">37,3%</td><td class="num">47,0%</td><td class="num"><span class="up">+9,7</span></td></tr></tbody></table></div>
+<p>Bristleback — один из лучших героев в Herald и один из худших в Divine. С Shadow Demon наоборот. Разброс по рангам здесь больше, чем эффект большинства контрпиков. Поэтому совет «бери то, что пикают про» на твоём рейтинге может работать против тебя.</p>
+
+<h2 id="s5">Алгоритм последнего пика</h2>
+<ol>
+<li><b>Найди главную угрозу.</b> Кто у врага решает игру? В Outdraft он отмечен ⭐. Есть ли у вас уже ответ на него? Если нет, это первый приоритет.</li>
+<li><b>Посмотри на линии.</b> Какая линия у вас Hard или Very hard? Последний пик должен помочь ей или хотя бы не проиграть свою.</li>
+<li><b>Не бери слабое звено.</b> Герой, который в этом драфте оказывается 🔻 самым слабым, — плохой выбор, даже если он в мете.</li>
+<li><b>Выбирай из своего пула.</b> Постоянство героя связано с лучшим результатом. Контрпик, на котором ты уверенно играешь, лучше «идеального» героя, на котором у тебя три игры.</li>
+<li><b>Проверь итог.</b> Посмотри, как изменился общий шанс драфта. Если пик почти не двигает процент, возможно, есть вариант лучше.</li>
+</ol>
+
+<h2 id="s6">Типичные ошибки последнего пика</h2>
+<ul>
+<li><b>Контрить того, кто и так слабый.</b> Если вражеский герой в этом драфте 🔻 самый слабый, закрывать его — потраченный пик. Смотри на ⭐.</li>
+<li><b>Брать героя «из тир-листа».</b> Мета-герой без связи с драфтом даёт меньше, чем жёсткий матчап против главной угрозы. А на твоём ранге он может быть вообще не сильным.</li>
+<li><b>Забыть про свою линию.</b> Последний пик тоже стоит на линии. Если он проигрывает её Very hard, плюс от контрпика можно потерять ещё до 10-й минуты.</li>
+<li><b>Пикать то, на чём не играешь.</b> Пара процентов из таблицы не стоит того, чтобы учиться герою в рейтинговой игре.</li>
+</ul>
+<h2 id="s7">Как это выглядит в Outdraft</h2>
+<p>Во время выбора героев Outdraft показывает для каждого героя его вклад в процентах и рейтинг линии: <span class="pill g">Good</span> <span class="pill e">Even</span> <span class="pill h">Hard</span> <span class="pill vh">Very hard</span>. ⭐ отмечает самого влиятельного героя, 🔻 — самого слабого, а сверху виден общий шанс, например «Dire 64%». Подсказки пиков учитывают твою роль, врагов и союзников и считаются по матчам за последние четыре недели, то есть под текущий патч.</p>
+<div class="callout od"><span class="k">На практике</span><p>Если у врага ⭐ на Huskar, а у вас нет ни среза лечения, ни break, лучший последний пик почти всегда тот, кто это закрывает. Даже если это не самый сильный герой патча.</p></div>
+
+  </article>
+  <aside class="toc"><b>Содержание</b><a href="#s1">Насколько силён контрпик: цифры</a><a href="#s2">Почему последний пик такой ценный</a><a href="#s3">Синергия или контрпик: что важнее</a><a href="#s4">«Сильный герой» зависит от ранга</a><a href="#s5">Алгоритм последнего пика</a><a href="#s6">Типичные ошибки последнего пика</a><a href="#s7">Как это выглядит в Outdraft</a><a class="btn download-btn" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft.exe">⬇ Скачать для Windows</a></aside>
+</div></div>
+
+<section class="blk" id="faq"><div class="wrap">
+  <h2>Частые вопросы</h2>
+  <details open><summary>Кого пикать последним в Dota 2?</summary><p>Героя, который закрывает самого опасного врага, не проигрывает свою линию и есть в твоём пуле. Сильнейший герой патча без привязки к драфту — не лучший выбор для последнего пика.</p></details>
+  <details><summary>Насколько контрпик меняет шансы?</summary><p>Обычный матчап — на 0–3 п.п., жёсткий контрпик — на 6–8 п.п. Например, Huskar против Ancient Apparition выигрывает 38,7% при общем винрейте 45,8%.</p></details>
+  <details><summary>Что важнее: синергия или контрпик?</summary><p>Важно и то и другое. Модели, которые учитывают пары героев (союзников и врагов), предсказывают исход заметно лучше, чем средние винрейты.</p></details>
+  <details><summary>Почему тир-листы не работают на моём ранге?</summary><p>Сила героя зависит от бракета. Bristleback выигрывает 53,8% в Herald и только 45,4% в Divine, а Shadow Demon — наоборот.</p></details>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <div class="ctabox">
+    <div class="row"><img src="/media/overlay.png" alt="Outdraft overlay" width="488" height="468">
+      <div><h2>Смотри шансы своего драфта вживую</h2><p>Outdraft — бесплатный оверлей для Dota 2. Он читает пики с экрана и показывает вклад каждого героя в процентах, расклад по линиям и общий шанс драфта на победу.</p></div></div>
+    <div class="acts"><a class="btn download-btn" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft.exe">⬇ Скачать для Windows</a><a class="btn ghost" href="/ru/#start">Как это работает</a></div>
+  </div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <h2>Читать дальше</h2>
+  <div class="grid">
+    <a class="card" href="/ru/why-i-keep-losing/"><span class="n">Статьи</span><h3>Почему я проигрываю в Доте, <span class="d">хотя играю нормально</span></h3><p>Форс 50%, серии поражений и тильт: что говорят Valve, исследования и статистика пабов.</p></a>
+    <a class="card" href="/ru/can-you-win-in-draft/"><span class="n">Статьи</span><h3>Можно ли выиграть игру <span class="r">на драфте?</span> Что говорит наука</h3><p>OpenAI Five, Stanford, 5 млн матчей ВШЭ: насколько пики предсказывают победу и почему средние винрейты врут.</p></a>
+    <a class="card" href="/ru/cant-kill-this-hero/"><span class="n">Статьи</span><h3>Почему этого героя <span class="d">невозможно убить</span></h3><p>Huskar, Meepo и другие «неубиваемые»: какие механики их закрывают и почему это вопрос драфта.</p></a>
+  </div>
+</div></section>
+
+<section class="blk" id="sources"><div class="wrap">
+  <h2>Источники</h2>
+  <ol class="src"><li id="src1">Dotabuff — Meepo counters (19 Oct 2026). <a href="https://www.dotabuff.com/heroes/meepo/counters" target="_blank" rel="noopener nofollow">www.dotabuff.com/heroes/meepo/counters</a></li><li id="src2">Dotabuff — Huskar counters (19 Oct 2026). <a href="https://www.dotabuff.com/heroes/huskar/counters" target="_blank" rel="noopener nofollow">www.dotabuff.com/heroes/huskar/counters</a></li><li id="src3">GosuGamers — Analyzing the first pick advantage at The International 2024 (datDota data). <a href="https://www.gosugamers.net/dota2/features/73236-analyzing-the-first-pick-advantage-at-the-international-2024" target="_blank" rel="noopener nofollow">www.gosugamers.net/dota2/features/73236-analyzing-the-first-pick-advantage-at-the-international-2024</a></li><li id="src4">Semenov et al. — Applications of Machine Learning in Dota 2: Literature Review and Practical Knowledge Sharing, CEUR-WS Vol-1842, 2017. <a href="https://ceur-ws.org/Vol-1842/paper_05.pdf" target="_blank" rel="noopener nofollow">ceur-ws.org/Vol-1842/paper_05.pdf</a></li><li id="src5">Semenov, Romov, Korolev, Yashkov, Neklyudov — Performance of Machine Learning Algorithms in Predicting Game Outcome from Drafts in Dota 2, AIST 2016 (Springer 2017). <a href="https://www.researchgate.net/publication/313010005" target="_blank" rel="noopener nofollow">www.researchgate.net/publication/313010005</a></li><li id="src6">OpenDota API — /heroStats, win rate by bracket (19 Oct 2026). <a href="https://api.opendota.com/api/heroStats" target="_blank" rel="noopener nofollow">api.opendota.com/api/heroStats</a></li><li id="src7">batru.gg — Dota 2 prediction benchmark, 3,579,956 held-out ranked matches (publisher's own numbers). <a href="https://batru.gg/dota2/benchmark" target="_blank" rel="noopener nofollow">batru.gg/dota2/benchmark</a></li><li id="src8">Dota2ProTracker — Radiant vs Dire, patch 7.41 (1,087,115 pub and 3,153 pro matches, 18 Oct 2026). <a href="https://dota2protracker.com/radiant-dire" target="_blank" rel="noopener nofollow">dota2protracker.com/radiant-dire</a></li></ol>
+  <p class="note">Винрейты Dotabuff и OpenDota сняты 19.10.2026 (патч 7.41) и меняются с каждым патчем. Цифры Kinkade & Lim взяты из обзора CEUR 2017.</p>
+</div></section>
+
+<div class="wrap">
+  <footer><span>© 2026 Outdraft · Не связан с Valve</span>
+    <nav class="links"><a href="/ru/guides/">Статьи</a><a href="https://t.me/d2_outdraft" target="_blank" rel="noopener">Telegram</a><a href="https://www.youtube.com/@comaapp" target="_blank" rel="noopener">YouTube</a><a href="https://tally.so/r/D4lK4E">Обратная связь</a><a href="https://github.com/vshtykhnov/outdraft-releases/releases">Все версии</a></nav>
+  </footer>
+</div>
+<script>
+  document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked", { from: location.pathname })));
+</script>
+</body>
+</html>
