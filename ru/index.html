@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Outdraft — помощник по драфту в Dota 2</title>
+  <link rel="canonical" href="https://outdraft.org/ru/">
+  <meta name="description" content="Бесплатный оверлей для Dota 2: кого брать, кого банить и что собирать, по матчам за последние четыре недели.">
+  <link rel="alternate" hreflang="en" href="https://outdraft.org/en/">
+  <link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/">
+  <link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/">
+  <link rel="alternate" hreflang="x-default" href="https://outdraft.org/">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://outdraft.org/ru/">
+  <meta property="og:title" content="Outdraft — помощник по драфту в Dota 2">
+  <meta property="og:description" content="Бесплатный оверлей для Dota 2: кого брать, кого банить и что собирать, по матчам за последние четыре недели.">
+  <meta property="og:image" content="https://outdraft.org/media/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="uk_UA">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Outdraft — помощник по драфту в Dota 2">
+  <meta name="twitter:description" content="Бесплатный оверлей для Dota 2: кого брать, кого банить и что собирать, по матчам за последние четыре недели.">
+  <meta name="twitter:image" content="https://outdraft.org/media/og-image.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Outdraft","applicationCategory":"GameApplication","operatingSystem":"Windows","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Бесплатный оверлей для Dota 2: кого брать, кого банить и что собирать, по матчам за последние четыре недели.","downloadUrl":"https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft.exe","softwareVersion":"0.1.9","author":{"@type":"Organization","name":"Outdraft"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Как это выглядит в матче","description":"Бесплатный оверлей для Dota 2: кого брать, кого банить и что собирать, по матчам за последние четыре недели.","thumbnailUrl":"https://outdraft.org/media/demo.jpg","contentUrl":"https://outdraft.org/media/demo.mp4","uploadDate":"2026-01-01","duration":"PT30S"}</script>
+  <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      src: url('/fonts/inter-var.woff2') format('woff2');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    :root {
+      --bg: #0a0d12; --panel: #10151c; --card: #141a22; --line: #222b37;
+      --text: #e8edf4; --muted: #8b95a5; --r: #5DCAA5; --d: #E24B4A;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text);
+           font: 16px/1.6 Inter, system-ui, sans-serif; }
+    a { color: inherit; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; text-decoration: none; }
+    .brand svg { width: 32px; height: 32px; }
+    .right { display: flex; align-items: center; gap: 22px; }
+    .links { display: flex; gap: 22px; font-size: 14px; color: var(--muted); }
+    .links a { text-decoration: none; }
+    .links a:hover { color: var(--text); }
+    .lang { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+    .lang a { background: none; border: 0; color: var(--muted); font: 600 13px Inter, sans-serif;
+              padding: 6px 10px; text-decoration: none; }
+    .lang a:hover { color: var(--text); }
+    .lang a[aria-current="page"] { background: #1c2430; color: var(--text); }
+    .hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; padding: 56px 0 72px; }
+    .tag { display: inline-block; font-size: 13px; color: var(--r); border: 1px solid #2c4a40;
+           background: #10221c; padding: 4px 10px; border-radius: 999px; margin-bottom: 18px; }
+    h1 { font-size: 52px; line-height: 1.05; margin: 0 0 18px; letter-spacing: -1.5px; font-weight: 800; }
+    h1 .r { color: var(--r); } h1 .d { color: var(--d); }
+    .lead { color: var(--muted); font-size: 18px; margin: 0 0 28px; max-width: 30em; }
+    .cta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 10px;
+           background: var(--r); color: #05140e; font-weight: 700; text-decoration: none; }
+    .btn:hover { filter: brightness(1.08); }
+    .sub { font-size: 13px; color: var(--muted); }
+    .btn.tg { background: none; color: var(--text); border: 1px solid var(--line); font-weight: 600; }
+    .btn.tg:hover { border-color: #2aabee; color: #2aabee; filter: none; }
+    .cta .tg { order: 1; }
+    .cta .sub { order: 2; flex-basis: 100%; }
+    .tg-top { display: inline-flex; align-items: center; color: var(--muted); }
+    .tg-top:hover { color: #2aabee; }
+    .shot { position: relative; border-radius: 16px; padding: 18px; background:
+            radial-gradient(120% 90% at 0% 0%, #17322a 0%, transparent 55%),
+            radial-gradient(120% 90% at 100% 100%, #3a1a1a 0%, transparent 55%), var(--panel);
+            border: 1px solid var(--line); }
+    .ov-img { display: block; width: 100%; height: auto; border-radius: 10px;
+             -webkit-mask-image: linear-gradient(#000 82%, transparent); mask-image: linear-gradient(#000 82%, transparent); }
+    .float { position: absolute; right: -14px; bottom: -18px; background: var(--card); border: 1px solid var(--line);
+             border-radius: 10px; padding: 10px 14px; font-size: 13px; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+    .float b { color: var(--r); }
+    .demo { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: 1px solid var(--line); background: #000; }
+    section { padding: 64px 0; border-top: 1px solid #141b24; scroll-margin-top: 8px; }
+    h2 { font-size: 30px; margin: 0 0 24px; letter-spacing: -.5px; }
+    .muted { color: var(--muted); margin: 0 0 32px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+    .card h3 { margin: 10px 0 6px; font-size: 17px; }
+    .card p { margin: 0; color: var(--muted); font-size: 15px; }
+    .ic { width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; font-weight: 800; }
+    .ic.g { background: #10221c; color: var(--r); } .ic.rd { background: #2a1414; color: var(--d); } .ic.b { background: #151d2a; color: #8fb3ff; }
+    .steps { counter-reset: s; }
+    .steps .card h3::before { counter-increment: s; content: counter(s); display: inline-grid; place-items: center;
+           width: 26px; height: 26px; margin-right: 10px; border-radius: 50%; background: #1c2430; color: var(--r); font-size: 14px; }
+    details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
+    summary { cursor: pointer; font-weight: 700; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; float: right; color: var(--muted); }
+    details[open] summary::after { content: "–"; }
+    details p { color: var(--muted); margin: 10px 0 0; }
+    .ss { margin-top: 12px; border: 1px solid #2a4f7a; background: #0e2240; border-radius: 8px; padding: 14px; font-size: 13px; color: #c8dcf5; }
+    .ss b { display: block; font-size: 15px; margin-bottom: 4px; color: #fff; }
+    .privacy ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+    .privacy li { color: var(--muted); padding-left: 22px; position: relative; }
+    .privacy li::before { content: "✓"; position: absolute; left: 0; color: var(--r); font-weight: 700; }
+    .privacy li b { color: var(--text); font-weight: 600; }
+    footer { padding: 32px 0 48px; border-top: 1px solid #141b24; color: var(--muted); font-size: 14px;
+             display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    footer .links { display: flex; flex-wrap: wrap; row-gap: 8px; }
+    @media (max-width: 820px) {
+      .wrap { padding: 0 16px; }
+      .hero { grid-template-columns: 1fr; gap: 32px; padding: 16px 0 48px; }
+      h1 { font-size: 34px; letter-spacing: -1px; }
+      .lead { font-size: 16px; margin-bottom: 22px; }
+      .cta { flex-direction: column; align-items: stretch; text-align: center; }
+      .cta .tg, .cta .sub { order: 0; }
+      .btn { justify-content: center; }
+      .shot { padding: 12px; }
+      .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
+      section { padding: 44px 0; }
+      h2 { font-size: 24px; margin-bottom: 20px; }
+      .grid3 { grid-template-columns: 1fr; gap: 10px; }
+      .card { padding: 16px; }
+      .top .links { display: none; }
+      footer { flex-direction: column; }
+    }
+  </style>
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once unregister identify alias set_config reset opt_in_capturing opt_out_capturing has_opted_out_capturing get_distinct_id get_property".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init("phc_tXqHeZPMF6h8Ls2ETXPWwyt8392FjHPi3TkW8wiMrmcf", {api_host: "https://eu.i.posthog.com", persistence: "memory", person_profiles: "never"});
+  </script>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/ru/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#141414"/><g fill="none" stroke-width="7"><circle cx="32" cy="32" r="17" stroke="#5DCAA5" stroke-dasharray="48 59" transform="rotate(-90 32 32)"/><circle cx="32" cy="32" r="17" stroke="#E24B4A" stroke-dasharray="48 59" transform="rotate(90 32 32)"/></g></svg>Outdraft</a>
+    <div class="right">
+      <nav class="links"><a href="#features">Возможности</a><a href="#start">Как начать</a><a href="#faq">Вопросы</a></nav>
+      <a class="tg-top" href="https://t.me/d2_outdraft" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg></a>
+      <nav class="lang" role="group" aria-label="Language"><a href="/en/">EN</a><a href="/ru/" aria-current="page">RU</a><a href="/uk/">UA</a></nav>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div>
+      <span class="tag">Бесплатная бета · Windows</span>
+      <h1>Выиграй драфт <span class="r">до</span> начала <span class="d">игры</span></h1>
+      <p class="lead">Кого брать, кого банить и что собирать — прямо поверх Dota 2.</p>
+      <div class="cta">
+        <a class="btn download-btn" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft.exe">⬇ Скачать для Windows</a>
+        <span class="sub"><span>без установки</span></span>
+        <a class="btn tg" href="https://t.me/d2_outdraft" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg><span>Наш Telegram</span></a>
+      </div>
+    </div>
+    <div class="shot" aria-hidden="true">
+      <img class="ov-img" src="/media/overlay.png" alt="Outdraft overlay during a draft" width="488" height="468" loading="eager">
+      <div class="float"><span>Лучший пик:</span> <b>Phantom Lancer</b></div>
+    </div>
+  </div>
+</div>
+
+<section id="demo"><div class="wrap">
+  <h2>Как это выглядит в матче</h2>
+  <video class="demo" src="/media/demo.mp4" poster="/media/demo.jpg" autoplay muted loop playsinline preload="metadata"></video>
+</div></section>
+
+<section id="features"><div class="wrap">
+  <h2>Всё в одном оверлее</h2>
+  <p class="lead">Все подсказки — по тысячам матчей за последние четыре недели.</p>
+  <div class="grid3">
+    <div class="card"><div class="ic g">▲</div><h3>Пик под весь драфт</h3><p>Герой на твою роль, который контрит врагов и сочетается с союзниками.</p></div>
+    <div class="card"><div class="ic rd">✕</div><h3>Баны под твой пул</h3><p>Убирают героев, которые бьют твоих, — тебя сложнее перепикать.</p></div>
+    <div class="card"><div class="ic b">≡</div><h3>Расклад по линиям</h3><p>Какая линия выигрывает, какая проигрывает и куда нужна помощь.</p></div>
+    <div class="card"><div class="ic g">⚖</div><h3>Кто выиграл драфт</h3><p>Видно, перепикали ли вы врага. Большой перевес — повод поставить Double Down.</p></div>
+    <div class="card"><div class="ic b">◆</div><h3>Предметы под врагов</h3><p>Билд подстраивается под вражеский состав, с минутой покупки каждого предмета.</p></div>
+    <div class="card"><div class="ic rd">★</div><h3>Навыки и таланты</h3><p>Что качать первым и как часто побеждает каждый талант.</p></div>
+  </div>
+</div></section>
+
+<section id="start"><div class="wrap">
+  <h2>Начать за минуту</h2>
+  <div class="grid3 steps">
+    <div class="card"><h3>Скачай</h3><p>Один файл, без установки.</p></div>
+    <div class="card"><h3>Запусти</h3><p>Dota в окне без рамки.</p></div>
+    <div class="card"><h3>Найди матч</h3><p>Подсказки появятся на выборе героев.</p></div>
+  </div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+  <h2>FAQ</h2>
+  <details open><summary>Windows пишет, что защитила компьютер?</summary>
+    <p>Это нормально: у программы пока нет цифровой подписи. Нажми <b>Подробнее</b>, затем <b>Выполнить в любом случае</b>.</p>
+    <div class="ss"><b>Windows protected your PC</b>Microsoft Defender SmartScreen prevented an unrecognized app from starting… <u>More info</u></div>
+  </details>
+  <details><summary>За это могут забанить?</summary>
+    <p>Нет. Outdraft не читает и не меняет память и файлы игры. Он только смотрит на пики на экране и анализирует их, а героя и предметы получает через официальную Game State Integration от Valve. Работает так же, как подсказки героев в Dota Plus, оверлеи Overwolf и подсветка через GSI в приложениях SteelSeries и Logitech.</p></details>
+  <details><summary>Как пользоваться?</summary>
+    <p>Запусти Outdraft, потом Dota 2 в окне без рамки — так программа видит пики. Найди матч: пики определятся сами, и сразу появятся подсказки. Каждый герой показывает свой вклад в процентах и рейтинг линии (Хорошо, Равно, Сложно или Очень сложно). Самый влиятельный герой отмечен звездой, самый слабый — стрелкой вниз, а преимущество драфта показано как процент победы (например, «Dire 64%»). Больше ничего не нужно — ни логинов, ни паролей, ни доступов.</p></details>
+  <details><summary>Это бесплатно?</summary>
+    <p>Да, пока идёт бета. Взамен нам нужна твоя обратная связь: что ломается, что неудобно, что исправить и что хотелось бы добавить. <a href="https://tally.so/r/D4lK4E" target="_blank" rel="noopener">Оставить отзыв</a>.</p></details>
+</div></section>
+
+<section id="privacy"><div class="wrap">
+  <h2>Конфиденциальность</h2>
+  <div class="card privacy"><ul>
+    <li>Только анонимная статистика, можно отключить.</li>
+    <li>Скриншоты не покидают твой ПК.</li>
+    <li>Для банов храним твою публичную статистику STRATZ.</li>
+  </ul></div>
+</div></section>
+
+<div class="wrap">
+  <footer><span>© 2026 Outdraft · Не связан с Valve</span>
+    <nav class="links"><a href="https://t.me/d2_outdraft" target="_blank" rel="noopener">Telegram</a><a href="https://tally.so/r/D4lK4E">Обратная связь</a><a href="#privacy">Конфиденциальность</a><a href="https://github.com/vshtykhnov/outdraft-releases/releases">Все версии</a></nav>
+  </footer>
+</div>
+
+<script>
+  document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked")));
+</script>
+</body>
+</html>
