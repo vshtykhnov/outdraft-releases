@@ -173,6 +173,8 @@ ${generateJsonLd(lang)}
     .btn.linux { background: transparent; border: 1px solid var(--line); color: var(--muted); font-weight: 600; }
     .btn.linux:hover { border-color: var(--r); color: var(--text); filter: none; }
     .sub { font-size: 13px; color: var(--muted); }
+    .telegram-note { font-size: 13px; color: var(--muted); text-decoration: none; }
+    .telegram-note:hover { color: #2aabee; }
     .btn.tg { background: none; color: var(--text); border: 1px solid var(--line); font-weight: 600; }
     .btn.tg:hover { border-color: #2aabee; color: #2aabee; filter: none; }
     .tg-top { display: inline-flex; align-items: center; color: var(--muted); }
@@ -258,6 +260,7 @@ ${generateJsonLd(lang)}
           <a class="btn download-btn linux" data-platform="linux" href="${LINUX_DOWNLOAD}">${dict.downloadLinux}</a>
         </div>
         <span class="sub"><span>${dict.noInstall}</span></span>
+        <a class="telegram-note" href="https://t.me/d2_outdraft" target="_blank" rel="noopener">${dict.tgJoin}</a>
       </div>
     </div>
     <div class="shot" aria-hidden="true">
@@ -392,6 +395,8 @@ ${generateJsonLd('en')}
     .btn.linux { background: transparent; border: 1px solid var(--line); color: var(--muted); font-weight: 600; }
     .btn.linux:hover { border-color: var(--r); color: var(--text); filter: none; }
     .sub { font-size: 13px; color: var(--muted); }
+    .telegram-note { font-size: 13px; color: var(--muted); text-decoration: none; }
+    .telegram-note:hover { color: #2aabee; }
     .btn.tg { background: none; color: var(--text); border: 1px solid var(--line); font-weight: 600; }
     .btn.tg:hover { border-color: #2aabee; color: #2aabee; filter: none; }
     .tg-top { display: inline-flex; align-items: center; color: var(--muted); }
@@ -477,6 +482,7 @@ ${generateJsonLd('en')}
           <a class="btn download-btn linux" data-platform="linux" href="${LINUX_DOWNLOAD}">${dict.downloadLinux}</a>
         </div>
         <span class="sub"><span>${dict.noInstall}</span></span>
+        <a class="telegram-note" href="https://t.me/d2_outdraft" target="_blank" rel="noopener">${dict.tgJoin}</a>
       </div>
     </div>
     <div class="shot" aria-hidden="true">
