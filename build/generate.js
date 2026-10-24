@@ -165,17 +165,16 @@ ${generateJsonLd(lang)}
     h1 { font-size: 52px; line-height: 1.05; margin: 0 0 18px; letter-spacing: -1.5px; font-weight: 800; }
     h1 .r { color: var(--r); } h1 .d { color: var(--d); }
     .lead { color: var(--muted); font-size: 18px; margin: 0 0 28px; max-width: 30em; }
-    .cta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 9px;
+    .cta { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+    .downloads { display: flex; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 184px; padding: 12px 18px; border-radius: 9px;
            background: var(--r); color: #05140e; font-weight: 700; text-decoration: none; }
     .btn:hover { filter: brightness(1.08); }
-    .btn.linux { padding: 10px 14px; background: transparent; border: 1px solid var(--line); color: var(--muted); font-weight: 600; }
+    .btn.linux { background: transparent; border: 1px solid var(--line); color: var(--muted); font-weight: 600; }
     .btn.linux:hover { border-color: var(--r); color: var(--text); filter: none; }
     .sub { font-size: 13px; color: var(--muted); }
     .btn.tg { background: none; color: var(--text); border: 1px solid var(--line); font-weight: 600; }
     .btn.tg:hover { border-color: #2aabee; color: #2aabee; filter: none; }
-    .cta .tg { order: 1; }
-    .cta .sub { order: 2; flex-basis: 100%; }
     .tg-top { display: inline-flex; align-items: center; color: var(--muted); }
     .tg-top:hover { color: #2aabee; }
     .shot { position: relative; border-radius: 16px; padding: 18px; background:
@@ -220,9 +219,8 @@ ${generateJsonLd(lang)}
       .hero { grid-template-columns: 1fr; gap: 32px; padding: 16px 0 48px; }
       h1 { font-size: 34px; letter-spacing: -1px; }
       .lead { font-size: 16px; margin-bottom: 22px; }
-      .cta { flex-direction: column; align-items: stretch; text-align: center; }
-      .cta .tg, .cta .sub { order: 0; }
-      .btn { justify-content: center; }
+      .cta { align-items: stretch; text-align: center; }
+      .downloads { flex-direction: column; }
       .shot { padding: 12px; }
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
       section { padding: 44px 0; }
@@ -255,10 +253,11 @@ ${generateJsonLd(lang)}
       <h1>${dict.title}</h1>
       <p class="lead">${dict.lead}</p>
       <div class="cta">
-        <a class="btn download-btn" data-platform="windows" href="${WINDOWS_DOWNLOAD}">${dict.downloadWindows}</a>
-        <a class="btn download-btn linux" data-platform="linux" href="${LINUX_DOWNLOAD}">${dict.downloadLinux}</a>
+        <div class="downloads">
+          <a class="btn download-btn" data-platform="windows" href="${WINDOWS_DOWNLOAD}">${dict.downloadWindows}</a>
+          <a class="btn download-btn linux" data-platform="linux" href="${LINUX_DOWNLOAD}">${dict.downloadLinux}</a>
+        </div>
         <span class="sub"><span>${dict.noInstall}</span></span>
-        <a class="btn tg" href="https://t.me/d2_outdraft" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg><span>${dict.tgJoin}</span></a>
       </div>
     </div>
     <div class="shot" aria-hidden="true">
@@ -385,17 +384,16 @@ ${generateJsonLd('en')}
     h1 { font-size: 52px; line-height: 1.05; margin: 0 0 18px; letter-spacing: -1.5px; font-weight: 800; }
     h1 .r { color: var(--r); } h1 .d { color: var(--d); }
     .lead { color: var(--muted); font-size: 18px; margin: 0 0 28px; max-width: 30em; }
-    .cta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 9px;
+    .cta { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+    .downloads { display: flex; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 184px; padding: 12px 18px; border-radius: 9px;
            background: var(--r); color: #05140e; font-weight: 700; text-decoration: none; }
     .btn:hover { filter: brightness(1.08); }
-    .btn.linux { padding: 10px 14px; background: transparent; border: 1px solid var(--line); color: var(--muted); font-weight: 600; }
+    .btn.linux { background: transparent; border: 1px solid var(--line); color: var(--muted); font-weight: 600; }
     .btn.linux:hover { border-color: var(--r); color: var(--text); filter: none; }
     .sub { font-size: 13px; color: var(--muted); }
     .btn.tg { background: none; color: var(--text); border: 1px solid var(--line); font-weight: 600; }
     .btn.tg:hover { border-color: #2aabee; color: #2aabee; filter: none; }
-    .cta .tg { order: 1; }
-    .cta .sub { order: 2; flex-basis: 100%; }
     .tg-top { display: inline-flex; align-items: center; color: var(--muted); }
     .tg-top:hover { color: #2aabee; }
     .shot { position: relative; border-radius: 16px; padding: 18px; background:
@@ -440,9 +438,8 @@ ${generateJsonLd('en')}
       .hero { grid-template-columns: 1fr; gap: 32px; padding: 16px 0 48px; }
       h1 { font-size: 34px; letter-spacing: -1px; }
       .lead { font-size: 16px; margin-bottom: 22px; }
-      .cta { flex-direction: column; align-items: stretch; text-align: center; }
-      .cta .tg, .cta .sub { order: 0; }
-      .btn { justify-content: center; }
+      .cta { align-items: stretch; text-align: center; }
+      .downloads { flex-direction: column; }
       .shot { padding: 12px; }
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
       section { padding: 44px 0; }
@@ -475,10 +472,11 @@ ${generateJsonLd('en')}
       <h1>${dict.title}</h1>
       <p class="lead">${dict.lead}</p>
       <div class="cta">
-        <a class="btn download-btn" data-platform="windows" href="${WINDOWS_DOWNLOAD}">${dict.downloadWindows}</a>
-        <a class="btn download-btn linux" data-platform="linux" href="${LINUX_DOWNLOAD}">${dict.downloadLinux}</a>
+        <div class="downloads">
+          <a class="btn download-btn" data-platform="windows" href="${WINDOWS_DOWNLOAD}">${dict.downloadWindows}</a>
+          <a class="btn download-btn linux" data-platform="linux" href="${LINUX_DOWNLOAD}">${dict.downloadLinux}</a>
+        </div>
         <span class="sub"><span>${dict.noInstall}</span></span>
-        <a class="btn tg" href="https://t.me/d2_outdraft" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg><span>${dict.tgJoin}</span></a>
       </div>
     </div>
     <div class="shot" aria-hidden="true">
