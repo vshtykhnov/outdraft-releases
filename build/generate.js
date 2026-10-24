@@ -166,9 +166,11 @@ ${generateJsonLd(lang)}
     h1 .r { color: var(--r); } h1 .d { color: var(--d); }
     .lead { color: var(--muted); font-size: 18px; margin: 0 0 28px; max-width: 30em; }
     .cta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 10px;
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 9px;
            background: var(--r); color: #05140e; font-weight: 700; text-decoration: none; }
     .btn:hover { filter: brightness(1.08); }
+    .btn.linux { padding: 10px 14px; background: transparent; border: 1px solid var(--line); color: var(--muted); font-weight: 600; }
+    .btn.linux:hover { border-color: var(--r); color: var(--text); filter: none; }
     .sub { font-size: 13px; color: var(--muted); }
     .btn.tg { background: none; color: var(--text); border: 1px solid var(--line); font-weight: 600; }
     .btn.tg:hover { border-color: #2aabee; color: #2aabee; filter: none; }
@@ -384,9 +386,11 @@ ${generateJsonLd('en')}
     h1 .r { color: var(--r); } h1 .d { color: var(--d); }
     .lead { color: var(--muted); font-size: 18px; margin: 0 0 28px; max-width: 30em; }
     .cta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 10px;
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 9px;
            background: var(--r); color: #05140e; font-weight: 700; text-decoration: none; }
     .btn:hover { filter: brightness(1.08); }
+    .btn.linux { padding: 10px 14px; background: transparent; border: 1px solid var(--line); color: var(--muted); font-weight: 600; }
+    .btn.linux:hover { border-color: var(--r); color: var(--text); filter: none; }
     .sub { font-size: 13px; color: var(--muted); }
     .btn.tg { background: none; color: var(--text); border: 1px solid var(--line); font-weight: 600; }
     .btn.tg:hover { border-color: #2aabee; color: #2aabee; filter: none; }
