@@ -191,9 +191,12 @@ ${generateJsonLd(lang)}
     .demo { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: 1px solid var(--line); background: #000; }
     section { padding: 64px 0; border-top: 1px solid #141b24; scroll-margin-top: 8px; }
     h2 { font-size: 30px; margin: 0 0 24px; letter-spacing: -.5px; }
-    .playable { max-width: 760px; }
-    .playable p { color: var(--muted); font-size: 18px; line-height: 1.65; margin: 0 0 16px; }
-    .playable p:last-child { margin-bottom: 0; }
+    .playable { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: start; padding: 40px;
+                background: radial-gradient(100% 120% at 0% 0%, #17322a 0%, transparent 52%), var(--panel);
+                border: 1px solid var(--line); border-radius: 16px; }
+    .playable h2 { margin: 0; }
+    .playable-copy { display: grid; gap: 16px; }
+    .playable p { color: var(--muted); font-size: 17px; line-height: 1.65; margin: 0; }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
@@ -228,6 +231,7 @@ ${generateJsonLd(lang)}
       .downloads { flex-direction: column; }
       .shot { padding: 12px; }
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
+      .playable { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
       section { padding: 44px 0; }
       h2 { font-size: 24px; margin-bottom: 20px; }
       .grid3 { grid-template-columns: 1fr; gap: 10px; }
@@ -279,8 +283,7 @@ ${generateJsonLd(lang)}
 
 <section id="playable"><div class="wrap playable">
   <h2>${dict.playableTitle}</h2>
-  <p>${dict.playableFirst}</p>
-  <p>${dict.playableSecond}</p>
+  <div class="playable-copy"><p>${dict.playableFirst}</p><p>${dict.playableSecond}</p></div>
 </div></section>
 
 <section id="features"><div class="wrap">
@@ -421,9 +424,12 @@ ${generateJsonLd('en')}
     .demo { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: 1px solid var(--line); background: #000; }
     section { padding: 64px 0; border-top: 1px solid #141b24; scroll-margin-top: 8px; }
     h2 { font-size: 30px; margin: 0 0 24px; letter-spacing: -.5px; }
-    .playable { max-width: 760px; }
-    .playable p { color: var(--muted); font-size: 18px; line-height: 1.65; margin: 0 0 16px; }
-    .playable p:last-child { margin-bottom: 0; }
+    .playable { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: start; padding: 40px;
+                background: radial-gradient(100% 120% at 0% 0%, #17322a 0%, transparent 52%), var(--panel);
+                border: 1px solid var(--line); border-radius: 16px; }
+    .playable h2 { margin: 0; }
+    .playable-copy { display: grid; gap: 16px; }
+    .playable p { color: var(--muted); font-size: 17px; line-height: 1.65; margin: 0; }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
@@ -458,6 +464,7 @@ ${generateJsonLd('en')}
       .downloads { flex-direction: column; }
       .shot { padding: 12px; }
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
+      .playable { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
       section { padding: 44px 0; }
       h2 { font-size: 24px; margin-bottom: 20px; }
       .grid3 { grid-template-columns: 1fr; gap: 10px; }
@@ -509,8 +516,7 @@ ${generateJsonLd('en')}
 
 <section id="playable"><div class="wrap playable">
   <h2>${dict.playableTitle}</h2>
-  <p>${dict.playableFirst}</p>
-  <p>${dict.playableSecond}</p>
+  <div class="playable-copy"><p>${dict.playableFirst}</p><p>${dict.playableSecond}</p></div>
 </div></section>
 
 <section id="features"><div class="wrap">
