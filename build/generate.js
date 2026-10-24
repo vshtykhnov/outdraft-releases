@@ -13,6 +13,8 @@ const { EN, RU, UK, META } = require('./translations');
 const LANGS = ['en', 'ru', 'uk'];
 const DICTS = { en: EN, ru: RU, uk: UK };
 const DOMAIN = 'https://outdraft.org';
+const WINDOWS_DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.zip';
+const LINUX_DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-linux-x86_64.tar.gz';
 
 const LANG_NAMES = { en: 'en', ru: 'ru', uk: 'uk' };
 
@@ -71,15 +73,15 @@ function generateJsonLd(lang) {
     "@type": "SoftwareApplication",
     "name": "Outdraft",
     "applicationCategory": "GameApplication",
-    "operatingSystem": "Windows",
+    "operatingSystem": "Windows, Linux",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
     "description": meta.description,
-    "downloadUrl": "https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft.exe",
-    "softwareVersion": "0.1.9",
+    "downloadUrl": WINDOWS_DOWNLOAD,
+    "softwareVersion": "0.2.0",
     "author": {
       "@type": "Organization",
       "name": "Outdraft"
@@ -251,7 +253,8 @@ ${generateJsonLd(lang)}
       <h1>${dict.title}</h1>
       <p class="lead">${dict.lead}</p>
       <div class="cta">
-        <a class="btn download-btn" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft.exe">${dict.download}</a>
+        <a class="btn download-btn" data-platform="windows" href="${WINDOWS_DOWNLOAD}">${dict.downloadWindows}</a>
+        <a class="btn download-btn linux" data-platform="linux" href="${LINUX_DOWNLOAD}">${dict.downloadLinux}</a>
         <span class="sub"><span>${dict.noInstall}</span></span>
         <a class="btn tg" href="https://t.me/d2_outdraft" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg><span>${dict.tgJoin}</span></a>
       </div>
@@ -320,7 +323,7 @@ ${generateJsonLd(lang)}
 </div>
 
 <script>
-  document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked")));
+  document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked", { platform: a.dataset.platform })));
 </script>
 </body>
 </html>`;
@@ -468,7 +471,8 @@ ${generateJsonLd('en')}
       <h1>${dict.title}</h1>
       <p class="lead">${dict.lead}</p>
       <div class="cta">
-        <a class="btn download-btn" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft.exe">${dict.download}</a>
+        <a class="btn download-btn" data-platform="windows" href="${WINDOWS_DOWNLOAD}">${dict.downloadWindows}</a>
+        <a class="btn download-btn linux" data-platform="linux" href="${LINUX_DOWNLOAD}">${dict.downloadLinux}</a>
         <span class="sub"><span>${dict.noInstall}</span></span>
         <a class="btn tg" href="https://t.me/d2_outdraft" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg><span>${dict.tgJoin}</span></a>
       </div>
@@ -537,7 +541,7 @@ ${generateJsonLd('en')}
 </div>
 
 <script>
-  document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked")));
+  document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked", { platform: a.dataset.platform })));
   
   // Handle legacy ?lang= URLs - redirect to proper language path
   (function() {

@@ -28,7 +28,7 @@
   <meta name="twitter:title" content="Outdraft — помічник з драфту в Dota 2">
   <meta name="twitter:description" content="Безкоштовний оверлей для Dota 2: кого брати, кого банити і що збирати, за матчами за останні чотири тижні.">
   <meta name="twitter:image" content="https://outdraft.org/media/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Outdraft","applicationCategory":"GameApplication","operatingSystem":"Windows","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Безкоштовний оверлей для Dota 2: кого брати, кого банити і що збирати, за матчами за останні чотири тижні.","downloadUrl":"https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft.exe","softwareVersion":"0.1.9","author":{"@type":"Organization","name":"Outdraft"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Outdraft","applicationCategory":"GameApplication","operatingSystem":"Windows, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Безкоштовний оверлей для Dota 2: кого брати, кого банити і що збирати, за матчами за останні чотири тижні.","downloadUrl":"https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.zip","softwareVersion":"0.2.0","author":{"@type":"Organization","name":"Outdraft"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Як це виглядає в матчі","description":"Безкоштовний оверлей для Dota 2: кого брати, кого банити і що збирати, за матчами за останні чотири тижні.","thumbnailUrl":"https://outdraft.org/media/demo.jpg","contentUrl":"https://outdraft.org/media/demo.mp4","uploadDate":"2026-01-01","duration":"PT30S"}</script>
   <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <style>
@@ -151,12 +151,13 @@
 
   <div class="hero">
     <div>
-      <span class="tag">Безкоштовна бета · Windows</span>
+      <span class="tag">Безкоштовна бета · Windows і Linux</span>
       <h1>Виграй драфт <span class="r">до</span> початку <span class="d">гри</span></h1>
       <p class="lead">Кого брати, кого банити і що збирати — просто поверх Dota 2.</p>
       <div class="cta">
-        <a class="btn download-btn" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft.exe">⬇ Завантажити для Windows</a>
-        <span class="sub"><span>без встановлення</span></span>
+        <a class="btn download-btn" data-platform="windows" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.zip">⬇ Завантажити для Windows</a>
+        <a class="btn download-btn linux" data-platform="linux" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-linux-x86_64.tar.gz">⬇ Завантажити для Linux</a>
+        <span class="sub"><span>Windows: розпакуй ZIP · Linux: розпакуй .tar.gz</span></span>
         <a class="btn tg" href="https://t.me/d2_outdraft" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg><span>Наш Telegram</span></a>
       </div>
     </div>
@@ -188,7 +189,7 @@
 <section id="start"><div class="wrap">
   <h2>Почати за хвилину</h2>
   <div class="grid3 steps">
-    <div class="card"><h3>Завантаж</h3><p>Один файл, без встановлення.</p></div>
+    <div class="card"><h3>Завантаж</h3><p>Розпакуй завантажений архів. Встановлення не потрібне.</p></div>
     <div class="card"><h3>Запусти</h3><p>Dota у вікні без рамки.</p></div>
     <div class="card"><h3>Знайди матч</h3><p>Підказки з'являться на виборі героїв.</p></div>
   </div>
@@ -224,7 +225,7 @@
 </div>
 
 <script>
-  document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked")));
+  document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked", { platform: a.dataset.platform })));
 </script>
 </body>
 </html>
