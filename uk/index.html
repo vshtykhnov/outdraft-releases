@@ -93,6 +93,9 @@
     .demo { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: 1px solid var(--line); background: #000; }
     section { padding: 64px 0; border-top: 1px solid #141b24; scroll-margin-top: 8px; }
     h2 { font-size: 30px; margin: 0 0 24px; letter-spacing: -.5px; }
+    .playable { max-width: 760px; }
+    .playable p { color: var(--muted); font-size: 18px; line-height: 1.65; margin: 0 0 16px; }
+    .playable p:last-child { margin-bottom: 0; }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
@@ -155,7 +158,7 @@
     <div>
       <span class="tag">Безкоштовна бета · Windows і Linux</span>
       <h1>Виграй драфт <span class="r">до</span> початку <span class="d">гри</span></h1>
-      <p class="lead">Кого брати, кого банити і що збирати — просто поверх Dota 2.</p>
+      <p class="lead">Починай кожен матч із драфта, у який справді можна грати.</p>
       <div class="cta">
         <div class="downloads">
           <a class="btn download-btn" data-platform="windows" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.zip">⬇ Завантажити для Windows</a>
@@ -174,6 +177,12 @@
 <section id="demo"><div class="wrap">
   <h2>Як це виглядає в матчі</h2>
   <video class="demo" src="/media/demo.mp4" poster="/media/demo.jpg" autoplay muted loop playsinline preload="metadata"></video>
+</div></section>
+
+<section id="playable"><div class="wrap playable">
+  <h2>Матч має бути іграбельним</h2>
+  <p>У пабліках Dota не кожен герой і білд дають однаковий шанс на гру. Іноді один пік вимагає майже ідеального виконання, а інший працює вже за звичайної гри. Через це матч може здаватися вирішеним ще до першої хвилини.</p>
+  <p>Outdraft допомагає почати з чеснішої позиції: продумані піки, адаптивні білди та підказки під час матчу. Далі залишається головне — твої мікро, макро й рішення у справді іграбельній грі.</p>
 </div></section>
 
 <section id="features"><div class="wrap">

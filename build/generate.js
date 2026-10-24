@@ -191,6 +191,9 @@ ${generateJsonLd(lang)}
     .demo { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: 1px solid var(--line); background: #000; }
     section { padding: 64px 0; border-top: 1px solid #141b24; scroll-margin-top: 8px; }
     h2 { font-size: 30px; margin: 0 0 24px; letter-spacing: -.5px; }
+    .playable { max-width: 760px; }
+    .playable p { color: var(--muted); font-size: 18px; line-height: 1.65; margin: 0 0 16px; }
+    .playable p:last-child { margin-bottom: 0; }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
@@ -272,6 +275,12 @@ ${generateJsonLd(lang)}
 <section id="demo"><div class="wrap">
   <h2>${dict.demoTitle}</h2>
   <video class="demo" src="/media/demo.mp4" poster="/media/demo.jpg" autoplay muted loop playsinline preload="metadata"></video>
+</div></section>
+
+<section id="playable"><div class="wrap playable">
+  <h2>${dict.playableTitle}</h2>
+  <p>${dict.playableFirst}</p>
+  <p>${dict.playableSecond}</p>
 </div></section>
 
 <section id="features"><div class="wrap">
@@ -412,6 +421,9 @@ ${generateJsonLd('en')}
     .demo { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: 1px solid var(--line); background: #000; }
     section { padding: 64px 0; border-top: 1px solid #141b24; scroll-margin-top: 8px; }
     h2 { font-size: 30px; margin: 0 0 24px; letter-spacing: -.5px; }
+    .playable { max-width: 760px; }
+    .playable p { color: var(--muted); font-size: 18px; line-height: 1.65; margin: 0 0 16px; }
+    .playable p:last-child { margin-bottom: 0; }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
@@ -493,6 +505,12 @@ ${generateJsonLd('en')}
 <section id="demo"><div class="wrap">
   <h2>${dict.demoTitle}</h2>
   <video class="demo" src="/media/demo.mp4" poster="/media/demo.jpg" autoplay muted loop playsinline preload="metadata"></video>
+</div></section>
+
+<section id="playable"><div class="wrap playable">
+  <h2>${dict.playableTitle}</h2>
+  <p>${dict.playableFirst}</p>
+  <p>${dict.playableSecond}</p>
 </div></section>
 
 <section id="features"><div class="wrap">
