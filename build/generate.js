@@ -259,7 +259,6 @@ ${generateJsonLd(lang)}
           <a class="btn download-btn" data-platform="windows" href="${WINDOWS_DOWNLOAD}">${dict.downloadWindows}</a>
           <a class="btn download-btn linux" data-platform="linux" href="${LINUX_DOWNLOAD}">${dict.downloadLinux}</a>
         </div>
-        <span class="sub"><span>${dict.noInstall}</span></span>
         <a class="telegram-note" href="https://t.me/d2_outdraft" target="_blank" rel="noopener">${dict.tgJoin}</a>
       </div>
     </div>
@@ -481,7 +480,6 @@ ${generateJsonLd('en')}
           <a class="btn download-btn" data-platform="windows" href="${WINDOWS_DOWNLOAD}">${dict.downloadWindows}</a>
           <a class="btn download-btn linux" data-platform="linux" href="${LINUX_DOWNLOAD}">${dict.downloadLinux}</a>
         </div>
-        <span class="sub"><span>${dict.noInstall}</span></span>
         <a class="telegram-note" href="https://t.me/d2_outdraft" target="_blank" rel="noopener">${dict.tgJoin}</a>
       </div>
     </div>
