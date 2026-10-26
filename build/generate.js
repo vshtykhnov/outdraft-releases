@@ -194,11 +194,8 @@ ${generateJsonLd(lang)}
     .demo { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: 1px solid var(--line); background: #000; }
     section { padding: 64px 0; border-top: 1px solid #141b24; scroll-margin-top: 8px; }
     h2 { font-size: 30px; margin: 0 0 24px; letter-spacing: -.5px; }
-    .playable { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: start; padding: 40px;
-                background: radial-gradient(100% 120% at 0% 0%, #17322a 0%, transparent 52%), var(--panel);
-                border: 1px solid var(--line); border-radius: 16px; }
+    .playable { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: start; }
     .playable h2 { margin: 0; }
-    .playable-copy { display: grid; gap: 16px; }
     .playable p { color: var(--muted); font-size: 17px; line-height: 1.65; margin: 0; }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -257,7 +254,7 @@ ${generateJsonLd(lang)}
       .downloads { flex-direction: column; }
       .shot { padding: 12px; }
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
-      .playable { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
+      .playable { grid-template-columns: 1fr; gap: 10px; }
       .group-head { grid-template-columns: 1fr; gap: 6px; }
       .model-flow { grid-template-columns: 1fr; }
       .model-factor, .model-factor:first-child { padding: 16px 0; }
@@ -316,7 +313,7 @@ ${generateJsonLd(lang)}
 
 <section id="playable"><div class="wrap playable">
   <h2>${dict.playableTitle}</h2>
-  <div class="playable-copy"><p>${dict.playableFirst}</p><p>${dict.playableSecond}</p></div>
+  <p>${dict.playableFirst}</p>
 </div></section>
 
 <section id="model"><div class="wrap">
@@ -479,11 +476,8 @@ ${generateJsonLd('en')}
     .demo { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: 1px solid var(--line); background: #000; }
     section { padding: 64px 0; border-top: 1px solid #141b24; scroll-margin-top: 8px; }
     h2 { font-size: 30px; margin: 0 0 24px; letter-spacing: -.5px; }
-    .playable { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: start; padding: 40px;
-                background: radial-gradient(100% 120% at 0% 0%, #17322a 0%, transparent 52%), var(--panel);
-                border: 1px solid var(--line); border-radius: 16px; }
+    .playable { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: start; }
     .playable h2 { margin: 0; }
-    .playable-copy { display: grid; gap: 16px; }
     .playable p { color: var(--muted); font-size: 17px; line-height: 1.65; margin: 0; }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -542,7 +536,7 @@ ${generateJsonLd('en')}
       .downloads { flex-direction: column; }
       .shot { padding: 12px; }
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
-      .playable { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
+      .playable { grid-template-columns: 1fr; gap: 10px; }
       .group-head { grid-template-columns: 1fr; gap: 6px; }
       .model-flow { grid-template-columns: 1fr; }
       .model-factor, .model-factor:first-child { padding: 16px 0; }
@@ -601,7 +595,7 @@ ${generateJsonLd('en')}
 
 <section id="playable"><div class="wrap playable">
   <h2>${dict.playableTitle}</h2>
-  <div class="playable-copy"><p>${dict.playableFirst}</p><p>${dict.playableSecond}</p></div>
+  <p>${dict.playableFirst}</p>
 </div></section>
 
 <section id="model"><div class="wrap">
