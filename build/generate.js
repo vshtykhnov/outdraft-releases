@@ -202,12 +202,29 @@ ${generateJsonLd(lang)}
     .playable p { color: var(--muted); font-size: 17px; line-height: 1.65; margin: 0; }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .model-result { margin-top: 16px; padding: 20px 22px; border-left: 3px solid var(--r); border-radius: 0 12px 12px 0;
-                    background: linear-gradient(90deg, #10221c, var(--panel)); color: var(--text); }
+    .model-flow { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .model-factor { position: relative; padding: 22px 26px; }
+    .model-factor:first-child { padding-left: 0; }
+    .model-factor + .model-factor { border-left: 1px solid var(--line); }
+    .model-factor + .model-factor::before { content: "+"; position: absolute; left: -12px; top: 50%; transform: translateY(-50%);
+                                           width: 23px; height: 23px; display: grid; place-items: center; border-radius: 50%;
+                                           background: var(--bg); color: var(--muted); font-weight: 700; }
+    .model-factor span { color: var(--r); font-size: 12px; font-weight: 800; letter-spacing: .08em; }
+    .model-factor h3 { margin: 5px 0 4px; font-size: 17px; }
+    .model-factor p { margin: 0; color: var(--muted); font-size: 14px; }
+    .model-result { display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; margin-top: 20px; max-width: 820px; }
+    .model-result span { color: var(--r); font-size: 24px; font-weight: 800; line-height: 1.2; }
+    .model-result p { margin: 0; color: var(--muted); }
     .feature-group + .feature-group { margin-top: 48px; }
     .group-head { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: end; margin-bottom: 20px; }
     .group-head h3 { margin: 0; font-size: 23px; }
     .group-head p { margin: 0; color: var(--muted); }
+    .feature-list { border-top: 1px solid var(--line); }
+    .feature-row { display: grid; grid-template-columns: 52px minmax(190px, .75fr) 1.25fr; gap: 20px; align-items: start;
+                   padding: 19px 0; border-bottom: 1px solid var(--line); }
+    .feature-row > span { color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .08em; padding-top: 3px; }
+    .feature-row h4 { margin: 0; font-size: 16px; }
+    .feature-row p { margin: 0; color: var(--muted); font-size: 15px; }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
     .card h3 { margin: 10px 0 6px; font-size: 17px; }
     .card p { margin: 0; color: var(--muted); font-size: 15px; }
@@ -242,6 +259,12 @@ ${generateJsonLd(lang)}
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
       .playable { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
       .group-head { grid-template-columns: 1fr; gap: 6px; }
+      .model-flow { grid-template-columns: 1fr; }
+      .model-factor, .model-factor:first-child { padding: 16px 0; }
+      .model-factor + .model-factor { border-left: 0; border-top: 1px solid var(--line); }
+      .model-factor + .model-factor::before { display: none; }
+      .feature-row { grid-template-columns: 34px 1fr; gap: 4px 12px; padding: 16px 0; }
+      .feature-row p { grid-column: 2; }
       section { padding: 44px 0; }
       h2 { font-size: 24px; margin-bottom: 20px; }
       .grid3 { grid-template-columns: 1fr; gap: 10px; }
@@ -299,12 +322,12 @@ ${generateJsonLd(lang)}
 <section id="model"><div class="wrap">
   <h2>${dict.modelTitle}</h2>
   <p class="lead">${dict.modelLead}</p>
-  <div class="grid3">
-    <div class="card"><div class="ic g">▲</div><h3>${dict.m1t}</h3><p>${dict.m1}</p></div>
-    <div class="card"><div class="ic rd">↔</div><h3>${dict.m2t}</h3><p>${dict.m2}</p></div>
-    <div class="card"><div class="ic b">+</div><h3>${dict.m3t}</h3><p>${dict.m3}</p></div>
+  <div class="model-flow">
+    <div class="model-factor"><span>01</span><h3>${dict.m1t}</h3><p>${dict.m1}</p></div>
+    <div class="model-factor"><span>02</span><h3>${dict.m2t}</h3><p>${dict.m2}</p></div>
+    <div class="model-factor"><span>03</span><h3>${dict.m3t}</h3><p>${dict.m3}</p></div>
   </div>
-  <div class="model-result">${dict.modelResult}</div>
+  <div class="model-result"><span>=</span><p>${dict.modelResult}</p></div>
 </div></section>
 
 <section id="features"><div class="wrap">
@@ -312,21 +335,21 @@ ${generateJsonLd(lang)}
   <p class="lead">${dict.featLead}</p>
   <div class="feature-group">
     <div class="group-head"><h3>${dict.draftTitle}</h3><p>${dict.draftLead}</p></div>
-    <div class="grid3">
-      <div class="card"><div class="ic g">▲</div><h3>${dict.d1t}</h3><p>${dict.d1}</p></div>
-      <div class="card"><div class="ic rd">!</div><h3>${dict.d2t}</h3><p>${dict.d2}</p></div>
-      <div class="card"><div class="ic b">◎</div><h3>${dict.d3t}</h3><p>${dict.d3}</p></div>
-      <div class="card"><div class="ic g">%</div><h3>${dict.d4t}</h3><p>${dict.d4}</p></div>
-      <div class="card"><div class="ic b">≡</div><h3>${dict.d5t}</h3><p>${dict.d5}</p></div>
-      <div class="card"><div class="ic rd">◷</div><h3>${dict.d6t}</h3><p>${dict.d6}</p></div>
+    <div class="feature-list">
+      <div class="feature-row"><span>01</span><h4>${dict.d1t}</h4><p>${dict.d1}</p></div>
+      <div class="feature-row"><span>02</span><h4>${dict.d2t}</h4><p>${dict.d2}</p></div>
+      <div class="feature-row"><span>03</span><h4>${dict.d3t}</h4><p>${dict.d3}</p></div>
+      <div class="feature-row"><span>04</span><h4>${dict.d4t}</h4><p>${dict.d4}</p></div>
+      <div class="feature-row"><span>05</span><h4>${dict.d5t}</h4><p>${dict.d5}</p></div>
+      <div class="feature-row"><span>06</span><h4>${dict.d6t}</h4><p>${dict.d6}</p></div>
     </div>
   </div>
   <div class="feature-group">
     <div class="group-head"><h3>${dict.gameTitle}</h3><p>${dict.gameLead}</p></div>
-    <div class="grid3">
-      <div class="card"><div class="ic b">◆</div><h3>${dict.g1t}</h3><p>${dict.g1}</p></div>
-      <div class="card"><div class="ic rd">★</div><h3>${dict.g2t}</h3><p>${dict.g2}</p></div>
-      <div class="card"><div class="ic g">↗</div><h3>${dict.g3t}</h3><p>${dict.g3}</p></div>
+    <div class="feature-list">
+      <div class="feature-row"><span>01</span><h4>${dict.g1t}</h4><p>${dict.g1}</p></div>
+      <div class="feature-row"><span>02</span><h4>${dict.g2t}</h4><p>${dict.g2}</p></div>
+      <div class="feature-row"><span>03</span><h4>${dict.g3t}</h4><p>${dict.g3}</p></div>
     </div>
   </div>
 </div></section>
@@ -464,12 +487,29 @@ ${generateJsonLd('en')}
     .playable p { color: var(--muted); font-size: 17px; line-height: 1.65; margin: 0; }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .model-result { margin-top: 16px; padding: 20px 22px; border-left: 3px solid var(--r); border-radius: 0 12px 12px 0;
-                    background: linear-gradient(90deg, #10221c, var(--panel)); color: var(--text); }
+    .model-flow { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .model-factor { position: relative; padding: 22px 26px; }
+    .model-factor:first-child { padding-left: 0; }
+    .model-factor + .model-factor { border-left: 1px solid var(--line); }
+    .model-factor + .model-factor::before { content: "+"; position: absolute; left: -12px; top: 50%; transform: translateY(-50%);
+                                           width: 23px; height: 23px; display: grid; place-items: center; border-radius: 50%;
+                                           background: var(--bg); color: var(--muted); font-weight: 700; }
+    .model-factor span { color: var(--r); font-size: 12px; font-weight: 800; letter-spacing: .08em; }
+    .model-factor h3 { margin: 5px 0 4px; font-size: 17px; }
+    .model-factor p { margin: 0; color: var(--muted); font-size: 14px; }
+    .model-result { display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; margin-top: 20px; max-width: 820px; }
+    .model-result span { color: var(--r); font-size: 24px; font-weight: 800; line-height: 1.2; }
+    .model-result p { margin: 0; color: var(--muted); }
     .feature-group + .feature-group { margin-top: 48px; }
     .group-head { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: end; margin-bottom: 20px; }
     .group-head h3 { margin: 0; font-size: 23px; }
     .group-head p { margin: 0; color: var(--muted); }
+    .feature-list { border-top: 1px solid var(--line); }
+    .feature-row { display: grid; grid-template-columns: 52px minmax(190px, .75fr) 1.25fr; gap: 20px; align-items: start;
+                   padding: 19px 0; border-bottom: 1px solid var(--line); }
+    .feature-row > span { color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .08em; padding-top: 3px; }
+    .feature-row h4 { margin: 0; font-size: 16px; }
+    .feature-row p { margin: 0; color: var(--muted); font-size: 15px; }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
     .card h3 { margin: 10px 0 6px; font-size: 17px; }
     .card p { margin: 0; color: var(--muted); font-size: 15px; }
@@ -504,6 +544,12 @@ ${generateJsonLd('en')}
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
       .playable { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
       .group-head { grid-template-columns: 1fr; gap: 6px; }
+      .model-flow { grid-template-columns: 1fr; }
+      .model-factor, .model-factor:first-child { padding: 16px 0; }
+      .model-factor + .model-factor { border-left: 0; border-top: 1px solid var(--line); }
+      .model-factor + .model-factor::before { display: none; }
+      .feature-row { grid-template-columns: 34px 1fr; gap: 4px 12px; padding: 16px 0; }
+      .feature-row p { grid-column: 2; }
       section { padding: 44px 0; }
       h2 { font-size: 24px; margin-bottom: 20px; }
       .grid3 { grid-template-columns: 1fr; gap: 10px; }
@@ -561,12 +607,12 @@ ${generateJsonLd('en')}
 <section id="model"><div class="wrap">
   <h2>${dict.modelTitle}</h2>
   <p class="lead">${dict.modelLead}</p>
-  <div class="grid3">
-    <div class="card"><div class="ic g">▲</div><h3>${dict.m1t}</h3><p>${dict.m1}</p></div>
-    <div class="card"><div class="ic rd">↔</div><h3>${dict.m2t}</h3><p>${dict.m2}</p></div>
-    <div class="card"><div class="ic b">+</div><h3>${dict.m3t}</h3><p>${dict.m3}</p></div>
+  <div class="model-flow">
+    <div class="model-factor"><span>01</span><h3>${dict.m1t}</h3><p>${dict.m1}</p></div>
+    <div class="model-factor"><span>02</span><h3>${dict.m2t}</h3><p>${dict.m2}</p></div>
+    <div class="model-factor"><span>03</span><h3>${dict.m3t}</h3><p>${dict.m3}</p></div>
   </div>
-  <div class="model-result">${dict.modelResult}</div>
+  <div class="model-result"><span>=</span><p>${dict.modelResult}</p></div>
 </div></section>
 
 <section id="features"><div class="wrap">
@@ -574,21 +620,21 @@ ${generateJsonLd('en')}
   <p class="lead">${dict.featLead}</p>
   <div class="feature-group">
     <div class="group-head"><h3>${dict.draftTitle}</h3><p>${dict.draftLead}</p></div>
-    <div class="grid3">
-      <div class="card"><div class="ic g">▲</div><h3>${dict.d1t}</h3><p>${dict.d1}</p></div>
-      <div class="card"><div class="ic rd">!</div><h3>${dict.d2t}</h3><p>${dict.d2}</p></div>
-      <div class="card"><div class="ic b">◎</div><h3>${dict.d3t}</h3><p>${dict.d3}</p></div>
-      <div class="card"><div class="ic g">%</div><h3>${dict.d4t}</h3><p>${dict.d4}</p></div>
-      <div class="card"><div class="ic b">≡</div><h3>${dict.d5t}</h3><p>${dict.d5}</p></div>
-      <div class="card"><div class="ic rd">◷</div><h3>${dict.d6t}</h3><p>${dict.d6}</p></div>
+    <div class="feature-list">
+      <div class="feature-row"><span>01</span><h4>${dict.d1t}</h4><p>${dict.d1}</p></div>
+      <div class="feature-row"><span>02</span><h4>${dict.d2t}</h4><p>${dict.d2}</p></div>
+      <div class="feature-row"><span>03</span><h4>${dict.d3t}</h4><p>${dict.d3}</p></div>
+      <div class="feature-row"><span>04</span><h4>${dict.d4t}</h4><p>${dict.d4}</p></div>
+      <div class="feature-row"><span>05</span><h4>${dict.d5t}</h4><p>${dict.d5}</p></div>
+      <div class="feature-row"><span>06</span><h4>${dict.d6t}</h4><p>${dict.d6}</p></div>
     </div>
   </div>
   <div class="feature-group">
     <div class="group-head"><h3>${dict.gameTitle}</h3><p>${dict.gameLead}</p></div>
-    <div class="grid3">
-      <div class="card"><div class="ic b">◆</div><h3>${dict.g1t}</h3><p>${dict.g1}</p></div>
-      <div class="card"><div class="ic rd">★</div><h3>${dict.g2t}</h3><p>${dict.g2}</p></div>
-      <div class="card"><div class="ic g">↗</div><h3>${dict.g3t}</h3><p>${dict.g3}</p></div>
+    <div class="feature-list">
+      <div class="feature-row"><span>01</span><h4>${dict.g1t}</h4><p>${dict.g1}</p></div>
+      <div class="feature-row"><span>02</span><h4>${dict.g2t}</h4><p>${dict.g2}</p></div>
+      <div class="feature-row"><span>03</span><h4>${dict.g3t}</h4><p>${dict.g3}</p></div>
     </div>
   </div>
 </div></section>
