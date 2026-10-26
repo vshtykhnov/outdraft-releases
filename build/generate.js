@@ -328,7 +328,6 @@ ${generateJsonLd(lang)}
 
 <section id="features"><div class="wrap">
   <h2>${dict.featTitle}</h2>
-  <p class="lead">${dict.featLead}</p>
   <div class="feature-group">
     <div class="group-head"><h3>${dict.draftTitle}</h3><p>${dict.draftLead}</p></div>
     <div class="feature-list">
@@ -609,7 +608,6 @@ ${generateJsonLd('en')}
 
 <section id="features"><div class="wrap">
   <h2>${dict.featTitle}</h2>
-  <p class="lead">${dict.featLead}</p>
   <div class="feature-group">
     <div class="group-head"><h3>${dict.draftTitle}</h3><p>${dict.draftLead}</p></div>
     <div class="feature-list">
