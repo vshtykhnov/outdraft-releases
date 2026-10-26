@@ -13,8 +13,11 @@ const { EN, RU, UK, META } = require('./translations');
 const LANGS = ['en', 'ru', 'uk'];
 const DICTS = { en: EN, ru: RU, uk: UK };
 const DOMAIN = 'https://outdraft.org';
+const SOFTWARE_VERSION = '0.3.1';
 const WINDOWS_DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.zip';
 const LINUX_DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-linux-x86_64.tar.gz';
+const GUIDE_PATHS = ['guides', 'why-i-keep-losing', 'can-you-win-in-draft', 'last-pick-counter-math', 'cant-kill-this-hero'];
+const GUIDES_LAST_MOD = '2026-10-19';
 
 const LANG_NAMES = { en: 'en', ru: 'ru', uk: 'uk' };
 
@@ -81,7 +84,7 @@ function generateJsonLd(lang) {
     },
     "description": meta.description,
     "downloadUrl": WINDOWS_DOWNLOAD,
-    "softwareVersion": "0.2.0",
+    "softwareVersion": SOFTWARE_VERSION,
     "author": {
       "@type": "Organization",
       "name": "Outdraft"
@@ -199,6 +202,12 @@ ${generateJsonLd(lang)}
     .playable p { color: var(--muted); font-size: 17px; line-height: 1.65; margin: 0; }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .model-result { margin-top: 16px; padding: 20px 22px; border-left: 3px solid var(--r); border-radius: 0 12px 12px 0;
+                    background: linear-gradient(90deg, #10221c, var(--panel)); color: var(--text); }
+    .feature-group + .feature-group { margin-top: 48px; }
+    .group-head { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: end; margin-bottom: 20px; }
+    .group-head h3 { margin: 0; font-size: 23px; }
+    .group-head p { margin: 0; color: var(--muted); }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
     .card h3 { margin: 10px 0 6px; font-size: 17px; }
     .card p { margin: 0; color: var(--muted); font-size: 15px; }
@@ -232,6 +241,7 @@ ${generateJsonLd(lang)}
       .shot { padding: 12px; }
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
       .playable { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
+      .group-head { grid-template-columns: 1fr; gap: 6px; }
       section { padding: 44px 0; }
       h2 { font-size: 24px; margin-bottom: 20px; }
       .grid3 { grid-template-columns: 1fr; gap: 10px; }
@@ -286,16 +296,38 @@ ${generateJsonLd(lang)}
   <div class="playable-copy"><p>${dict.playableFirst}</p><p>${dict.playableSecond}</p></div>
 </div></section>
 
+<section id="model"><div class="wrap">
+  <h2>${dict.modelTitle}</h2>
+  <p class="lead">${dict.modelLead}</p>
+  <div class="grid3">
+    <div class="card"><div class="ic g">▲</div><h3>${dict.m1t}</h3><p>${dict.m1}</p></div>
+    <div class="card"><div class="ic rd">↔</div><h3>${dict.m2t}</h3><p>${dict.m2}</p></div>
+    <div class="card"><div class="ic b">+</div><h3>${dict.m3t}</h3><p>${dict.m3}</p></div>
+  </div>
+  <div class="model-result">${dict.modelResult}</div>
+</div></section>
+
 <section id="features"><div class="wrap">
   <h2>${dict.featTitle}</h2>
   <p class="lead">${dict.featLead}</p>
-  <div class="grid3">
-    <div class="card"><div class="ic g">▲</div><h3>${dict.f1t}</h3><p>${dict.f1}</p></div>
-    <div class="card"><div class="ic rd">✕</div><h3>${dict.f2t}</h3><p>${dict.f2}</p></div>
-    <div class="card"><div class="ic b">≡</div><h3>${dict.f4t}</h3><p>${dict.f4}</p></div>
-    <div class="card"><div class="ic g">⚖</div><h3>${dict.f5t}</h3><p>${dict.f5}</p></div>
-    <div class="card"><div class="ic b">◆</div><h3>${dict.f3t}</h3><p>${dict.f3}</p></div>
-    <div class="card"><div class="ic rd">★</div><h3>${dict.f6t}</h3><p>${dict.f6}</p></div>
+  <div class="feature-group">
+    <div class="group-head"><h3>${dict.draftTitle}</h3><p>${dict.draftLead}</p></div>
+    <div class="grid3">
+      <div class="card"><div class="ic g">▲</div><h3>${dict.d1t}</h3><p>${dict.d1}</p></div>
+      <div class="card"><div class="ic rd">!</div><h3>${dict.d2t}</h3><p>${dict.d2}</p></div>
+      <div class="card"><div class="ic b">◎</div><h3>${dict.d3t}</h3><p>${dict.d3}</p></div>
+      <div class="card"><div class="ic g">%</div><h3>${dict.d4t}</h3><p>${dict.d4}</p></div>
+      <div class="card"><div class="ic b">≡</div><h3>${dict.d5t}</h3><p>${dict.d5}</p></div>
+      <div class="card"><div class="ic rd">◷</div><h3>${dict.d6t}</h3><p>${dict.d6}</p></div>
+    </div>
+  </div>
+  <div class="feature-group">
+    <div class="group-head"><h3>${dict.gameTitle}</h3><p>${dict.gameLead}</p></div>
+    <div class="grid3">
+      <div class="card"><div class="ic b">◆</div><h3>${dict.g1t}</h3><p>${dict.g1}</p></div>
+      <div class="card"><div class="ic rd">★</div><h3>${dict.g2t}</h3><p>${dict.g2}</p></div>
+      <div class="card"><div class="ic g">↗</div><h3>${dict.g3t}</h3><p>${dict.g3}</p></div>
+    </div>
   </div>
 </div></section>
 
@@ -432,6 +464,12 @@ ${generateJsonLd('en')}
     .playable p { color: var(--muted); font-size: 17px; line-height: 1.65; margin: 0; }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .model-result { margin-top: 16px; padding: 20px 22px; border-left: 3px solid var(--r); border-radius: 0 12px 12px 0;
+                    background: linear-gradient(90deg, #10221c, var(--panel)); color: var(--text); }
+    .feature-group + .feature-group { margin-top: 48px; }
+    .group-head { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: end; margin-bottom: 20px; }
+    .group-head h3 { margin: 0; font-size: 23px; }
+    .group-head p { margin: 0; color: var(--muted); }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
     .card h3 { margin: 10px 0 6px; font-size: 17px; }
     .card p { margin: 0; color: var(--muted); font-size: 15px; }
@@ -465,6 +503,7 @@ ${generateJsonLd('en')}
       .shot { padding: 12px; }
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
       .playable { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
+      .group-head { grid-template-columns: 1fr; gap: 6px; }
       section { padding: 44px 0; }
       h2 { font-size: 24px; margin-bottom: 20px; }
       .grid3 { grid-template-columns: 1fr; gap: 10px; }
@@ -519,16 +558,38 @@ ${generateJsonLd('en')}
   <div class="playable-copy"><p>${dict.playableFirst}</p><p>${dict.playableSecond}</p></div>
 </div></section>
 
+<section id="model"><div class="wrap">
+  <h2>${dict.modelTitle}</h2>
+  <p class="lead">${dict.modelLead}</p>
+  <div class="grid3">
+    <div class="card"><div class="ic g">▲</div><h3>${dict.m1t}</h3><p>${dict.m1}</p></div>
+    <div class="card"><div class="ic rd">↔</div><h3>${dict.m2t}</h3><p>${dict.m2}</p></div>
+    <div class="card"><div class="ic b">+</div><h3>${dict.m3t}</h3><p>${dict.m3}</p></div>
+  </div>
+  <div class="model-result">${dict.modelResult}</div>
+</div></section>
+
 <section id="features"><div class="wrap">
   <h2>${dict.featTitle}</h2>
   <p class="lead">${dict.featLead}</p>
-  <div class="grid3">
-    <div class="card"><div class="ic g">▲</div><h3>${dict.f1t}</h3><p>${dict.f1}</p></div>
-    <div class="card"><div class="ic rd">✕</div><h3>${dict.f2t}</h3><p>${dict.f2}</p></div>
-    <div class="card"><div class="ic b">≡</div><h3>${dict.f4t}</h3><p>${dict.f4}</p></div>
-    <div class="card"><div class="ic g">⚖</div><h3>${dict.f5t}</h3><p>${dict.f5}</p></div>
-    <div class="card"><div class="ic b">◆</div><h3>${dict.f3t}</h3><p>${dict.f3}</p></div>
-    <div class="card"><div class="ic rd">★</div><h3>${dict.f6t}</h3><p>${dict.f6}</p></div>
+  <div class="feature-group">
+    <div class="group-head"><h3>${dict.draftTitle}</h3><p>${dict.draftLead}</p></div>
+    <div class="grid3">
+      <div class="card"><div class="ic g">▲</div><h3>${dict.d1t}</h3><p>${dict.d1}</p></div>
+      <div class="card"><div class="ic rd">!</div><h3>${dict.d2t}</h3><p>${dict.d2}</p></div>
+      <div class="card"><div class="ic b">◎</div><h3>${dict.d3t}</h3><p>${dict.d3}</p></div>
+      <div class="card"><div class="ic g">%</div><h3>${dict.d4t}</h3><p>${dict.d4}</p></div>
+      <div class="card"><div class="ic b">≡</div><h3>${dict.d5t}</h3><p>${dict.d5}</p></div>
+      <div class="card"><div class="ic rd">◷</div><h3>${dict.d6t}</h3><p>${dict.d6}</p></div>
+    </div>
+  </div>
+  <div class="feature-group">
+    <div class="group-head"><h3>${dict.gameTitle}</h3><p>${dict.gameLead}</p></div>
+    <div class="grid3">
+      <div class="card"><div class="ic b">◆</div><h3>${dict.g1t}</h3><p>${dict.g1}</p></div>
+      <div class="card"><div class="ic rd">★</div><h3>${dict.g2t}</h3><p>${dict.g2}</p></div>
+      <div class="card"><div class="ic g">↗</div><h3>${dict.g3t}</h3><p>${dict.g3}</p></div>
+    </div>
   </div>
 </div></section>
 
@@ -611,6 +672,25 @@ function generateSitemap() {
     <xhtml:link rel="alternate" hreflang="x-default" href="${DOMAIN}/"/>
   </url>`;
   }
+
+  sitemap += `
+
+  <!-- guides -->`;
+  for (const guidePath of GUIDE_PATHS) {
+    for (const lang of LANGS) {
+      sitemap += `
+  <url>
+    <loc>${DOMAIN}/${lang}/${guidePath}/</loc>
+    <lastmod>${GUIDES_LAST_MOD}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${DOMAIN}/en/${guidePath}/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="${DOMAIN}/ru/${guidePath}/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="${DOMAIN}/uk/${guidePath}/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${DOMAIN}/en/${guidePath}/"/>
+  </url>`;
+    }
+  }
+  sitemap += `
+  <!-- /guides -->`;
   
   sitemap += `
 </urlset>`;

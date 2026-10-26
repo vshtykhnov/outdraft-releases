@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Outdraft — помічник з драфту в Dota 2</title>
   <link rel="canonical" href="https://outdraft.org/uk/">
-  <meta name="description" content="Безкоштовний оверлей для Dota 2: кого брати, кого банити і що збирати, за матчами за останні чотири тижні.">
+  <meta name="description" content="Безкоштовний помічник для Dota 2: піки, лінії, таймінги, білди, навички, особисті бани та порівняння GPM/XPM у матчі.">
   <link rel="alternate" hreflang="en" href="https://outdraft.org/en/">
   <link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/">
   <link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/">
@@ -17,7 +17,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://outdraft.org/uk/">
   <meta property="og:title" content="Outdraft — помічник з драфту в Dota 2">
-  <meta property="og:description" content="Безкоштовний оверлей для Dota 2: кого брати, кого банити і що збирати, за матчами за останні чотири тижні.">
+  <meta property="og:description" content="Безкоштовний помічник для Dota 2: піки, лінії, таймінги, білди, навички, особисті бани та порівняння GPM/XPM у матчі.">
   <meta property="og:image" content="https://outdraft.org/media/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -26,10 +26,10 @@
   <meta property="og:locale:alternate" content="ru_RU">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Outdraft — помічник з драфту в Dota 2">
-  <meta name="twitter:description" content="Безкоштовний оверлей для Dota 2: кого брати, кого банити і що збирати, за матчами за останні чотири тижні.">
+  <meta name="twitter:description" content="Безкоштовний помічник для Dota 2: піки, лінії, таймінги, білди, навички, особисті бани та порівняння GPM/XPM у матчі.">
   <meta name="twitter:image" content="https://outdraft.org/media/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Outdraft","applicationCategory":"GameApplication","operatingSystem":"Windows, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Безкоштовний оверлей для Dota 2: кого брати, кого банити і що збирати, за матчами за останні чотири тижні.","downloadUrl":"https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.zip","softwareVersion":"0.2.0","author":{"@type":"Organization","name":"Outdraft"}}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Як це виглядає в матчі","description":"Безкоштовний оверлей для Dota 2: кого брати, кого банити і що збирати, за матчами за останні чотири тижні.","thumbnailUrl":"https://outdraft.org/media/demo.jpg","contentUrl":"https://outdraft.org/media/demo.mp4","uploadDate":"2026-01-01","duration":"PT30S"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Outdraft","applicationCategory":"GameApplication","operatingSystem":"Windows, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Безкоштовний помічник для Dota 2: піки, лінії, таймінги, білди, навички, особисті бани та порівняння GPM/XPM у матчі.","downloadUrl":"https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.zip","softwareVersion":"0.3.1","author":{"@type":"Organization","name":"Outdraft"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Як це виглядає в матчі","description":"Безкоштовний помічник для Dota 2: піки, лінії, таймінги, білди, навички, особисті бани та порівняння GPM/XPM у матчі.","thumbnailUrl":"https://outdraft.org/media/demo.jpg","contentUrl":"https://outdraft.org/media/demo.mp4","uploadDate":"2026-01-01","duration":"PT30S"}</script>
   <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <style>
     @font-face {
@@ -101,6 +101,12 @@
     .playable p { color: var(--muted); font-size: 17px; line-height: 1.65; margin: 0; }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .model-result { margin-top: 16px; padding: 20px 22px; border-left: 3px solid var(--r); border-radius: 0 12px 12px 0;
+                    background: linear-gradient(90deg, #10221c, var(--panel)); color: var(--text); }
+    .feature-group + .feature-group { margin-top: 48px; }
+    .group-head { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: end; margin-bottom: 20px; }
+    .group-head h3 { margin: 0; font-size: 23px; }
+    .group-head p { margin: 0; color: var(--muted); }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
     .card h3 { margin: 10px 0 6px; font-size: 17px; }
     .card p { margin: 0; color: var(--muted); font-size: 15px; }
@@ -134,6 +140,7 @@
       .shot { padding: 12px; }
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
       .playable { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
+      .group-head { grid-template-columns: 1fr; gap: 6px; }
       section { padding: 44px 0; }
       h2 { font-size: 24px; margin-bottom: 20px; }
       .grid3 { grid-template-columns: 1fr; gap: 10px; }
@@ -162,7 +169,7 @@
     <div>
       <span class="tag">Безкоштовна бета · Windows і Linux</span>
       <h1>Виграй драфт <span class="r">до</span> початку <span class="d">гри</span></h1>
-      <p class="lead">Починай кожен матч із драфта, у який справді можна грати.</p>
+      <p class="lead">Кожен пік змінює матч. Після кожного героя Outdraft перераховує найкращі відповіді, лінії, таймінги й білди, а в грі показує твій темп.</p>
       <div class="cta">
         <div class="downloads">
           <a class="btn download-btn" data-platform="windows" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.zip">⬇ Завантажити для Windows</a>
@@ -188,16 +195,38 @@
   <div class="playable-copy"><p>Деякі піки сильні самі по собі. Інші потребують майже ідеальної гри, щоб дати той самий результат. Outdraft допомагає уникнути цього перекосу завдяки продуманим пікам, адаптивним білдам і підказкам у матчі.</p><p>Ти отримуєш іграбельний матч, де важливіша твоя гра, а не те, кому дістався сильніший герой.</p></div>
 </div></section>
 
-<section id="features"><div class="wrap">
-  <h2>Усе в одному оверлеї</h2>
-  <p class="lead">Усі підказки — за тисячами матчів за останні чотири тижні.</p>
+<section id="model"><div class="wrap">
+  <h2>Новий розрахунок після кожного піку</h2>
+  <p class="lead">Outdraft перетворює статистику недавніх матчів Legend–Ancient на живу модель поточного драфту.</p>
   <div class="grid3">
-    <div class="card"><div class="ic g">▲</div><h3>Пік під увесь драфт</h3><p>Герой на твою роль, який контрить ворогів і поєднується з союзниками.</p></div>
-    <div class="card"><div class="ic rd">✕</div><h3>Бани під твій пул</h3><p>Прибирають героїв, які б'ють твоїх, — тебе складніше перепікати.</p></div>
-    <div class="card"><div class="ic b">≡</div><h3>Розклад по лініях</h3><p>Яка лінія виграє, яка програє і куди потрібна допомога.</p></div>
-    <div class="card"><div class="ic g">⚖</div><h3>Хто виграв драфт</h3><p>Видно, чи перепікали ви ворога. Велика перевага — привід поставити Double Down.</p></div>
-    <div class="card"><div class="ic b">◆</div><h3>Предмети під ворогів</h3><p>Білд підлаштовується під склад ворогів, із хвилиною покупки кожного предмета.</p></div>
-    <div class="card"><div class="ic rd">★</div><h3>Навички й таланти</h3><p>Що качати першим і як часто перемагає кожен талант.</p></div>
+    <div class="card"><div class="ic g">▲</div><h3>Сила героя</h3><p>Як герой грає в поточній меті й на цій ролі.</p></div>
+    <div class="card"><div class="ic rd">↔</div><h3>Матчапи</h3><p>Як кожен кандидат грає проти вже вибраних ворогів.</p></div>
+    <div class="card"><div class="ic b">+</div><h3>Синергія</h3><p>Як кожен кандидат поєднується з уже вибраними союзниками.</p></div>
+  </div>
+  <div class="model-result">Разом ці фактори перетворюються на зміну шансу на перемогу. Після кожного нового героя перераховуються піки, загрози суперника, лінії та внесок кожного героя.</div>
+</div></section>
+
+<section id="features"><div class="wrap">
+  <h2>Від першого піку до кінця матчу</h2>
+  <p class="lead">Один розрахунок перетворюється на план для драфту, ліній, таймінгів, білду й темпу твоєї гри.</p>
+  <div class="feature-group">
+    <div class="group-head"><h3>План матчу ще на драфті</h3><p>Видно не лише хто сильніший, а й звідки береться перевага та коли її використовувати.</p></div>
+    <div class="grid3">
+      <div class="card"><div class="ic g">▲</div><h3>Піки на кожну роль</h3><p>Найкращий доступний герой на кожну вільну роль і відсоток, який пік додає до шансу на перемогу. Відповідь змінюється після кожного піку.</p></div>
+      <div class="card"><div class="ic rd">!</div><h3>Найкраща відповідь суперника</h3><p>Найсильніший герой, якого ворог ще може взяти на кожну роль, — небезпечний ластпік не стане несподіванкою.</p></div>
+      <div class="card"><div class="ic b">◎</div><h3>Твій пул і особисті бани</h3><p>Залиш у рекомендаціях лише героїв, на яких граєш. Бани враховують частоту піку, силу в меті й матчапи проти твого пулу.</p></div>
+      <div class="card"><div class="ic g">%</div><h3>Шанс і внесок у драфт</h3><p>Загальний шанс на перемогу та внесок кожного героя, матчапу й синергії. Корисний контекст перед Double Down.</p></div>
+      <div class="card"><div class="ic b">≡</div><h3>Ролі й лінії</h3><p>Герої розподіляються за ймовірними ролями. Видно, яка лінія сильна, рівна чи складна; помилку можна виправити перетягуванням.</p></div>
+      <div class="card"><div class="ic rd">◷</div><h3>Гра на ранній стадії чи в лейті</h3><p>Порівняй шанс на перемогу до 30 і після 45 хвилин і подивись, які герої стають сильнішими чи слабшими протягом гри.</p></div>
+    </div>
+  </div>
+  <div class="feature-group">
+    <div class="group-head"><h3>Продовжуй план уже в матчі</h3><p>Коли починається матч, Outdraft перемикається з аналізу драфту на план гри для твого героя й ролі.</p></div>
+    <div class="grid3">
+      <div class="card"><div class="ic b">◆</div><h3>Предмети для цього матчу</h3><p>Стартові предмети й покупки на лінію, мідгейм і лейт зі звичними таймінгами. Позначки ворогів показують, що проти цього складу купують частіше, а що пропускають.</p></div>
+      <div class="card"><div class="ic rd">★</div><h3>Навички, таланти й наступні кроки</h3><p>Порядок здібностей, частота вибору й вінрейт талантів, а в матчі — наступні рівні та предмети з урахуванням того, що в тебе вже є.</p></div>
+      <div class="card"><div class="ic g">↗</div><h3>Темп і шанс у реальному часі</h3><p>Порівнюй ластхіти, рівень, GPM і XPM із середніми значеннями героя на цій ролі в ту саму хвилину. На графіку видно просідання, а шанс змінюється з рахунком і часом.</p></div>
+    </div>
   </div>
 </div></section>
 
@@ -219,7 +248,7 @@
   <details><summary>За це можуть забанити?</summary>
     <p>Ні. Outdraft не читає й не змінює пам'ять і файли гри. Він лише дивиться на піки на екрані й аналізує їх, а героя та предмети отримує через офіційну Game State Integration від Valve. Працює так само, як підказки героїв у Dota Plus, оверлеї Overwolf і підсвічування через GSI в застосунках SteelSeries і Logitech.</p></details>
   <details><summary>Як користуватися?</summary>
-    <p>Запусти Outdraft, потім Dota 2 у вікні без рамки — так програма бачить піки. Знайди матч: піки визначаться самі, і одразу з'являться підказки. Кожен герой показує свій внесок у відсотках і рейтинг лінії (Добре, Рівно, Складно або Дуже складно). Найвпливовіший герой позначений зіркою, найслабший — стрілкою вниз, а перевага драфту показана як відсоток перемоги (наприклад, «Dire 64%»). Більше нічого не потрібно — ні логінів, ні паролів, ні доступів.</p></details>
+    <p>Запусти Outdraft, а потім Dota 2 у вікні без рамки. Під час вибору героїв програма розпізнає кожен пік і перераховує рекомендації, шанс на перемогу, лінії та таймінги. Після початку матчу вона перемикається на предмети, навички й Live, де твій темп порівнюється зі звичними значеннями героя на цій ролі. Обліковий запис не потрібен; Steam можна підключити лише для особистого пулу й банів.</p></details>
   <details><summary>Це безкоштовно?</summary>
     <p>Так, поки триває бета. Натомість нам потрібен твій відгук: що ламається, що незручно, що виправити і що хотілося б додати. <a href="https://tally.so/r/D4lK4E" target="_blank" rel="noopener">Залишити відгук</a>.</p></details>
 </div></section>

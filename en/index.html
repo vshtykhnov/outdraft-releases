@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Outdraft — Dota 2 draft helper</title>
   <link rel="canonical" href="https://outdraft.org/en/">
-  <meta name="description" content="Free Dota 2 overlay: who to pick, who to ban and what to build, from the last four weeks of matches.">
+  <meta name="description" content="Free Dota 2 draft and live companion with recalculated picks, lanes, timings, builds, skills, personal bans, and live GPM/XPM.">
   <link rel="alternate" hreflang="en" href="https://outdraft.org/en/">
   <link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/">
   <link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/">
@@ -17,7 +17,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://outdraft.org/en/">
   <meta property="og:title" content="Outdraft — Dota 2 draft helper">
-  <meta property="og:description" content="Free Dota 2 overlay: who to pick, who to ban and what to build, from the last four weeks of matches.">
+  <meta property="og:description" content="Free Dota 2 draft and live companion with recalculated picks, lanes, timings, builds, skills, personal bans, and live GPM/XPM.">
   <meta property="og:image" content="https://outdraft.org/media/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -26,10 +26,10 @@
   <meta property="og:locale:alternate" content="uk_UA">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Outdraft — Dota 2 draft helper">
-  <meta name="twitter:description" content="Free Dota 2 overlay: who to pick, who to ban and what to build, from the last four weeks of matches.">
+  <meta name="twitter:description" content="Free Dota 2 draft and live companion with recalculated picks, lanes, timings, builds, skills, personal bans, and live GPM/XPM.">
   <meta name="twitter:image" content="https://outdraft.org/media/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Outdraft","applicationCategory":"GameApplication","operatingSystem":"Windows, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free Dota 2 overlay: who to pick, who to ban and what to build, from the last four weeks of matches.","downloadUrl":"https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.zip","softwareVersion":"0.2.0","author":{"@type":"Organization","name":"Outdraft"}}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"See it in a real match","description":"Free Dota 2 overlay: who to pick, who to ban and what to build, from the last four weeks of matches.","thumbnailUrl":"https://outdraft.org/media/demo.jpg","contentUrl":"https://outdraft.org/media/demo.mp4","uploadDate":"2026-01-01","duration":"PT30S"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Outdraft","applicationCategory":"GameApplication","operatingSystem":"Windows, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free Dota 2 draft and live companion with recalculated picks, lanes, timings, builds, skills, personal bans, and live GPM/XPM.","downloadUrl":"https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.zip","softwareVersion":"0.3.1","author":{"@type":"Organization","name":"Outdraft"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"See it in a real match","description":"Free Dota 2 draft and live companion with recalculated picks, lanes, timings, builds, skills, personal bans, and live GPM/XPM.","thumbnailUrl":"https://outdraft.org/media/demo.jpg","contentUrl":"https://outdraft.org/media/demo.mp4","uploadDate":"2026-01-01","duration":"PT30S"}</script>
   <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <style>
     @font-face {
@@ -101,6 +101,12 @@
     .playable p { color: var(--muted); font-size: 17px; line-height: 1.65; margin: 0; }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .model-result { margin-top: 16px; padding: 20px 22px; border-left: 3px solid var(--r); border-radius: 0 12px 12px 0;
+                    background: linear-gradient(90deg, #10221c, var(--panel)); color: var(--text); }
+    .feature-group + .feature-group { margin-top: 48px; }
+    .group-head { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: end; margin-bottom: 20px; }
+    .group-head h3 { margin: 0; font-size: 23px; }
+    .group-head p { margin: 0; color: var(--muted); }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
     .card h3 { margin: 10px 0 6px; font-size: 17px; }
     .card p { margin: 0; color: var(--muted); font-size: 15px; }
@@ -134,6 +140,7 @@
       .shot { padding: 12px; }
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
       .playable { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
+      .group-head { grid-template-columns: 1fr; gap: 6px; }
       section { padding: 44px 0; }
       h2 { font-size: 24px; margin-bottom: 20px; }
       .grid3 { grid-template-columns: 1fr; gap: 10px; }
@@ -162,7 +169,7 @@
     <div>
       <span class="tag">Free beta · Windows & Linux</span>
       <h1>Win the draft <span class="r">before</span> the game <span class="d">starts</span></h1>
-      <p class="lead">Start every match with a draft you can actually play.</p>
+      <p class="lead">Every pick changes the match. Outdraft recalculates heroes, lanes, timings, and builds as the draft develops—then follows your pace in game.</p>
       <div class="cta">
         <div class="downloads">
           <a class="btn download-btn" data-platform="windows" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.zip">⬇ Download for Windows</a>
@@ -188,16 +195,38 @@
   <div class="playable-copy"><p>Some picks are strong on their own. Others demand near-perfect play to deliver the same result. Outdraft helps you avoid that imbalance with thoughtful picks, adaptive builds, and in-match guidance.</p><p>You get a playable match where your play matters more than who ended up with the stronger hero.</p></div>
 </div></section>
 
-<section id="features"><div class="wrap">
-  <h2>Everything in one overlay</h2>
-  <p class="lead">Every suggestion comes from thousands of matches of the last four weeks.</p>
+<section id="model"><div class="wrap">
+  <h2>A new answer after every pick</h2>
+  <p class="lead">Outdraft turns recent Legend–Ancient match data into a live model of the current draft.</p>
   <div class="grid3">
-    <div class="card"><div class="ic g">▲</div><h3>Picks for the whole draft</h3><p>A hero for your role that counters the enemies and works with your allies.</p></div>
-    <div class="card"><div class="ic rd">✕</div><h3>Bans for your pool</h3><p>Takes away the heroes that beat what you play, so you're harder to counter.</p></div>
-    <div class="card"><div class="ic b">≡</div><h3>Lanes at a glance</h3><p>Which lane wins, which loses and where help is needed.</p></div>
-    <div class="card"><div class="ic g">⚖</div><h3>Who won the draft</h3><p>See if you outdrafted them. A big edge is a good game for Double Down.</p></div>
-    <div class="card"><div class="ic b">◆</div><h3>Items for these enemies</h3><p>The build adapts to the enemy lineup, with the minute to buy each item.</p></div>
-    <div class="card"><div class="ic rd">★</div><h3>Skills and talents</h3><p>What to max first and how often each talent wins.</p></div>
+    <div class="card"><div class="ic g">▲</div><h3>Hero strength</h3><p>How the hero performs in the current meta and on this role.</p></div>
+    <div class="card"><div class="ic rd">↔</div><h3>Matchups</h3><p>How every candidate plays into each enemy already picked.</p></div>
+    <div class="card"><div class="ic b">+</div><h3>Synergy</h3><p>How every candidate works with each ally already picked.</p></div>
+  </div>
+  <div class="model-result">Together, these become changes in win chance. Picks, enemy threats, lane outlook, and draft impact are recalculated whenever a hero appears.</div>
+</div></section>
+
+<section id="features"><div class="wrap">
+  <h2>From the first pick to the final fight</h2>
+  <p class="lead">One calculation becomes a plan for the draft, lanes, timings, build, and your live pace.</p>
+  <div class="feature-group">
+    <div class="group-head"><h3>Plan the match before it starts</h3><p>See not only who is stronger, but where the advantage comes from and when to use it.</p></div>
+    <div class="grid3">
+      <div class="card"><div class="ic g">▲</div><h3>Picks for every role</h3><p>The best available hero for each open role, with the win chance the pick adds. The answer changes with every pick.</p></div>
+      <div class="card"><div class="ic rd">!</div><h3>The enemy’s best reply</h3><p>See the strongest hero the enemy can still take for each role, so the dangerous last pick is not a surprise.</p></div>
+      <div class="card"><div class="ic b">◎</div><h3>Your pool and personal bans</h3><p>Filter picks to heroes you play. Ban suggestions combine pick frequency, meta strength, and counters to your own pool.</p></div>
+      <div class="card"><div class="ic g">%</div><h3>Win chance and impact</h3><p>See the draft’s overall win chance and how much each hero, matchup, and synergy moves it. Useful context before a Double Down.</p></div>
+      <div class="card"><div class="ic b">≡</div><h3>Roles and lanes</h3><p>Heroes fall into their likely roles. See which lane is Strong, Even, or Hard, then correct a role by dragging if needed.</p></div>
+      <div class="card"><div class="ic rd">◷</div><h3>Early or late</h3><p>Compare win chance from under 30 to 45+ minutes and see which heroes gain or lose value as the game goes long.</p></div>
+    </div>
+  </div>
+  <div class="feature-group">
+    <div class="group-head"><h3>Keep the plan through the match</h3><p>When the match starts, Outdraft switches from draft analysis to a game plan for your hero and role.</p></div>
+    <div class="grid3">
+      <div class="card"><div class="ic b">◆</div><h3>Items for this game</h3><p>Starting, laning, mid-, and late-game items with usual timings. Enemy markers show what players buy more often—or skip—into this lineup.</p></div>
+      <div class="card"><div class="ic rd">★</div><h3>Skills, talents, and what’s next</h3><p>See the ability order, talent pick and win rates, then the next levels and items based on what you already have.</p></div>
+      <div class="card"><div class="ic g">↗</div><h3>Live pace and win chance</h3><p>Compare last hits, level, GPM, and XPM with this hero and role at the same minute. Follow GPM/XPM drops while win chance adjusts to the score and time.</p></div>
+    </div>
   </div>
 </div></section>
 
@@ -219,7 +248,7 @@
   <details><summary>Can I get banned for using it?</summary>
     <p>No. Outdraft never reads or changes the game's memory or files. It only looks at the picks on screen and analyzes them, and gets your hero and items through Valve's official Game State Integration. It works the same way as Dota Plus hero suggestions, Overwolf overlays and the GSI lighting in SteelSeries and Logitech apps.</p></details>
   <details><summary>How do I use it?</summary>
-    <p>Run Outdraft, then start Dota 2 in borderless window so the app can see the picks. Find a match: picks are recognized automatically and suggestions appear right away. Each hero shows its impact as a percentage and a lane rating (Good, Even, Hard, or Very Hard). The most influential hero has a star, the weakest has a down arrow, and the overall draft advantage is shown as win rate (e.g. "Dire 64%"). That's it, no logins, passwords or permissions.</p></details>
+    <p>Run Outdraft, then Dota 2 in borderless window. During hero selection it recognizes each pick and recalculates recommendations, win chance, lanes, and timings. When the match starts it switches to items, skills, and Live, where your pace is compared with the usual values for that hero and role. No account is required; linking Steam is optional and only personalizes your pool and bans.</p></details>
   <details><summary>Is it free?</summary>
     <p>Yes, during the beta. In return we need your feedback: what breaks, what feels awkward, what to fix and what you would like to see. <a href="https://tally.so/r/D4lK4E" target="_blank" rel="noopener">Leave feedback</a>.</p></details>
 </div></section>
