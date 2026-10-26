@@ -213,9 +213,9 @@ ${generateJsonLd(lang)}
     .model-result span { color: var(--r); font-size: 24px; font-weight: 800; line-height: 1.2; }
     .model-result p { margin: 0; color: var(--muted); }
     .feature-group + .feature-group { margin-top: 48px; }
-    .group-head { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: end; margin-bottom: 20px; }
+    .group-head { max-width: 680px; margin-bottom: 20px; }
     .group-head h3 { margin: 0; font-size: 23px; }
-    .group-head p { margin: 0; color: var(--muted); }
+    .group-head p { margin: 6px 0 0; color: var(--muted); }
     .feature-list { border-top: 1px solid var(--line); }
     .feature-row { display: grid; grid-template-columns: 52px minmax(190px, .75fr) 1.25fr; gap: 20px; align-items: start;
                    padding: 19px 0; border-bottom: 1px solid var(--line); }
@@ -255,7 +255,6 @@ ${generateJsonLd(lang)}
       .shot { padding: 12px; }
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
       .playable { grid-template-columns: 1fr; gap: 10px; }
-      .group-head { grid-template-columns: 1fr; gap: 6px; }
       .model-flow { grid-template-columns: 1fr; }
       .model-factor, .model-factor:first-child { padding: 16px 0; }
       .model-factor + .model-factor { border-left: 0; border-top: 1px solid var(--line); }
@@ -495,9 +494,9 @@ ${generateJsonLd('en')}
     .model-result span { color: var(--r); font-size: 24px; font-weight: 800; line-height: 1.2; }
     .model-result p { margin: 0; color: var(--muted); }
     .feature-group + .feature-group { margin-top: 48px; }
-    .group-head { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: end; margin-bottom: 20px; }
+    .group-head { max-width: 680px; margin-bottom: 20px; }
     .group-head h3 { margin: 0; font-size: 23px; }
-    .group-head p { margin: 0; color: var(--muted); }
+    .group-head p { margin: 6px 0 0; color: var(--muted); }
     .feature-list { border-top: 1px solid var(--line); }
     .feature-row { display: grid; grid-template-columns: 52px minmax(190px, .75fr) 1.25fr; gap: 20px; align-items: start;
                    padding: 19px 0; border-bottom: 1px solid var(--line); }
@@ -537,7 +536,6 @@ ${generateJsonLd('en')}
       .shot { padding: 12px; }
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
       .playable { grid-template-columns: 1fr; gap: 10px; }
-      .group-head { grid-template-columns: 1fr; gap: 6px; }
       .model-flow { grid-template-columns: 1fr; }
       .model-factor, .model-factor:first-child { padding: 16px 0; }
       .model-factor + .model-factor { border-left: 0; border-top: 1px solid var(--line); }
