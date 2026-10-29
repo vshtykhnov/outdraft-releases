@@ -93,9 +93,8 @@
     .demo { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: 1px solid var(--line); background: #000; }
     section { padding: 64px 0; border-top: 1px solid #141b24; scroll-margin-top: 8px; }
     h2 { font-size: 30px; margin: 0 0 24px; letter-spacing: -.5px; }
-    .playable { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: start; }
-    .playable h2 { margin: 0; }
-    .playable p { color: var(--muted); font-size: 17px; line-height: 1.65; margin: 0; }
+    h2.title { font-size: 40px; font-weight: 800; letter-spacing: -1px; text-align: center; margin-bottom: 32px; }
+    h2.title .r { color: var(--r); }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .model-flow { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -111,16 +110,9 @@
     .model-result { display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; margin-top: 20px; max-width: 820px; }
     .model-result span { color: var(--r); font-size: 24px; font-weight: 800; line-height: 1.2; }
     .model-result p { margin: 0; color: var(--muted); }
-    .feature-group + .feature-group { margin-top: 48px; }
-    .group-head { max-width: 680px; margin-bottom: 20px; }
-    .group-head h3 { margin: 0; font-size: 23px; }
-    .group-head p { margin: 6px 0 0; color: var(--muted); }
-    .feature-list { border-top: 1px solid var(--line); }
-    .feature-row { display: grid; grid-template-columns: 52px minmax(190px, .75fr) 1.25fr; gap: 20px; align-items: start;
-                   padding: 19px 0; border-bottom: 1px solid var(--line); }
-    .feature-row > span { color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .08em; padding-top: 3px; }
-    .feature-row h4 { margin: 0; font-size: 16px; }
-    .feature-row p { margin: 0; color: var(--muted); font-size: 15px; }
+    .feature-group + .feature-group { margin-top: 40px; }
+    .feature-group > h3 { margin: 0 0 14px; font-size: 21px; }
+    .card h4 { margin: 0 0 6px; font-size: 16px; }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
     .card h3 { margin: 10px 0 6px; font-size: 17px; }
     .card p { margin: 0; color: var(--muted); font-size: 15px; }
@@ -153,15 +145,13 @@
       .downloads { flex-direction: column; }
       .shot { padding: 12px; }
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
-      .playable { grid-template-columns: 1fr; gap: 10px; }
       .model-flow { grid-template-columns: 1fr; }
       .model-factor, .model-factor:first-child { padding: 16px 0; }
       .model-factor + .model-factor { border-left: 0; border-top: 1px solid var(--line); }
       .model-factor + .model-factor::before { display: none; }
-      .feature-row { grid-template-columns: 34px 1fr; gap: 4px 12px; padding: 16px 0; }
-      .feature-row p { grid-column: 2; }
       section { padding: 44px 0; }
       h2 { font-size: 24px; margin-bottom: 20px; }
+      h2.title { font-size: 28px; margin-bottom: 22px; }
       .grid3 { grid-template-columns: 1fr; gap: 10px; }
       .card { padding: 16px; }
       .top .links { display: none; }
@@ -198,20 +188,46 @@
       </div>
     </div>
     <div class="shot" aria-hidden="true">
-      <img class="ov-img" src="/media/overlay.png" alt="Outdraft overlay during a draft" width="488" height="468" loading="eager">
+      <img class="ov-img" src="/media/hero-partial.png" alt="Outdraft during a Dota 2 draft" width="621" height="473" loading="eager">
       <div class="float"><span>Best pick:</span> <b>Phantom Lancer</b></div>
     </div>
   </div>
 </div>
 
 <section id="demo"><div class="wrap">
-  <h2>See it in a real match</h2>
-  <video class="demo" src="/media/demo.mp4" poster="/media/demo.jpg" autoplay muted loop playsinline preload="metadata"></video>
+  <details style="padding:0;overflow:hidden"><summary style="padding:20px 22px;display:flex;align-items:center;gap:14px"><span style="display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#10221c;color:#5DCAA5;font-size:15px">▶</span><span><span style="display:block;color:#5DCAA5;font-size:12px;font-weight:800;letter-spacing:.08em">WATCH IN ACTION</span><span style="display:block;font-size:20px;margin-top:1px">See Outdraft in a real match</span></span></summary><div style="padding:0 22px 22px"><video class="demo" src="/media/demo.mp4" poster="/media/demo.jpg" controls playsinline preload="none"></video><div style="margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap"><p style="margin:0;color:#8b95a5">Every screen and the full walkthrough — on one page.</p><a href="/en/tour/" style="display:inline-flex;padding:9px 13px;border:1px solid #2c4a40;border-radius:8px;background:#10221c;color:#5DCAA5;font-weight:700;text-decoration:none">Explore the full tour →</a></div></div></details>
 </div></section>
 
-<section id="playable"><div class="wrap playable">
-  <h2>Let your play decide the match</h2>
-  <p>Not every pick gives you the same chance: one hero forgives mistakes while another demands near-perfect play. Outdraft helps you choose heroes and a plan for the exact draft, so the result depends on your decisions—not an imbalance before the game starts.</p>
+<section id="playable"><div class="wrap">
+  <h2 class="title">Why <span class="r">Outdraft</span></h2>
+  <div class="grid3">
+    <div class="card"><h3>Let your play decide the match</h3><p>Heroes for this draft, so the game decides the match, not the picks.</p></div>
+    <div class="card"><h3>No need to follow the meta</h3><p>See who is strong in the current meta and who counters whom.</p></div>
+    <div class="card"><h3>Know what to do</h3><p>Why a hero fits the draft, and what to take next in the game.</p></div>
+  </div>
+</div></section>
+
+<section id="features"><div class="wrap">
+  <h2 class="title">What <span class="r">Outdraft</span> does</h2>
+  <div class="feature-group">
+    <h3>In the draft</h3>
+    <div class="grid3">
+      <div class="card"><h4>Picks for every role</h4><p>The best hero for every open role and how much it adds to your chance.</p></div>
+      <div class="card"><h4>The enemy’s best reply</h4><p>Who the enemy can still take, so a last pick is no surprise.</p></div>
+      <div class="card"><h4>Your pool and personal bans</h4><p>Suggestions from your own heroes, and bans against your pool.</p></div>
+      <div class="card"><h4>Win chance and impact</h4><p>Your win chance and what each hero, matchup and synergy adds.</p></div>
+      <div class="card"><h4>Roles and lanes</h4><p>Who plays which role, and which lane is strong, even or hard.</p></div>
+      <div class="card"><h4>Early game or late</h4><p>How your chance shifts with game length, and who scales better.</p></div>
+    </div>
+  </div>
+  <div class="feature-group">
+    <h3>In the match</h3>
+    <div class="grid3">
+      <div class="card"><h4>Items for this game</h4><p>Starting items, lane, midgame and late, adjusted for these enemies.</p></div>
+      <div class="card"><h4>Skills and talents</h4><p>Skill order, the best talents and what to level next.</p></div>
+      <div class="card"><h4>Live pace and win chance</h4><p>Your farm against the average for this role, and your chance as the game goes.</p></div>
+    </div>
+  </div>
 </div></section>
 
 <section id="model"><div class="wrap">
@@ -223,29 +239,6 @@
     <div class="model-factor"><span>03</span><h3>Synergy</h3><p>How every candidate works with each ally already picked.</p></div>
   </div>
   <div class="model-result"><span>=</span><p>Together, these become changes in win chance. Picks, enemy threats, lane outlook, and draft impact are recalculated whenever a hero appears.</p></div>
-</div></section>
-
-<section id="features"><div class="wrap">
-  <h2>From the first pick to the final fight</h2>
-  <div class="feature-group">
-    <div class="group-head"><h3>Plan the match before it starts</h3><p>See not only who is stronger, but where the advantage comes from and when to use it.</p></div>
-    <div class="feature-list">
-      <div class="feature-row"><span>01</span><h4>Picks for every role</h4><p>The best available hero for each open role, with the win chance the pick adds. The answer changes with every pick.</p></div>
-      <div class="feature-row"><span>02</span><h4>The enemy’s best reply</h4><p>See the strongest hero the enemy can still take for each role, so the dangerous last pick is not a surprise.</p></div>
-      <div class="feature-row"><span>03</span><h4>Your pool and personal bans</h4><p>Filter picks to heroes you play. Ban suggestions combine pick frequency, meta strength, and counters to your own pool.</p></div>
-      <div class="feature-row"><span>04</span><h4>Win chance and impact</h4><p>See the draft’s overall win chance and how much each hero, matchup, and synergy moves it. Useful context before a Double Down.</p></div>
-      <div class="feature-row"><span>05</span><h4>Roles and lanes</h4><p>Heroes fall into their likely roles. See which lane is Strong, Even, or Hard.</p></div>
-      <div class="feature-row"><span>06</span><h4>Early or late</h4><p>Compare win chance from under 30 to 45+ minutes and see which heroes gain or lose value as the game goes long.</p></div>
-    </div>
-  </div>
-  <div class="feature-group">
-    <div class="group-head"><h3>Keep the plan through the match</h3><p>When the match starts, Outdraft switches from draft analysis to a game plan for your hero and role.</p></div>
-    <div class="feature-list">
-      <div class="feature-row"><span>01</span><h4>Items for this game</h4><p>Starting, laning, mid-, and late-game items with usual timings. Enemy markers show what players buy more often—or skip—into this lineup.</p></div>
-      <div class="feature-row"><span>02</span><h4>Skills, talents, and what’s next</h4><p>See the ability order, talent pick and win rates, then the next levels and items based on what you already have.</p></div>
-      <div class="feature-row"><span>03</span><h4>Live pace and win chance</h4><p>Compare last hits, level, GPM, and XPM with this hero and role at the same minute. Follow GPM/XPM drops while win chance adjusts to the score and time.</p></div>
-    </div>
-  </div>
 </div></section>
 
 <section id="start"><div class="wrap">
@@ -288,6 +281,15 @@
 
 <script>
   document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked", { platform: a.dataset.platform })));
+  document.querySelector('#model')?.after(document.querySelector('#demo'));
+  (() => {
+    const slides = [['/media/hero-draft.png', 'Outdraft during a Dota 2 draft'], ['/media/tour/03-suggestions.png', 'Outdraft hero suggestions'], ['/media/tour/08-items.png', 'Outdraft item suggestions'], ['/media/tour/10-live.png', 'Outdraft live match statistics']];
+    const image = document.querySelector('#hero-slide'), previous = document.querySelector('.hero-prev'), next = document.querySelector('.hero-next');
+    if (!image || !previous || !next) return;
+    let current = 0;
+    const show = index => { current = (index + slides.length) % slides.length; image.src = slides[current][0]; image.alt = slides[current][1]; };
+    previous.addEventListener('click', () => show(current - 1)); next.addEventListener('click', () => show(current + 1));
+  })();
   
   // Handle legacy ?lang= URLs - redirect to proper language path
   (function() {

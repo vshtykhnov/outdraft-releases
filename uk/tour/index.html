@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Outdraft — тур продуктом</title>
+  <meta name="description" content="Екран за екраном: як Outdraft допомагає під час драфту й матчу Dota 2.">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face { font-family: Inter; src: url('/fonts/inter-var.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+    :root { --bg:#0a0d12; --panel:#10151c; --card:#141a22; --line:#222b37; --text:#e8edf4; --muted:#8b95a5; --r:#5DCAA5; }
+    * { box-sizing:border-box; } html { scroll-behavior:smooth; } body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 Inter,system-ui,sans-serif; }
+    a { color:inherit; } .wrap { max-width:1080px; padding:0 24px; margin:auto; }
+    header { display:flex; justify-content:space-between; align-items:center; padding:20px 0; gap:18px; }
+    .brand { display:flex; align-items:center; gap:10px; font-weight:800; font-size:18px; text-decoration:none; }
+    .brand svg { width:32px; height:32px; } .back { color:var(--muted); font-size:14px; text-decoration:none; } .back:hover { color:var(--text); }
+    .hero { text-align:center; padding:68px 0 60px; border-top:1px solid #141b24; background:radial-gradient(70% 120% at 50% 0%,#10251f 0%,transparent 68%); }
+    .tag { display:inline-block; padding:4px 10px; border:1px solid #2c4a40; border-radius:999px; color:var(--r); background:#10221c; font-size:13px; }
+    h1 { max-width:760px; margin:16px auto 12px; font-size:48px; line-height:1.08; letter-spacing:-1.4px; } .lead { max-width:620px; margin:0 auto; color:var(--muted); font-size:18px; }
+    section { padding:58px 0; border-top:1px solid #141b24; } h2 { margin:0 0 8px; font-size:30px; letter-spacing:-.5px; }
+    .section-head { max-width:760px; margin:0 auto 22px; text-align:center; } .eyebrow { margin:0 0 6px; color:var(--r); font-size:12px; font-weight:800; letter-spacing:.1em; }
+    .video-card { max-width:720px; margin:0 auto; padding:12px; background:linear-gradient(145deg,#151d27,#10151c); border:1px solid var(--line); border-radius:18px; box-shadow:0 16px 46px rgba(0,0,0,.22); }
+    .video { display:block; width:100%; aspect-ratio:622/474; border:1px solid var(--line); border-radius:10px; background:#000; }
+    .note { max-width:720px; margin:13px auto 0; color:var(--muted); font-size:14px; text-align:center; }
+    .tour-gallery { max-width:760px; margin:0 auto; }
+    .gallery { display:grid; grid-template-columns:48px minmax(0,1fr) 48px; align-items:center; gap:16px; }
+    .frame { overflow:hidden; border:1px solid var(--line); background:var(--panel); border-radius:16px; }
+    .frame img { display:block; width:100%; height:auto; }
+    .control { width:48px; height:48px; border:1px solid var(--line); border-radius:50%; background:var(--card); color:var(--text); font:28px/1 Inter; cursor:pointer; }
+    .control:hover { border-color:var(--r); color:var(--r); } .control:focus-visible { outline:2px solid var(--r); outline-offset:3px; }
+    .caption { display:flex; justify-content:space-between; gap:20px; align-items:baseline; margin-top:18px; } .caption h3 { margin:0; font-size:20px; } .caption p { margin:4px 0 0; color:var(--muted); }
+    .count { color:var(--r); white-space:nowrap; font-size:14px; font-weight:700; }
+    .dots { display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin-top:24px; }
+    .dot { width:8px; height:8px; padding:0; border:0; border-radius:50%; background:#3a4554; cursor:pointer; } .dot[aria-current="true"] { background:var(--r); transform:scale(1.2); }
+    .all { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:42px; }
+    .thumb { overflow:hidden; border:1px solid var(--line); border-radius:8px; padding:0; background:#000; cursor:pointer; aspect-ratio:4/3; } .thumb img { width:100%; height:100%; object-fit:cover; display:block; opacity:.66; } .thumb:hover img,.thumb[aria-current="true"] img { opacity:1; } .thumb[aria-current="true"] { border-color:var(--r); }
+    footer { padding:30px 0 48px; color:var(--muted); font-size:14px; border-top:1px solid #141b24; }
+    @media (max-width:720px) { .wrap{padding:0 16px;} h1{font-size:34px;} .hero{padding:40px 0;} .gallery{grid-template-columns:38px minmax(0,1fr) 38px;gap:8px;} .control{width:38px;height:38px;font-size:23px;} .all{grid-template-columns:repeat(5,1fr);gap:6px;} .caption{display:block;} .count{display:block;margin-top:10px;} section{padding:42px 0;} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/ru/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#141414"/><g fill="none" stroke-width="7"><circle cx="32" cy="32" r="17" stroke="#5DCAA5" stroke-dasharray="48 59" transform="rotate(-90 32 32)"/><circle cx="32" cy="32" r="17" stroke="#E24B4A" stroke-dasharray="48 59" transform="rotate(90 32 32)"/></g></svg>Outdraft</a>
+      <a class="back" href="/uk/">← На головну</a>
+    </header>
+  </div>
+
+  <main>
+    <section class="hero"><div class="wrap">
+      <span class="tag">Екран за екраном</span>
+      <h1>Outdraft у драфті та в матчі</h1>
+      <p class="lead">Короткий тур усіма підказками: від очікування драфту до предметів, навичок і темпу гри.</p>
+    </div></section>
+
+    <section><div class="wrap">
+      <div class="section-head"><p class="eyebrow">5 ХВИЛИН · З ОЗВУЧКОЮ</p><h2>Повний огляд функцій</h2></div>
+      <div class="video-card"><video class="video" controls preload="metadata" poster="/media/tour/04-draft.png">
+        <source src="/media/tour/outdraft-guide-uk.mp4" type="video/mp4">
+        Ваш браузер не підтримує відео.
+      </video></div>
+      <p class="note">Детальний відеоогляд можливостей Outdraft.</p>
+    </div></section>
+
+    <section><div class="wrap">
+      <div class="tour-gallery">
+      <div class="section-head"><p class="eyebrow">10 ЕКРАНІВ</p><h2>Інтерфейс крок за кроком</h2></div>
+      <div class="gallery">
+        <button class="control" id="prev" type="button" aria-label="Попередній екран">‹</button>
+        <div class="frame"><img id="slide" src="/media/tour/01-waiting.png" alt="Outdraft очікує на початок драфту" width="621" height="473"></div>
+        <button class="control" id="next" type="button" aria-label="Наступний екран">›</button>
+      </div>
+      <div class="caption"><div><h3 id="slide-title">Очікування драфту</h3><p id="slide-text">Outdraft готовий і перемкнеться на підказки, щойно почнеться вибір героїв.</p></div><span class="count" id="count">1 / 10</span></div>
+      <div class="dots" id="dots" aria-label="Вибір екрана"></div>
+      <div class="all" id="thumbs" aria-label="Усі екрани"></div>
+      </div>
+    </div></section>
+  </main>
+
+  <div class="wrap"><footer>© 2026 Outdraft · Не пов'язаний із Valve</footer></div>
+  <script>
+    const slides = [
+      ['01-waiting.png', 'Очікування драфту', 'Outdraft готовий і перемкнеться на підказки, щойно почнеться вибір героїв.'],
+      ['02-draft-start.png', 'Перші піки', 'З’являються вибрані герої, ролі та перша оцінка шансу на перемогу.'],
+      ['03-suggestions.png', 'Підказки щодо героїв', 'Кандидати на кожну вільну роль перераховуються після кожного нового піку.'],
+      ['04-draft.png', 'Шанс і драфт', 'Видно баланс сторін, прогноз тривалості матчу та розклад по лініях.'],
+      ['05-hero.png', 'Чому герой підходить', 'Кожна рекомендація має контекст: матчапи, синергія та роль у поточному драфті.'],
+      ['06-lanes.png', 'Лінії', 'Outdraft показує, де команда має перевагу, а де варто чекати складнощів.'],
+      ['07-timings.png', 'Рання гра та лейт', 'Шанс на перемогу розбитий за тривалістю матчу — видно, кому вигідна затяжна гра.'],
+      ['08-items.png', 'Предмети', 'Після старту матчу з’являються предмети під конкретних союзників і ворогів.'],
+      ['09-skills.png', 'Навички й таланти', 'Порядок прокачки, наступний рівень і найкращі таланти для цієї ситуації.'],
+      ['10-live.png', 'Live', 'Темп фарму та шанс на перемогу оновлюються впродовж матчу.']
+    ];
+    let current = 0;
+    const slide = document.querySelector('#slide'), title = document.querySelector('#slide-title'), text = document.querySelector('#slide-text'), count = document.querySelector('#count'), dots = document.querySelector('#dots'), thumbs = document.querySelector('#thumbs');
+    function render(index) {
+      current = (index + slides.length) % slides.length;
+      const [file, heading, description] = slides[current];
+      slide.src = `/media/tour/${file}`; slide.alt = heading; title.textContent = heading; text.textContent = description; count.textContent = `${current + 1} / ${slides.length}`;
+      [...dots.children].forEach((dot, i) => dot.setAttribute('aria-current', String(i === current)));
+      [...thumbs.children].forEach((thumb, i) => thumb.setAttribute('aria-current', String(i === current)));
+    }
+    slides.forEach(([file, heading], i) => {
+      const dot = document.createElement('button'); dot.className = 'dot'; dot.type = 'button'; dot.title = heading; dot.setAttribute('aria-label', heading); dot.addEventListener('click', () => render(i)); dots.append(dot);
+      const thumb = document.createElement('button'); thumb.className = 'thumb'; thumb.type = 'button'; thumb.setAttribute('aria-label', heading); thumb.innerHTML = `<img src="/media/tour/${file}" alt="">`; thumb.addEventListener('click', () => render(i)); thumbs.append(thumb);
+    });
+    document.querySelector('#prev').addEventListener('click', () => render(current - 1)); document.querySelector('#next').addEventListener('click', () => render(current + 1));
+    document.addEventListener('keydown', event => { if (event.key === 'ArrowLeft') render(current - 1); if (event.key === 'ArrowRight') render(current + 1); });
+    render(0);
+  </script>
+</body>
+</html>

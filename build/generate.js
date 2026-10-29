@@ -99,7 +99,7 @@ function generateJsonLd(lang) {
     "thumbnailUrl": `${DOMAIN}/media/demo.jpg`,
     "contentUrl": `${DOMAIN}/media/demo.mp4`,
     "uploadDate": "2026-01-01",
-    "duration": "PT30S"
+    "duration": "PT1M7S"
   };
 
   return `  <script type="application/ld+json">${JSON.stringify(softwareApp)}</script>
@@ -194,9 +194,8 @@ ${generateJsonLd(lang)}
     .demo { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: 1px solid var(--line); background: #000; }
     section { padding: 64px 0; border-top: 1px solid #141b24; scroll-margin-top: 8px; }
     h2 { font-size: 30px; margin: 0 0 24px; letter-spacing: -.5px; }
-    .playable { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: start; }
-    .playable h2 { margin: 0; }
-    .playable p { color: var(--muted); font-size: 17px; line-height: 1.65; margin: 0; }
+    h2.title { font-size: 40px; font-weight: 800; letter-spacing: -1px; text-align: center; margin-bottom: 32px; }
+    h2.title .r { color: var(--r); }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .model-flow { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -212,16 +211,9 @@ ${generateJsonLd(lang)}
     .model-result { display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; margin-top: 20px; max-width: 820px; }
     .model-result span { color: var(--r); font-size: 24px; font-weight: 800; line-height: 1.2; }
     .model-result p { margin: 0; color: var(--muted); }
-    .feature-group + .feature-group { margin-top: 48px; }
-    .group-head { max-width: 680px; margin-bottom: 20px; }
-    .group-head h3 { margin: 0; font-size: 23px; }
-    .group-head p { margin: 6px 0 0; color: var(--muted); }
-    .feature-list { border-top: 1px solid var(--line); }
-    .feature-row { display: grid; grid-template-columns: 52px minmax(190px, .75fr) 1.25fr; gap: 20px; align-items: start;
-                   padding: 19px 0; border-bottom: 1px solid var(--line); }
-    .feature-row > span { color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .08em; padding-top: 3px; }
-    .feature-row h4 { margin: 0; font-size: 16px; }
-    .feature-row p { margin: 0; color: var(--muted); font-size: 15px; }
+    .feature-group + .feature-group { margin-top: 40px; }
+    .feature-group > h3 { margin: 0 0 14px; font-size: 21px; }
+    .card h4 { margin: 0 0 6px; font-size: 16px; }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
     .card h3 { margin: 10px 0 6px; font-size: 17px; }
     .card p { margin: 0; color: var(--muted); font-size: 15px; }
@@ -254,15 +246,13 @@ ${generateJsonLd(lang)}
       .downloads { flex-direction: column; }
       .shot { padding: 12px; }
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
-      .playable { grid-template-columns: 1fr; gap: 10px; }
       .model-flow { grid-template-columns: 1fr; }
       .model-factor, .model-factor:first-child { padding: 16px 0; }
       .model-factor + .model-factor { border-left: 0; border-top: 1px solid var(--line); }
       .model-factor + .model-factor::before { display: none; }
-      .feature-row { grid-template-columns: 34px 1fr; gap: 4px 12px; padding: 16px 0; }
-      .feature-row p { grid-column: 2; }
       section { padding: 44px 0; }
       h2 { font-size: 24px; margin-bottom: 20px; }
+      h2.title { font-size: 28px; margin-bottom: 22px; }
       .grid3 { grid-template-columns: 1fr; gap: 10px; }
       .card { padding: 16px; }
       .top .links { display: none; }
@@ -299,20 +289,46 @@ ${generateJsonLd(lang)}
       </div>
     </div>
     <div class="shot" aria-hidden="true">
-      <img class="ov-img" src="/media/overlay.png" alt="Outdraft overlay during a draft" width="488" height="468" loading="eager">
+      <img class="ov-img" src="/media/hero-partial.png" alt="Outdraft during a Dota 2 draft" width="621" height="473" loading="eager">
       <div class="float"><span>${dict.bestPick}</span> <b>Phantom Lancer</b></div>
     </div>
   </div>
 </div>
 
 <section id="demo"><div class="wrap">
-  <h2>${dict.demoTitle}</h2>
-  <video class="demo" src="/media/demo.mp4" poster="/media/demo.jpg" autoplay muted loop playsinline preload="metadata"></video>
+  <details style="padding:0;overflow:hidden"><summary style="padding:20px 22px;display:flex;align-items:center;gap:14px"><span style="display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#10221c;color:#5DCAA5;font-size:15px">▶</span><span><span style="display:block;color:#5DCAA5;font-size:12px;font-weight:800;letter-spacing:.08em">WATCH IN ACTION</span><span style="display:block;font-size:20px;margin-top:1px">${lang === 'ru' ? 'Outdraft в настоящем матче' : lang === 'uk' ? 'Outdraft у справжньому матчі' : 'See Outdraft in a real match'}</span></span></summary><div style="padding:0 22px 22px"><video class="demo" src="/media/demo.mp4" poster="/media/demo.jpg" controls playsinline preload="none"></video><div style="margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap"><p style="margin:0;color:#8b95a5">${lang === 'ru' ? 'Все экраны и полный разбор — на одной странице.' : lang === 'uk' ? 'Усі екрани та повний огляд — на одній сторінці.' : 'Every screen and the full walkthrough — on one page.'}</p><a href="/${lang}/tour/" style="display:inline-flex;padding:9px 13px;border:1px solid #2c4a40;border-radius:8px;background:#10221c;color:#5DCAA5;font-weight:700;text-decoration:none">${lang === 'ru' ? 'Открыть полный тур →' : lang === 'uk' ? 'Відкрити повний тур →' : 'Explore the full tour →'}</a></div></div></details>
 </div></section>
 
-<section id="playable"><div class="wrap playable">
-  <h2>${dict.playableTitle}</h2>
-  <p>${dict.playableFirst}</p>
+<section id="playable"><div class="wrap">
+  <h2 class="title">${dict.whyTitle}</h2>
+  <div class="grid3">
+    <div class="card"><h3>${dict.playableTitle}</h3><p>${dict.playableFirst}</p></div>
+    <div class="card"><h3>${dict.metaTitle}</h3><p>${dict.metaText}</p></div>
+    <div class="card"><h3>${dict.clearTitle}</h3><p>${dict.clearText}</p></div>
+  </div>
+</div></section>
+
+<section id="features"><div class="wrap">
+  <h2 class="title">${dict.featTitle}</h2>
+  <div class="feature-group">
+    <h3>${dict.draftTitle}</h3>
+    <div class="grid3">
+      <div class="card"><h4>${dict.d1t}</h4><p>${dict.d1}</p></div>
+      <div class="card"><h4>${dict.d2t}</h4><p>${dict.d2}</p></div>
+      <div class="card"><h4>${dict.d3t}</h4><p>${dict.d3}</p></div>
+      <div class="card"><h4>${dict.d4t}</h4><p>${dict.d4}</p></div>
+      <div class="card"><h4>${dict.d5t}</h4><p>${dict.d5}</p></div>
+      <div class="card"><h4>${dict.d6t}</h4><p>${dict.d6}</p></div>
+    </div>
+  </div>
+  <div class="feature-group">
+    <h3>${dict.gameTitle}</h3>
+    <div class="grid3">
+      <div class="card"><h4>${dict.g1t}</h4><p>${dict.g1}</p></div>
+      <div class="card"><h4>${dict.g2t}</h4><p>${dict.g2}</p></div>
+      <div class="card"><h4>${dict.g3t}</h4><p>${dict.g3}</p></div>
+    </div>
+  </div>
 </div></section>
 
 <section id="model"><div class="wrap">
@@ -324,29 +340,6 @@ ${generateJsonLd(lang)}
     <div class="model-factor"><span>03</span><h3>${dict.m3t}</h3><p>${dict.m3}</p></div>
   </div>
   <div class="model-result"><span>=</span><p>${dict.modelResult}</p></div>
-</div></section>
-
-<section id="features"><div class="wrap">
-  <h2>${dict.featTitle}</h2>
-  <div class="feature-group">
-    <div class="group-head"><h3>${dict.draftTitle}</h3><p>${dict.draftLead}</p></div>
-    <div class="feature-list">
-      <div class="feature-row"><span>01</span><h4>${dict.d1t}</h4><p>${dict.d1}</p></div>
-      <div class="feature-row"><span>02</span><h4>${dict.d2t}</h4><p>${dict.d2}</p></div>
-      <div class="feature-row"><span>03</span><h4>${dict.d3t}</h4><p>${dict.d3}</p></div>
-      <div class="feature-row"><span>04</span><h4>${dict.d4t}</h4><p>${dict.d4}</p></div>
-      <div class="feature-row"><span>05</span><h4>${dict.d5t}</h4><p>${dict.d5}</p></div>
-      <div class="feature-row"><span>06</span><h4>${dict.d6t}</h4><p>${dict.d6}</p></div>
-    </div>
-  </div>
-  <div class="feature-group">
-    <div class="group-head"><h3>${dict.gameTitle}</h3><p>${dict.gameLead}</p></div>
-    <div class="feature-list">
-      <div class="feature-row"><span>01</span><h4>${dict.g1t}</h4><p>${dict.g1}</p></div>
-      <div class="feature-row"><span>02</span><h4>${dict.g2t}</h4><p>${dict.g2}</p></div>
-      <div class="feature-row"><span>03</span><h4>${dict.g3t}</h4><p>${dict.g3}</p></div>
-    </div>
-  </div>
 </div></section>
 
 <section id="start"><div class="wrap">
@@ -389,6 +382,16 @@ ${generateJsonLd(lang)}
 
 <script>
   document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked", { platform: a.dataset.platform })));
+  document.querySelector('#model')?.after(document.querySelector('#demo'));
+  (() => {
+    const slides = [['/media/hero-draft.png', 'Outdraft during a Dota 2 draft'], ['/media/tour/03-suggestions.png', 'Outdraft hero suggestions'], ['/media/tour/08-items.png', 'Outdraft item suggestions'], ['/media/tour/10-live.png', 'Outdraft live match statistics']];
+    const image = document.querySelector('#hero-slide'), previous = document.querySelector('.hero-prev'), next = document.querySelector('.hero-next');
+    if (!image || !previous || !next) return;
+    let current = 0;
+    const show = index => { current = (index + slides.length) % slides.length; image.src = slides[current][0]; image.alt = slides[current][1]; };
+    previous.addEventListener('click', () => show(current - 1));
+    next.addEventListener('click', () => show(current + 1));
+  })();
 </script>
 </body>
 </html>`;
@@ -474,9 +477,8 @@ ${generateJsonLd('en')}
     .demo { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: 1px solid var(--line); background: #000; }
     section { padding: 64px 0; border-top: 1px solid #141b24; scroll-margin-top: 8px; }
     h2 { font-size: 30px; margin: 0 0 24px; letter-spacing: -.5px; }
-    .playable { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: start; }
-    .playable h2 { margin: 0; }
-    .playable p { color: var(--muted); font-size: 17px; line-height: 1.65; margin: 0; }
+    h2.title { font-size: 40px; font-weight: 800; letter-spacing: -1px; text-align: center; margin-bottom: 32px; }
+    h2.title .r { color: var(--r); }
     .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .model-flow { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -492,16 +494,9 @@ ${generateJsonLd('en')}
     .model-result { display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; margin-top: 20px; max-width: 820px; }
     .model-result span { color: var(--r); font-size: 24px; font-weight: 800; line-height: 1.2; }
     .model-result p { margin: 0; color: var(--muted); }
-    .feature-group + .feature-group { margin-top: 48px; }
-    .group-head { max-width: 680px; margin-bottom: 20px; }
-    .group-head h3 { margin: 0; font-size: 23px; }
-    .group-head p { margin: 6px 0 0; color: var(--muted); }
-    .feature-list { border-top: 1px solid var(--line); }
-    .feature-row { display: grid; grid-template-columns: 52px minmax(190px, .75fr) 1.25fr; gap: 20px; align-items: start;
-                   padding: 19px 0; border-bottom: 1px solid var(--line); }
-    .feature-row > span { color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .08em; padding-top: 3px; }
-    .feature-row h4 { margin: 0; font-size: 16px; }
-    .feature-row p { margin: 0; color: var(--muted); font-size: 15px; }
+    .feature-group + .feature-group { margin-top: 40px; }
+    .feature-group > h3 { margin: 0 0 14px; font-size: 21px; }
+    .card h4 { margin: 0 0 6px; font-size: 16px; }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
     .card h3 { margin: 10px 0 6px; font-size: 17px; }
     .card p { margin: 0; color: var(--muted); font-size: 15px; }
@@ -534,15 +529,13 @@ ${generateJsonLd('en')}
       .downloads { flex-direction: column; }
       .shot { padding: 12px; }
       .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
-      .playable { grid-template-columns: 1fr; gap: 10px; }
       .model-flow { grid-template-columns: 1fr; }
       .model-factor, .model-factor:first-child { padding: 16px 0; }
       .model-factor + .model-factor { border-left: 0; border-top: 1px solid var(--line); }
       .model-factor + .model-factor::before { display: none; }
-      .feature-row { grid-template-columns: 34px 1fr; gap: 4px 12px; padding: 16px 0; }
-      .feature-row p { grid-column: 2; }
       section { padding: 44px 0; }
       h2 { font-size: 24px; margin-bottom: 20px; }
+      h2.title { font-size: 28px; margin-bottom: 22px; }
       .grid3 { grid-template-columns: 1fr; gap: 10px; }
       .card { padding: 16px; }
       .top .links { display: none; }
@@ -579,20 +572,46 @@ ${generateJsonLd('en')}
       </div>
     </div>
     <div class="shot" aria-hidden="true">
-      <img class="ov-img" src="/media/overlay.png" alt="Outdraft overlay during a draft" width="488" height="468" loading="eager">
+      <img class="ov-img" src="/media/hero-partial.png" alt="Outdraft during a Dota 2 draft" width="621" height="473" loading="eager">
       <div class="float"><span>${dict.bestPick}</span> <b>Phantom Lancer</b></div>
     </div>
   </div>
 </div>
 
 <section id="demo"><div class="wrap">
-  <h2>${dict.demoTitle}</h2>
-  <video class="demo" src="/media/demo.mp4" poster="/media/demo.jpg" autoplay muted loop playsinline preload="metadata"></video>
+  <details style="padding:0;overflow:hidden"><summary style="padding:20px 22px;display:flex;align-items:center;gap:14px"><span style="display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#10221c;color:#5DCAA5;font-size:15px">▶</span><span><span style="display:block;color:#5DCAA5;font-size:12px;font-weight:800;letter-spacing:.08em">WATCH IN ACTION</span><span style="display:block;font-size:20px;margin-top:1px">See Outdraft in a real match</span></span></summary><div style="padding:0 22px 22px"><video class="demo" src="/media/demo.mp4" poster="/media/demo.jpg" controls playsinline preload="none"></video><div style="margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap"><p style="margin:0;color:#8b95a5">Every screen and the full walkthrough — on one page.</p><a href="/en/tour/" style="display:inline-flex;padding:9px 13px;border:1px solid #2c4a40;border-radius:8px;background:#10221c;color:#5DCAA5;font-weight:700;text-decoration:none">Explore the full tour →</a></div></div></details>
 </div></section>
 
-<section id="playable"><div class="wrap playable">
-  <h2>${dict.playableTitle}</h2>
-  <p>${dict.playableFirst}</p>
+<section id="playable"><div class="wrap">
+  <h2 class="title">${dict.whyTitle}</h2>
+  <div class="grid3">
+    <div class="card"><h3>${dict.playableTitle}</h3><p>${dict.playableFirst}</p></div>
+    <div class="card"><h3>${dict.metaTitle}</h3><p>${dict.metaText}</p></div>
+    <div class="card"><h3>${dict.clearTitle}</h3><p>${dict.clearText}</p></div>
+  </div>
+</div></section>
+
+<section id="features"><div class="wrap">
+  <h2 class="title">${dict.featTitle}</h2>
+  <div class="feature-group">
+    <h3>${dict.draftTitle}</h3>
+    <div class="grid3">
+      <div class="card"><h4>${dict.d1t}</h4><p>${dict.d1}</p></div>
+      <div class="card"><h4>${dict.d2t}</h4><p>${dict.d2}</p></div>
+      <div class="card"><h4>${dict.d3t}</h4><p>${dict.d3}</p></div>
+      <div class="card"><h4>${dict.d4t}</h4><p>${dict.d4}</p></div>
+      <div class="card"><h4>${dict.d5t}</h4><p>${dict.d5}</p></div>
+      <div class="card"><h4>${dict.d6t}</h4><p>${dict.d6}</p></div>
+    </div>
+  </div>
+  <div class="feature-group">
+    <h3>${dict.gameTitle}</h3>
+    <div class="grid3">
+      <div class="card"><h4>${dict.g1t}</h4><p>${dict.g1}</p></div>
+      <div class="card"><h4>${dict.g2t}</h4><p>${dict.g2}</p></div>
+      <div class="card"><h4>${dict.g3t}</h4><p>${dict.g3}</p></div>
+    </div>
+  </div>
 </div></section>
 
 <section id="model"><div class="wrap">
@@ -604,29 +623,6 @@ ${generateJsonLd('en')}
     <div class="model-factor"><span>03</span><h3>${dict.m3t}</h3><p>${dict.m3}</p></div>
   </div>
   <div class="model-result"><span>=</span><p>${dict.modelResult}</p></div>
-</div></section>
-
-<section id="features"><div class="wrap">
-  <h2>${dict.featTitle}</h2>
-  <div class="feature-group">
-    <div class="group-head"><h3>${dict.draftTitle}</h3><p>${dict.draftLead}</p></div>
-    <div class="feature-list">
-      <div class="feature-row"><span>01</span><h4>${dict.d1t}</h4><p>${dict.d1}</p></div>
-      <div class="feature-row"><span>02</span><h4>${dict.d2t}</h4><p>${dict.d2}</p></div>
-      <div class="feature-row"><span>03</span><h4>${dict.d3t}</h4><p>${dict.d3}</p></div>
-      <div class="feature-row"><span>04</span><h4>${dict.d4t}</h4><p>${dict.d4}</p></div>
-      <div class="feature-row"><span>05</span><h4>${dict.d5t}</h4><p>${dict.d5}</p></div>
-      <div class="feature-row"><span>06</span><h4>${dict.d6t}</h4><p>${dict.d6}</p></div>
-    </div>
-  </div>
-  <div class="feature-group">
-    <div class="group-head"><h3>${dict.gameTitle}</h3><p>${dict.gameLead}</p></div>
-    <div class="feature-list">
-      <div class="feature-row"><span>01</span><h4>${dict.g1t}</h4><p>${dict.g1}</p></div>
-      <div class="feature-row"><span>02</span><h4>${dict.g2t}</h4><p>${dict.g2}</p></div>
-      <div class="feature-row"><span>03</span><h4>${dict.g3t}</h4><p>${dict.g3}</p></div>
-    </div>
-  </div>
 </div></section>
 
 <section id="start"><div class="wrap">
@@ -669,6 +665,16 @@ ${generateJsonLd('en')}
 
 <script>
   document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked", { platform: a.dataset.platform })));
+  document.querySelector('#model')?.after(document.querySelector('#demo'));
+  (() => {
+    const slides = [['/media/hero-draft.png', 'Outdraft during a Dota 2 draft'], ['/media/tour/03-suggestions.png', 'Outdraft hero suggestions'], ['/media/tour/08-items.png', 'Outdraft item suggestions'], ['/media/tour/10-live.png', 'Outdraft live match statistics']];
+    const image = document.querySelector('#hero-slide'), previous = document.querySelector('.hero-prev'), next = document.querySelector('.hero-next');
+    if (!image || !previous || !next) return;
+    let current = 0;
+    const show = index => { current = (index + slides.length) % slides.length; image.src = slides[current][0]; image.alt = slides[current][1]; };
+    previous.addEventListener('click', () => show(current - 1));
+    next.addEventListener('click', () => show(current + 1));
+  })();
   
   // Handle legacy ?lang= URLs - redirect to proper language path
   (function() {
