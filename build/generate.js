@@ -290,7 +290,6 @@ ${generateJsonLd(lang)}
     </div>
     <div class="shot" aria-hidden="true">
       <img class="ov-img" src="/media/hero-partial.png" alt="Outdraft during a Dota 2 draft" width="621" height="473" loading="eager">
-      <div class="float"><span>${dict.bestPick}</span> <b>Phantom Lancer</b></div>
     </div>
   </div>
 </div>
@@ -573,7 +572,6 @@ ${generateJsonLd('en')}
     </div>
     <div class="shot" aria-hidden="true">
       <img class="ov-img" src="/media/hero-partial.png" alt="Outdraft during a Dota 2 draft" width="621" height="473" loading="eager">
-      <div class="float"><span>${dict.bestPick}</span> <b>Phantom Lancer</b></div>
     </div>
   </div>
 </div>
