@@ -13,7 +13,7 @@ const DOMAIN = 'https://outdraft.org';
 const LANGS = ['en', 'ru', 'uk'];
 const LOCALE = { en: 'en_US', ru: 'ru_RU', uk: 'uk_UA' };
 const PUBLISHED = '2026-10-19';
-const DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.zip';
+const DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.exe';
 const ORDER = ['why-i-keep-losing', 'can-you-win-in-draft', 'last-pick-counter-math', 'cant-kill-this-hero'];
 
 const CONTENT = {

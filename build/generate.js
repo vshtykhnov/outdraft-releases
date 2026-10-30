@@ -14,8 +14,8 @@ const LANGS = ['en', 'ru', 'uk'];
 const DICTS = { en: EN, ru: RU, uk: UK };
 const DOMAIN = 'https://outdraft.org';
 const SOFTWARE_VERSION = '0.3.1';
-const WINDOWS_DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.zip';
-const LINUX_DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-linux-x86_64.tar.gz';
+const WINDOWS_DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.exe';
+const LINUX_DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-linux-x86_64.AppImage';
 const GUIDE_PATHS = ['guides', 'why-i-keep-losing', 'can-you-win-in-draft', 'last-pick-counter-math', 'cant-kill-this-hero'];
 const GUIDES_LAST_MOD = '2026-10-19';
 

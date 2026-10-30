@@ -28,8 +28,8 @@
   <meta name="twitter:title" content="Outdraft — Dota 2 draft helper">
   <meta name="twitter:description" content="Free Dota 2 draft and live companion with recalculated picks, lanes, timings, builds, skills, personal bans, and live GPM/XPM.">
   <meta name="twitter:image" content="https://outdraft.org/media/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Outdraft","applicationCategory":"GameApplication","operatingSystem":"Windows, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free Dota 2 draft and live companion with recalculated picks, lanes, timings, builds, skills, personal bans, and live GPM/XPM.","downloadUrl":"https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.zip","softwareVersion":"0.3.1","author":{"@type":"Organization","name":"Outdraft"}}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"See it in a real match","description":"Free Dota 2 draft and live companion with recalculated picks, lanes, timings, builds, skills, personal bans, and live GPM/XPM.","thumbnailUrl":"https://outdraft.org/media/demo.jpg","contentUrl":"https://outdraft.org/media/demo.mp4","uploadDate":"2026-01-01","duration":"PT30S"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Outdraft","applicationCategory":"GameApplication","operatingSystem":"Windows, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free Dota 2 draft and live companion with recalculated picks, lanes, timings, builds, skills, personal bans, and live GPM/XPM.","downloadUrl":"https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.exe","softwareVersion":"0.3.1","author":{"@type":"Organization","name":"Outdraft"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"See it in a real match","description":"Free Dota 2 draft and live companion with recalculated picks, lanes, timings, builds, skills, personal bans, and live GPM/XPM.","thumbnailUrl":"https://outdraft.org/media/demo.jpg","contentUrl":"https://outdraft.org/media/demo.mp4","uploadDate":"2026-01-01","duration":"PT1M7S"}</script>
   <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <style>
     @font-face {
@@ -181,8 +181,8 @@
       <p class="lead">Outdraft recalculates its recommendations after every pick and keeps helping once the match starts.</p>
       <div class="cta">
         <div class="downloads">
-          <a class="btn download-btn" data-platform="windows" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.zip">⬇ Download for Windows</a>
-          <a class="btn download-btn linux" data-platform="linux" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-linux-x86_64.tar.gz">⬇ Download for Linux</a>
+          <a class="btn download-btn" data-platform="windows" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.exe">⬇ Download for Windows</a>
+          <a class="btn download-btn linux" data-platform="linux" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-linux-x86_64.AppImage">⬇ Download for Linux</a>
         </div>
         <a class="telegram-note" href="https://t.me/d2_outdraft" target="_blank" rel="noopener">Join our Telegram</a>
       </div>
@@ -243,7 +243,7 @@
 <section id="start"><div class="wrap">
   <h2>Start in a minute</h2>
   <div class="grid3 steps">
-    <div class="card"><h3>Download</h3><p>Extract the downloaded archive. No installation needed.</p></div>
+    <div class="card"><h3>Download</h3><p>Run the downloaded installer. It installs in a few seconds, no admin rights needed.</p></div>
     <div class="card"><h3>Run it</h3><p>Dota in borderless window.</p></div>
     <div class="card"><h3>Find a match</h3><p>Suggestions appear at hero selection.</p></div>
   </div>
@@ -287,7 +287,8 @@
     if (!image || !previous || !next) return;
     let current = 0;
     const show = index => { current = (index + slides.length) % slides.length; image.src = slides[current][0]; image.alt = slides[current][1]; };
-    previous.addEventListener('click', () => show(current - 1)); next.addEventListener('click', () => show(current + 1));
+    previous.addEventListener('click', () => show(current - 1));
+    next.addEventListener('click', () => show(current + 1));
   })();
 </script>
 </body>
