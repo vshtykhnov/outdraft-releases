@@ -40,6 +40,11 @@ ${linuxRun}
 <p>Any screen shape works: 4:3, 5:4, 16:10, 16:9, 21:9, including a 4:3 game stretched to full screen.</p>`, 'windows'],
       ['Dota settings', `<p>Set Dota to <b>Fullscreen</b> or <b>Borderless window</b>. A Dota window smaller than the monitor isn’t read.</p>
 <p>Any screen shape works: 4:3, 5:4, 16:10, 16:9, 21:9, including a 4:3 game stretched to full screen.</p>`, 'linux'],
+      ['Where to keep Outdraft', `<p>On Linux Outdraft is a regular window, not an overlay on top of Dota.</p>
+<ul>
+<li><b>Two monitors:</b> keep Outdraft on the second one.</li>
+<li><b>One monitor:</b> during the draft switch to Outdraft with <b>Alt+Tab</b>. Keep the hero bar at the top of the screen visible: Outdraft reads the picks there.</li>
+</ul>`, 'linux'],
       ['Using it', `<ul>
 <li><b>Draft:</b> point at an empty seat to see its best heroes. Click to keep the list.</li>
 <li><b>Match:</b> the <b>Game</b> view shows build, skills and farm.</li>
@@ -80,6 +85,11 @@ ${linuxRun}
 <p>Подходит любой формат экрана: 4:3, 5:4, 16:10, 16:9, 21:9, в том числе 4:3, растянутый на весь экран.</p>`, 'windows'],
       ['Настройки Dota', `<p>Включи в Dota <b>полноэкранный</b> режим или <b>окно без рамки</b>. Окно Dota меньше монитора не читается.</p>
 <p>Подходит любой формат экрана: 4:3, 5:4, 16:10, 16:9, 21:9, в том числе 4:3, растянутый на весь экран.</p>`, 'linux'],
+      ['Где держать Outdraft', `<p>На Linux Outdraft — обычное окно, а не оверлей поверх Dota.</p>
+<ul>
+<li><b>Два монитора:</b> держи Outdraft на втором.</li>
+<li><b>Один монитор:</b> во время драфта переключайся на Outdraft через <b>Alt+Tab</b>. Не закрывай полосу героев вверху экрана: Outdraft читает пики оттуда.</li>
+</ul>`, 'linux'],
       ['Как пользоваться', `<ul>
 <li><b>Драфт:</b> наведи на пустой слот, чтобы увидеть лучших героев для него. Кликни, чтобы закрепить список.</li>
 <li><b>Матч:</b> во вкладке <b>Игра</b> — сборка, скиллы и фарм.</li>
@@ -120,6 +130,11 @@ ${linuxRun}
 <p>Підходить будь-який формат екрана: 4:3, 5:4, 16:10, 16:9, 21:9, зокрема 4:3, розтягнутий на весь екран.</p>`, 'windows'],
       ['Налаштування Dota', `<p>Увімкни в Dota <b>повноекранний</b> режим або <b>вікно без рамки</b>. Вікно Dota, менше за монітор, не читається.</p>
 <p>Підходить будь-який формат екрана: 4:3, 5:4, 16:10, 16:9, 21:9, зокрема 4:3, розтягнутий на весь екран.</p>`, 'linux'],
+      ['Де тримати Outdraft', `<p>На Linux Outdraft — звичайне вікно, а не оверлей поверх Dota.</p>
+<ul>
+<li><b>Два монітори:</b> тримай Outdraft на другому.</li>
+<li><b>Один монітор:</b> під час драфту перемикайся на Outdraft через <b>Alt+Tab</b>. Не закривай смугу героїв угорі екрана: Outdraft читає піки звідти.</li>
+</ul>`, 'linux'],
       ['Як користуватися', `<ul>
 <li><b>Драфт:</b> наведи на порожній слот, щоб побачити найкращих героїв для нього. Клацни, щоб закріпити список.</li>
 <li><b>Матч:</b> у вкладці <b>Гра</b> — збірка, скіли та фарм.</li>
