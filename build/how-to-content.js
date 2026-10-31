@@ -33,13 +33,13 @@ module.exports = {
 ${linuxRun}
 <p>You need a Wayland session and the GStreamer PipeWire plugin: ${linuxPkgs}.</p>
 <p>Outdraft updates itself.</p>`, 'linux'],
+      ['Screen sharing', `<p>When Outdraft starts, a screen-sharing window appears. Choose the <b>monitor Dota is on</b>. Usually you only do this once.</p>`, 'linux'],
       ['First run', `<p>Outdraft adds Dota’s Game State Integration file, so Dota can send it game data. <b>Restart Dota 2 once</b> after the first run.</p>
 <p>When it works, the welcome card shows <b>✓ Dota 2 connected</b>.</p>`],
       ['Dota settings', `<p>Set Dota to <b>Borderless window</b> or <b>Windowed</b>.</p>
 <p>Any screen shape works: 4:3, 5:4, 16:10, 16:9, 21:9, including a 4:3 game stretched to full screen.</p>`, 'windows'],
       ['Dota settings', `<p>Set Dota to <b>Fullscreen</b> or <b>Borderless window</b>. A Dota window smaller than the monitor isn’t read.</p>
 <p>Any screen shape works: 4:3, 5:4, 16:10, 16:9, 21:9, including a 4:3 game stretched to full screen.</p>`, 'linux'],
-      ['Screen sharing', `<p>At your first draft a screen-sharing window appears. Choose the <b>monitor Dota is on</b>.</p>`, 'linux'],
       ['Using it', `<ul>
 <li><b>Draft:</b> point at an empty seat to see its best heroes. Click to keep the list.</li>
 <li><b>Match:</b> the <b>Game</b> view shows build, skills and farm.</li>
@@ -73,13 +73,13 @@ ${linuxRun}
 ${linuxRun}
 <p>Нужны сессия Wayland и плагин GStreamer для PipeWire: ${linuxPkgs}.</p>
 <p>Outdraft обновляется сам.</p>`, 'linux'],
+      ['Доступ к экрану', `<p>При запуске Outdraft появится окно доступа к экрану. Выбери <b>монитор, на котором Dota</b>. Обычно это нужно сделать один раз.</p>`, 'linux'],
       ['Первый запуск', `<p>Outdraft добавляет файл Game State Integration, чтобы Dota передавала ему данные игры. <b>Перезапусти Dota 2 один раз</b> после первого запуска.</p>
 <p>Когда всё работает, на стартовой карточке видно <b>✓ Dota 2 подключена</b>.</p>`],
       ['Настройки Dota', `<p>Включи в Dota режим <b>окно без рамки</b> или <b>оконный</b>.</p>
 <p>Подходит любой формат экрана: 4:3, 5:4, 16:10, 16:9, 21:9, в том числе 4:3, растянутый на весь экран.</p>`, 'windows'],
       ['Настройки Dota', `<p>Включи в Dota <b>полноэкранный</b> режим или <b>окно без рамки</b>. Окно Dota меньше монитора не читается.</p>
 <p>Подходит любой формат экрана: 4:3, 5:4, 16:10, 16:9, 21:9, в том числе 4:3, растянутый на весь экран.</p>`, 'linux'],
-      ['Доступ к экрану', `<p>На первом драфте появится окно доступа к экрану. Выбери <b>монитор, на котором Dota</b>.</p>`, 'linux'],
       ['Как пользоваться', `<ul>
 <li><b>Драфт:</b> наведи на пустой слот, чтобы увидеть лучших героев для него. Кликни, чтобы закрепить список.</li>
 <li><b>Матч:</b> во вкладке <b>Игра</b> — сборка, скиллы и фарм.</li>
@@ -113,13 +113,13 @@ ${linuxRun}
 ${linuxRun}
 <p>Потрібні сесія Wayland і плагін GStreamer для PipeWire: ${linuxPkgs}.</p>
 <p>Outdraft оновлюється сам.</p>`, 'linux'],
+      ['Доступ до екрана', `<p>Під час запуску Outdraft з’явиться вікно доступу до екрана. Обери <b>монітор, на якому Dota</b>. Зазвичай це треба зробити один раз.</p>`, 'linux'],
       ['Перший запуск', `<p>Outdraft додає файл Game State Integration, щоб Dota передавала йому дані гри. <b>Перезапусти Dota 2 один раз</b> після першого запуску.</p>
 <p>Коли все працює, на стартовій картці видно <b>✓ Dota 2 підключено</b>.</p>`],
       ['Налаштування Dota', `<p>Увімкни в Dota режим <b>вікно без рамки</b> або <b>віконний</b>.</p>
 <p>Підходить будь-який формат екрана: 4:3, 5:4, 16:10, 16:9, 21:9, зокрема 4:3, розтягнутий на весь екран.</p>`, 'windows'],
       ['Налаштування Dota', `<p>Увімкни в Dota <b>повноекранний</b> режим або <b>вікно без рамки</b>. Вікно Dota, менше за монітор, не читається.</p>
 <p>Підходить будь-який формат екрана: 4:3, 5:4, 16:10, 16:9, 21:9, зокрема 4:3, розтягнутий на весь екран.</p>`, 'linux'],
-      ['Доступ до екрана', `<p>На першому драфті з’явиться вікно доступу до екрана. Обери <b>монітор, на якому Dota</b>.</p>`, 'linux'],
       ['Як користуватися', `<ul>
 <li><b>Драфт:</b> наведи на порожній слот, щоб побачити найкращих героїв для нього. Клацни, щоб закріпити список.</li>
 <li><b>Матч:</b> у вкладці <b>Гра</b> — збірка, скіли та фарм.</li>
