@@ -23,6 +23,9 @@ choose **More info → Run anyway**. Each release links its VirusTotal scan.
 On Windows, use Dota 2 in borderless-window or windowed mode. Restart Dota 2 once after the first run so
 it loads the game integration. An internet connection is required for recommendations.
 
+Step by step, including what to do if Dota 2 isn't found:
+[Windows](https://outdraft.org/en/how-to-use/windows/) · [Linux](https://outdraft.org/en/how-to-use/linux/).
+
 ## Update
 
 From 0.3.2 on, Outdraft updates itself: it downloads a new version in the background and installs it

@@ -24,7 +24,7 @@ const CONTENT = {
 const SOURCES = require('./articles/sources');
 
 const UI = {
-  en: { home: 'Home', guides: 'Guides', features: 'Features', faq: 'FAQ', updated: 'Updated', read: 'min read',
+  en: { home: 'Home', howTo: 'How to use', guides: 'Guides', features: 'Features', faq: 'FAQ', updated: 'Updated', read: 'min read',
         data: 'Live numbers: Dotabuff / OpenDota / D2PT, 19 Oct 2026, patch 7.41', toc: 'On this page',
         sources: 'Sources', related: 'Read next', faqTitle: 'Questions', ctaTitle: 'See your draft odds live',
         ctaText: 'Outdraft is a free overlay for Dota 2. It reads the picks on your screen and shows each hero’s impact in %, lane ratings and the overall draft win chance.',
@@ -33,7 +33,7 @@ const UI = {
         guidesTitle: 'Dota 2 draft guides', guidesMeta: 'Guides | Outdraft',
         guidesLead: 'Research, real numbers and honest answers about drafting in Dota 2. No filler: every figure links to its source.',
         guidesDesc: 'Dota 2 draft guides based on research and real match data: losing streaks, draft win prediction, counter-picking and hard-to-kill heroes.' },
-  ru: { home: 'Главная', guides: 'Статьи', features: 'Возможности', faq: 'Вопросы', updated: 'Обновлено', read: 'мин чтения',
+  ru: { home: 'Главная', howTo: 'Инструкция', guides: 'Статьи', features: 'Возможности', faq: 'Вопросы', updated: 'Обновлено', read: 'мин чтения',
         data: 'Живые цифры: Dotabuff / OpenDota / D2PT, 19.10.2026, патч 7.41', toc: 'Содержание',
         sources: 'Источники', related: 'Читать дальше', faqTitle: 'Частые вопросы', ctaTitle: 'Смотри шансы своего драфта вживую',
         ctaText: 'Outdraft — бесплатный оверлей для Dota 2. Он читает пики с экрана и показывает вклад каждого героя в процентах, расклад по линиям и общий шанс драфта на победу.',
@@ -42,7 +42,7 @@ const UI = {
         guidesTitle: 'Статьи о драфте в Dota 2', guidesMeta: 'Статьи о драфте | Outdraft',
         guidesLead: 'Исследования, реальные цифры и честные ответы о драфте в Dota 2. Без воды: у каждой цифры есть ссылка на источник.',
         guidesDesc: 'Статьи о драфте в Dota 2 на основе исследований и статистики матчей: серии поражений, шанс победы по пикам, контрпик и неубиваемые герои.' },
-  uk: { home: 'Головна', guides: 'Статті', features: 'Можливості', faq: 'Питання', updated: 'Оновлено', read: 'хв читання',
+  uk: { home: 'Головна', howTo: 'Інструкція', guides: 'Статті', features: 'Можливості', faq: 'Питання', updated: 'Оновлено', read: 'хв читання',
         data: 'Живі цифри: Dotabuff / OpenDota / D2PT, 19.10.2026, патч 7.41', toc: 'Зміст',
         sources: 'Джерела', related: 'Читати далі', faqTitle: 'Часті питання', ctaTitle: 'Дивись шанси свого драфту наживо',
         ctaText: 'Outdraft — безкоштовний оверлей для Dota 2. Він читає піки з екрана й показує внесок кожного героя у відсотках, розклад по лініях і загальний шанс драфту на перемогу.',
@@ -206,7 +206,7 @@ function header(lang, slug, current) {
   <header class="top">
     <a class="brand" href="/${lang}/">${LOGO}Outdraft</a>
     <div class="right">
-      <nav class="links"><a href="/${lang}/guides/"${current === 'guides' ? ' aria-current="page"' : ''}>${u.guides}</a><a href="/${lang}/#features">${u.features}</a><a href="/${lang}/#faq">${u.faq}</a></nav>
+      <nav class="links"><a href="/${lang}/how-to-use/windows/"${current === 'how-to' ? ' aria-current="page"' : ''}>${u.howTo}</a><a href="/${lang}/guides/"${current === 'guides' ? ' aria-current="page"' : ''}>${u.guides}</a><a href="/${lang}/#features">${u.features}</a><a href="/${lang}/#faq">${u.faq}</a></nav>
       <a class="tg-top" href="https://t.me/d2_outdraft" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">${TG_SVG}</a>
       <nav class="lang" role="group" aria-label="Language">${sw}</nav>
     </div>
@@ -218,7 +218,7 @@ function footer(lang) {
   const u = UI[lang];
   return `<div class="wrap">
   <footer><span>${u.foot}</span>
-    <nav class="links"><a href="/${lang}/guides/">${u.guides}</a><a href="https://t.me/d2_outdraft" target="_blank" rel="noopener">Telegram</a><a href="https://www.youtube.com/@comaapp" target="_blank" rel="noopener">YouTube</a><a href="https://tally.so/r/D4lK4E">${u.feedback}</a><a href="https://github.com/vshtykhnov/outdraft-releases/releases">${u.releases}</a></nav>
+    <nav class="links"><a href="/${lang}/how-to-use/windows/">${u.howTo}</a><a href="/${lang}/guides/">${u.guides}</a><a href="https://t.me/d2_outdraft" target="_blank" rel="noopener">Telegram</a><a href="https://www.youtube.com/@comaapp" target="_blank" rel="noopener">YouTube</a><a href="https://tally.so/r/D4lK4E">${u.feedback}</a><a href="https://github.com/vshtykhnov/outdraft-releases/releases">${u.releases}</a></nav>
   </footer>
 </div>
 <script>
@@ -368,4 +368,6 @@ function main() {
   updateSitemap(outDir);
   console.log(report.join('\n'));
 }
-main();
+if (require.main === module) main();
+
+module.exports = { DOMAIN, LANGS, UI, esc, strip, url, head, header, footer };

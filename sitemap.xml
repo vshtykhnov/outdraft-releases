@@ -3,7 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://outdraft.org/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/"/>
@@ -11,7 +11,7 @@
   </url>
   <url>
     <loc>https://outdraft.org/en/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/"/>
@@ -19,7 +19,7 @@
   </url>
   <url>
     <loc>https://outdraft.org/ru/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/"/>
@@ -27,7 +27,7 @@
   </url>
   <url>
     <loc>https://outdraft.org/uk/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/"/>
@@ -156,4 +156,55 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/cant-kill-this-hero/"/>
   </url>
   <!-- /guides -->
+
+  <!-- how-to -->
+  <url>
+    <loc>https://outdraft.org/en/how-to-use/windows/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/how-to-use/windows/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/how-to-use/windows/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/how-to-use/windows/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/how-to-use/windows/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/ru/how-to-use/windows/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/how-to-use/windows/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/how-to-use/windows/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/how-to-use/windows/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/how-to-use/windows/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/uk/how-to-use/windows/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/how-to-use/windows/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/how-to-use/windows/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/how-to-use/windows/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/how-to-use/windows/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/en/how-to-use/linux/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/how-to-use/linux/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/how-to-use/linux/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/how-to-use/linux/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/how-to-use/linux/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/ru/how-to-use/linux/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/how-to-use/linux/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/how-to-use/linux/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/how-to-use/linux/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/how-to-use/linux/"/>
+  </url>
+  <url>
+    <loc>https://outdraft.org/uk/how-to-use/linux/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://outdraft.org/en/how-to-use/linux/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/how-to-use/linux/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/how-to-use/linux/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://outdraft.org/en/how-to-use/linux/"/>
+  </url>
+  <!-- /how-to -->
 </urlset>

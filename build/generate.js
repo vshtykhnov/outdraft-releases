@@ -18,6 +18,8 @@ const WINDOWS_DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releas
 const LINUX_DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-linux-x86_64.AppImage';
 const GUIDE_PATHS = ['guides', 'why-i-keep-losing', 'can-you-win-in-draft', 'last-pick-counter-math', 'cant-kill-this-hero'];
 const GUIDES_LAST_MOD = '2026-10-19';
+const HOW_TO_PATHS = ['how-to-use/windows', 'how-to-use/linux'];
+const HOW_TO_LAST_MOD = '2026-10-31';
 
 const LANG_NAMES = { en: 'en', ru: 'ru', uk: 'uk' };
 
@@ -269,7 +271,7 @@ ${generateJsonLd(lang)}
   <header class="top">
     <a class="brand" href="${brandHref}"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#141414"/><g fill="none" stroke-width="7"><circle cx="32" cy="32" r="17" stroke="#5DCAA5" stroke-dasharray="48 59" transform="rotate(-90 32 32)"/><circle cx="32" cy="32" r="17" stroke="#E24B4A" stroke-dasharray="48 59" transform="rotate(90 32 32)"/></g></svg>Outdraft</a>
     <div class="right">
-      <nav class="links"><a href="/${lang}/guides/">${dict.navGuides}</a><a href="#features">${dict.navFeatures}</a><a href="#start">${dict.navStart}</a><a href="#faq">${dict.navFaq}</a></nav>
+      <nav class="links"><a href="/${lang}/how-to-use/windows/">${dict.navHowTo}</a><a href="/${lang}/guides/">${dict.navGuides}</a><a href="#features">${dict.navFeatures}</a><a href="#start">${dict.navStart}</a><a href="#faq">${dict.navFaq}</a></nav>
       <a class="tg-top" href="https://t.me/d2_outdraft" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg></a>
       <nav class="lang" role="group" aria-label="Language"><a href="/en/"${lang === 'en' ? ' aria-current="page"' : ''}>EN</a><a href="/ru/"${lang === 'ru' ? ' aria-current="page"' : ''}>RU</a><a href="/uk/"${lang === 'uk' ? ' aria-current="page"' : ''}>UA</a></nav>
     </div>
@@ -348,6 +350,7 @@ ${generateJsonLd(lang)}
     <div class="card"><h3>${dict.s2t}</h3><p>${dict.s2}</p></div>
     <div class="card"><h3>${dict.s3t}</h3><p>${dict.s3}</p></div>
   </div>
+  <p class="sub" style="margin-top:18px">${dict.howToMore} <a href="/${lang}/how-to-use/windows/">Windows</a> · <a href="/${lang}/how-to-use/linux/">Linux</a></p>
 </div></section>
 
 <section id="faq"><div class="wrap">
@@ -551,7 +554,7 @@ ${generateJsonLd('en')}
   <header class="top">
     <a class="brand" href="/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#141414"/><g fill="none" stroke-width="7"><circle cx="32" cy="32" r="17" stroke="#5DCAA5" stroke-dasharray="48 59" transform="rotate(-90 32 32)"/><circle cx="32" cy="32" r="17" stroke="#E24B4A" stroke-dasharray="48 59" transform="rotate(90 32 32)"/></g></svg>Outdraft</a>
     <div class="right">
-      <nav class="links"><a href="/en/guides/">${dict.navGuides}</a><a href="#features">${dict.navFeatures}</a><a href="#start">${dict.navStart}</a><a href="#faq">${dict.navFaq}</a></nav>
+      <nav class="links"><a href="/en/how-to-use/windows/">${dict.navHowTo}</a><a href="/en/guides/">${dict.navGuides}</a><a href="#features">${dict.navFeatures}</a><a href="#start">${dict.navStart}</a><a href="#faq">${dict.navFaq}</a></nav>
       <a class="tg-top" href="https://t.me/d2_outdraft" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg></a>
       <nav class="lang" role="group" aria-label="Language"><a href="/en/">EN</a><a href="/ru/">RU</a><a href="/uk/">UA</a></nav>
     </div>
@@ -630,6 +633,7 @@ ${generateJsonLd('en')}
     <div class="card"><h3>${dict.s2t}</h3><p>${dict.s2}</p></div>
     <div class="card"><h3>${dict.s3t}</h3><p>${dict.s3}</p></div>
   </div>
+  <p class="sub" style="margin-top:18px">${dict.howToMore} <a href="/en/how-to-use/windows/">Windows</a> · <a href="/en/how-to-use/linux/">Linux</a></p>
 </div></section>
 
 <section id="faq"><div class="wrap">
@@ -731,6 +735,25 @@ function generateSitemap() {
   }
   sitemap += `
   <!-- /guides -->`;
+
+  sitemap += `
+
+  <!-- how-to -->`;
+  for (const howToPath of HOW_TO_PATHS) {
+    for (const lang of LANGS) {
+      sitemap += `
+  <url>
+    <loc>${DOMAIN}/${lang}/${howToPath}/</loc>
+    <lastmod>${HOW_TO_LAST_MOD}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${DOMAIN}/en/${howToPath}/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="${DOMAIN}/ru/${howToPath}/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="${DOMAIN}/uk/${howToPath}/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${DOMAIN}/en/${howToPath}/"/>
+  </url>`;
+    }
+  }
+  sitemap += `
+  <!-- /how-to -->`;
   
   sitemap += `
 </urlset>`;

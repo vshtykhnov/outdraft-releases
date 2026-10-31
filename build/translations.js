@@ -1,5 +1,7 @@
 const EN = {
   navGuides: "Guides",
+  navHowTo: "How to use",
+  howToMore: "Step-by-step setup:",
   navFeatures: "Features",
   navStart: "How it works",
   navFaq: "FAQ",
@@ -74,6 +76,8 @@ const EN = {
 
 const RU = {
   navGuides: "Статьи",
+  navHowTo: "Инструкция",
+  howToMore: "Пошаговая настройка:",
   navFeatures: "Возможности",
   navStart: "Как начать",
   navFaq: "Вопросы",
@@ -148,6 +152,8 @@ const RU = {
 
 const UK = {
   navGuides: "Статті",
+  navHowTo: "Інструкція",
+  howToMore: "Покрокове налаштування:",
   navFeatures: "Можливості",
   navStart: "Як почати",
   navFaq: "Питання",
