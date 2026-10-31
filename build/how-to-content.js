@@ -34,7 +34,7 @@ ${linuxRun}
 <p>You need a Wayland session and the GStreamer PipeWire plugin: ${linuxPkgs}.</p>
 <p>Outdraft updates itself.</p>`, 'linux'],
       ['First run', `<p>Outdraft adds Dota’s Game State Integration file, so Dota can send it game data. <b>Restart Dota 2 once</b> after the first run.</p>
-<p>When it works, the welcome card shows <b>✓ Connected to Dota 2</b>.</p>`],
+<p>When it works, the welcome card shows <b>✓ Dota 2 connected</b>.</p>`],
       ['Dota settings', `<p>Set Dota to <b>Borderless window</b> or <b>Windowed</b>.</p>
 <p>Any screen shape works: 4:3, 5:4, 16:10, 16:9, 21:9, including a 4:3 game stretched to full screen.</p>`, 'windows'],
       ['Dota settings', `<p>Set Dota to <b>Fullscreen</b> or <b>Borderless window</b>. A Dota window smaller than the monitor isn’t read.</p>
@@ -125,8 +125,8 @@ ${linuxRun}
 <li><b>Матч:</b> у вкладці <b>Гра</b> — збірка, скіли та фарм.</li>
 <li><b>Додати Steam ID</b> — бани проти твого пулу героїв.</li>
 </ul>`],
-      ['Якщо Dota 2 не знайдено', `<p>В Outdraft натисни <b>Вибрати папку Dota 2</b> і обери папку <code>dota 2 beta</code>.</p>
-<p>Де вона: у Steam відкрий Dota 2, потім <b>⚙ → Керування → Переглянути локальні файли</b>. Відкриється саме ця папка.</p>`],
+      ['Якщо Dota 2 не знайдено', `<p>В Outdraft натисни <b>Обрати теку Dota 2</b> і обери теку <code>dota 2 beta</code>.</p>
+<p>Де вона: у Steam відкрий Dota 2, потім <b>⚙ → Керувати → Переглянути локальні файли</b>. Відкриється саме ця тека.</p>`],
       ['Досі не працює?', `<p>Опиши, що відбувається, у <a href="${FORM}" target="_blank" rel="noopener">формі зворотного зв’язку</a> або запитай у нашій <a href="${TG}" target="_blank" rel="noopener">Telegram-спільноті</a>.</p>`],
     ],
   },
