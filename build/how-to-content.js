@@ -1,7 +1,7 @@
 // Copy for /<lang>/how-to-use/<windows|linux>/. Steps are [heading, html] pairs; `os` limits a step to one OS.
 // Button and status names must match the desktop app's own labels (client/ui/src/lib/i18n.ts in ../outdraft).
 const FORM = 'https://tally.so/r/D4lK4E';
-const TG = 'https://t.me/d2_outdraft';
+const { COMMUNITY_URL } = require('./community');
 const WIN_FILE = 'Outdraft-windows-x86_64.exe';
 const LINUX_FILE = 'Outdraft-linux-x86_64.AppImage';
 const RELEASES = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/';
@@ -52,7 +52,7 @@ ${linuxRun}
 </ul>`],
       ['If Dota 2 isn’t found', `<p>In Outdraft click <b>Choose Dota 2 folder</b> and pick the folder named <code>dota 2 beta</code>.</p>
 <p>To find it: in Steam open Dota 2, then <b>⚙ → Manage → Browse local files</b>. That opens exactly this folder.</p>`],
-      ['Still not working?', `<p>Tell us what happens in the <a href="${FORM}" target="_blank" rel="noopener">feedback form</a> or ask in our <a href="${TG}" target="_blank" rel="noopener">Telegram community</a>.</p>`],
+      ['Still not working?', `<p>Tell us what happens in the <a href="${FORM}" target="_blank" rel="noopener">feedback form</a> or ask in our <a href="${COMMUNITY_URL}" target="_blank" rel="noopener">Discord community</a>.</p>`],
     ],
   },
 
@@ -97,7 +97,7 @@ ${linuxRun}
 </ul>`],
       ['Если Dota 2 не найдена', `<p>В Outdraft нажми <b>Выбрать папку Dota 2</b> и выбери папку <code>dota 2 beta</code>.</p>
 <p>Где она: в Steam открой Dota 2, затем <b>⚙ → Управление → Просмотреть локальные файлы</b>. Откроется именно эта папка.</p>`],
-      ['Всё ещё не работает?', `<p>Опиши, что происходит, в <a href="${FORM}" target="_blank" rel="noopener">форме обратной связи</a> или спроси в нашем <a href="${TG}" target="_blank" rel="noopener">Telegram-сообществе</a>.</p>`],
+      ['Всё ещё не работает?', `<p>Опиши, что происходит, в <a href="${FORM}" target="_blank" rel="noopener">форме обратной связи</a> или спроси в нашем <a href="${COMMUNITY_URL}" target="_blank" rel="noopener">Discord-сообществе</a>.</p>`],
     ],
   },
 
@@ -142,7 +142,7 @@ ${linuxRun}
 </ul>`],
       ['Якщо Dota 2 не знайдено', `<p>В Outdraft натисни <b>Обрати теку Dota 2</b> і обери теку <code>dota 2 beta</code>.</p>
 <p>Де вона: у Steam відкрий Dota 2, потім <b>⚙ → Керувати → Переглянути локальні файли</b>. Відкриється саме ця тека.</p>`],
-      ['Досі не працює?', `<p>Опиши, що відбувається, у <a href="${FORM}" target="_blank" rel="noopener">формі зворотного зв’язку</a> або запитай у нашій <a href="${TG}" target="_blank" rel="noopener">Telegram-спільноті</a>.</p>`],
+      ['Досі не працює?', `<p>Опиши, що відбувається, у <a href="${FORM}" target="_blank" rel="noopener">формі зворотного зв’язку</a> або запитай у нашій <a href="${COMMUNITY_URL}" target="_blank" rel="noopener">Discord-спільноті</a>.</p>`],
     ],
   },
 };
