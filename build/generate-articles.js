@@ -22,13 +22,14 @@ const CONTENT = {
   uk: require('./articles/content-uk'),
 };
 const SOURCES = require('./articles/sources');
+const { COMMUNITY_URL, COMMUNITY_SVG } = require('./community');
 
 const UI = {
   en: { home: 'Home', howTo: 'How to use', guides: 'Guides', features: 'Features', faq: 'FAQ', updated: 'Updated', read: 'min read',
         data: 'Live numbers: Dotabuff / OpenDota / D2PT, 19 Oct 2026, patch 7.41', toc: 'On this page',
         sources: 'Sources', related: 'Read next', faqTitle: 'Questions', ctaTitle: 'See your draft odds live',
         ctaText: 'Outdraft is a free overlay for Dota 2. It reads the picks on your screen and shows each hero’s impact in %, lane ratings and the overall draft win chance.',
-        download: '⬇ Download for Windows', how: 'How it works', tg: 'Telegram', foot: '© 2026 Outdraft · Not affiliated with Valve',
+        download: '⬇ Download for Windows', how: 'How it works', foot: '© 2026 Outdraft · Not affiliated with Valve',
         feedback: 'Feedback', releases: 'All releases',
         guidesTitle: 'Dota 2 draft guides', guidesMeta: 'Guides | Outdraft',
         guidesLead: 'Research, real numbers and honest answers about drafting in Dota 2. No filler: every figure links to its source.',
@@ -37,7 +38,7 @@ const UI = {
         data: 'Живые цифры: Dotabuff / OpenDota / D2PT, 19.10.2026, патч 7.41', toc: 'Содержание',
         sources: 'Источники', related: 'Читать дальше', faqTitle: 'Частые вопросы', ctaTitle: 'Смотри шансы своего драфта вживую',
         ctaText: 'Outdraft — бесплатный оверлей для Dota 2. Он читает пики с экрана и показывает вклад каждого героя в процентах, расклад по линиям и общий шанс драфта на победу.',
-        download: '⬇ Скачать для Windows', how: 'Как это работает', tg: 'Telegram', foot: '© 2026 Outdraft · Не связан с Valve',
+        download: '⬇ Скачать для Windows', how: 'Как это работает', foot: '© 2026 Outdraft · Не связан с Valve',
         feedback: 'Обратная связь', releases: 'Все версии',
         guidesTitle: 'Статьи о драфте в Dota 2', guidesMeta: 'Статьи о драфте | Outdraft',
         guidesLead: 'Исследования, реальные цифры и честные ответы о драфте в Dota 2. Без воды: у каждой цифры есть ссылка на источник.',
@@ -46,7 +47,7 @@ const UI = {
         data: 'Живі цифри: Dotabuff / OpenDota / D2PT, 19.10.2026, патч 7.41', toc: 'Зміст',
         sources: 'Джерела', related: 'Читати далі', faqTitle: 'Часті питання', ctaTitle: 'Дивись шанси свого драфту наживо',
         ctaText: 'Outdraft — безкоштовний оверлей для Dota 2. Він читає піки з екрана й показує внесок кожного героя у відсотках, розклад по лініях і загальний шанс драфту на перемогу.',
-        download: '⬇ Завантажити для Windows', how: 'Як це працює', tg: 'Telegram', foot: '© 2026 Outdraft · Не пов\'язаний із Valve',
+        download: '⬇ Завантажити для Windows', how: 'Як це працює', foot: '© 2026 Outdraft · Не пов\'язаний із Valve',
         feedback: 'Зворотний зв\'язок', releases: 'Усі версії',
         guidesTitle: 'Статті про драфт у Dota 2', guidesMeta: 'Статті про драфт | Outdraft',
         guidesLead: 'Дослідження, реальні цифри й чесні відповіді про драфт у Dota 2. Без води: кожна цифра має посилання на джерело.',
@@ -58,7 +59,6 @@ const strip = s => String(s).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()
 const url = (lang, slug) => `${DOMAIN}/${lang}/${slug ? slug + '/' : ''}`;
 const words = s => strip(s).split(' ').filter(w => /[\p{L}\p{N}]/u.test(w)).length;
 
-const TG_SVG = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg>';
 const LOGO = '<svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#141414"/><g fill="none" stroke-width="7"><circle cx="32" cy="32" r="17" stroke="#5DCAA5" stroke-dasharray="48 59" transform="rotate(-90 32 32)"/><circle cx="32" cy="32" r="17" stroke="#E24B4A" stroke-dasharray="48 59" transform="rotate(90 32 32)"/></g></svg>';
 
 const CSS = `
@@ -78,7 +78,7 @@ const CSS = `
     .lang { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
     .lang a { color: var(--muted); font: 600 13px Inter, sans-serif; padding: 6px 10px; text-decoration: none; }
     .lang a:hover { color: var(--text); } .lang a[aria-current="page"] { background: #1c2430; color: var(--text); }
-    .tg-top { display: inline-flex; align-items: center; color: var(--muted); } .tg-top:hover { color: #2aabee; }
+    .community-top { display: inline-flex; align-items: center; color: var(--muted); } .community-top:hover { color: #5865F2; }
     .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 10px; background: var(--r); color: #05140e; font-weight: 700; text-decoration: none; }
     .btn:hover { filter: brightness(1.08); }
     .btn.ghost { background: none; color: var(--text); border: 1px solid var(--line); font-weight: 600; } .btn.ghost:hover { border-color: var(--r); color: var(--r); filter: none; }
@@ -207,7 +207,7 @@ function header(lang, slug, current) {
     <a class="brand" href="/${lang}/">${LOGO}Outdraft</a>
     <div class="right">
       <nav class="links"><a href="/${lang}/how-to-use/windows/"${current === 'how-to' ? ' aria-current="page"' : ''}>${u.howTo}</a><a href="/${lang}/guides/"${current === 'guides' ? ' aria-current="page"' : ''}>${u.guides}</a><a href="/${lang}/#features">${u.features}</a><a href="/${lang}/#faq">${u.faq}</a></nav>
-      <a class="tg-top" href="https://t.me/d2_outdraft" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">${TG_SVG}</a>
+      <a class="community-top" href="${COMMUNITY_URL}" target="_blank" rel="noopener" aria-label="Discord" title="Discord">${COMMUNITY_SVG}</a>
       <nav class="lang" role="group" aria-label="Language">${sw}</nav>
     </div>
   </header>
@@ -218,7 +218,7 @@ function footer(lang) {
   const u = UI[lang];
   return `<div class="wrap">
   <footer><span>${u.foot}</span>
-    <nav class="links"><a href="/${lang}/how-to-use/windows/">${u.howTo}</a><a href="/${lang}/guides/">${u.guides}</a><a href="https://t.me/d2_outdraft" target="_blank" rel="noopener">Telegram</a><a href="https://www.youtube.com/@comaapp" target="_blank" rel="noopener">YouTube</a><a href="https://tally.so/r/D4lK4E">${u.feedback}</a><a href="https://github.com/vshtykhnov/outdraft-releases/releases">${u.releases}</a></nav>
+    <nav class="links"><a href="/${lang}/how-to-use/windows/">${u.howTo}</a><a href="/${lang}/guides/">${u.guides}</a><a href="${COMMUNITY_URL}" target="_blank" rel="noopener">Discord</a><a href="https://tally.so/r/D4lK4E">${u.feedback}</a><a href="https://github.com/vshtykhnov/outdraft-releases/releases">${u.releases}</a></nav>
   </footer>
 </div>
 <script>

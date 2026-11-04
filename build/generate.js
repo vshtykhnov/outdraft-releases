@@ -9,6 +9,7 @@
 const fs = require('fs');
 const path = require('path');
 const { EN, RU, UK, META } = require('./translations');
+const { COMMUNITY_URL, COMMUNITY_SVG } = require('./community');
 
 const LANGS = ['en', 'ru', 'uk'];
 const DICTS = { en: EN, ru: RU, uk: UK };
@@ -178,12 +179,10 @@ ${generateJsonLd(lang)}
     .btn.linux { background: transparent; border: 1px solid var(--line); color: var(--muted); font-weight: 600; }
     .btn.linux:hover { border-color: var(--r); color: var(--text); filter: none; }
     .sub { font-size: 13px; color: var(--muted); }
-    .telegram-note { font-size: 13px; color: var(--muted); text-decoration: none; }
-    .telegram-note:hover { color: #2aabee; }
-    .btn.tg { background: none; color: var(--text); border: 1px solid var(--line); font-weight: 600; }
-    .btn.tg:hover { border-color: #2aabee; color: #2aabee; filter: none; }
-    .tg-top { display: inline-flex; align-items: center; color: var(--muted); }
-    .tg-top:hover { color: #2aabee; }
+    .community-note { font-size: 13px; color: var(--muted); text-decoration: none; }
+    .community-note:hover { color: #5865F2; }
+    .community-top { display: inline-flex; align-items: center; color: var(--muted); }
+    .community-top:hover { color: #5865F2; }
     .shot { position: relative; border-radius: 16px; padding: 18px; background:
             radial-gradient(120% 90% at 0% 0%, #17322a 0%, transparent 55%),
             radial-gradient(120% 90% at 100% 100%, #3a1a1a 0%, transparent 55%), var(--panel);
@@ -272,7 +271,7 @@ ${generateJsonLd(lang)}
     <a class="brand" href="${brandHref}"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#141414"/><g fill="none" stroke-width="7"><circle cx="32" cy="32" r="17" stroke="#5DCAA5" stroke-dasharray="48 59" transform="rotate(-90 32 32)"/><circle cx="32" cy="32" r="17" stroke="#E24B4A" stroke-dasharray="48 59" transform="rotate(90 32 32)"/></g></svg>Outdraft</a>
     <div class="right">
       <nav class="links"><a href="/${lang}/how-to-use/windows/">${dict.navHowTo}</a><a href="/${lang}/guides/">${dict.navGuides}</a><a href="#features">${dict.navFeatures}</a><a href="#start">${dict.navStart}</a><a href="#faq">${dict.navFaq}</a></nav>
-      <a class="tg-top" href="https://t.me/d2_outdraft" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg></a>
+      <a class="community-top" href="${COMMUNITY_URL}" target="_blank" rel="noopener" aria-label="Discord" title="Discord">${COMMUNITY_SVG}</a>
       <nav class="lang" role="group" aria-label="Language"><a href="/en/"${lang === 'en' ? ' aria-current="page"' : ''}>EN</a><a href="/ru/"${lang === 'ru' ? ' aria-current="page"' : ''}>RU</a><a href="/uk/"${lang === 'uk' ? ' aria-current="page"' : ''}>UA</a></nav>
     </div>
   </header>
@@ -287,7 +286,7 @@ ${generateJsonLd(lang)}
           <a class="btn download-btn" data-platform="windows" href="${WINDOWS_DOWNLOAD}">${dict.downloadWindows}</a>
           <a class="btn download-btn linux" data-platform="linux" href="${LINUX_DOWNLOAD}">${dict.downloadLinux}</a>
         </div>
-        <a class="telegram-note" href="https://t.me/d2_outdraft" target="_blank" rel="noopener">${dict.tgJoin}</a>
+        <a class="community-note" href="${COMMUNITY_URL}" target="_blank" rel="noopener">${dict.communityJoin}</a>
       </div>
     </div>
     <div class="shot" aria-hidden="true">
@@ -378,7 +377,7 @@ ${generateJsonLd(lang)}
 
 <div class="wrap">
   <footer><span>${dict.foot}</span>
-    <nav class="links"><a href="https://t.me/d2_outdraft" target="_blank" rel="noopener">Telegram</a><a href="https://tally.so/r/D4lK4E">${dict.feedback}</a><a href="#privacy">${dict.privTitle}</a><a href="https://github.com/vshtykhnov/outdraft-releases/releases">${dict.releases}</a></nav>
+    <nav class="links"><a href="${COMMUNITY_URL}" target="_blank" rel="noopener">Discord</a><a href="https://tally.so/r/D4lK4E">${dict.feedback}</a><a href="#privacy">${dict.privTitle}</a><a href="https://github.com/vshtykhnov/outdraft-releases/releases">${dict.releases}</a></nav>
   </footer>
 </div>
 
@@ -461,12 +460,10 @@ ${generateJsonLd('en')}
     .btn.linux { background: transparent; border: 1px solid var(--line); color: var(--muted); font-weight: 600; }
     .btn.linux:hover { border-color: var(--r); color: var(--text); filter: none; }
     .sub { font-size: 13px; color: var(--muted); }
-    .telegram-note { font-size: 13px; color: var(--muted); text-decoration: none; }
-    .telegram-note:hover { color: #2aabee; }
-    .btn.tg { background: none; color: var(--text); border: 1px solid var(--line); font-weight: 600; }
-    .btn.tg:hover { border-color: #2aabee; color: #2aabee; filter: none; }
-    .tg-top { display: inline-flex; align-items: center; color: var(--muted); }
-    .tg-top:hover { color: #2aabee; }
+    .community-note { font-size: 13px; color: var(--muted); text-decoration: none; }
+    .community-note:hover { color: #5865F2; }
+    .community-top { display: inline-flex; align-items: center; color: var(--muted); }
+    .community-top:hover { color: #5865F2; }
     .shot { position: relative; border-radius: 16px; padding: 18px; background:
             radial-gradient(120% 90% at 0% 0%, #17322a 0%, transparent 55%),
             radial-gradient(120% 90% at 100% 100%, #3a1a1a 0%, transparent 55%), var(--panel);
@@ -555,7 +552,7 @@ ${generateJsonLd('en')}
     <a class="brand" href="/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#141414"/><g fill="none" stroke-width="7"><circle cx="32" cy="32" r="17" stroke="#5DCAA5" stroke-dasharray="48 59" transform="rotate(-90 32 32)"/><circle cx="32" cy="32" r="17" stroke="#E24B4A" stroke-dasharray="48 59" transform="rotate(90 32 32)"/></g></svg>Outdraft</a>
     <div class="right">
       <nav class="links"><a href="/en/how-to-use/windows/">${dict.navHowTo}</a><a href="/en/guides/">${dict.navGuides}</a><a href="#features">${dict.navFeatures}</a><a href="#start">${dict.navStart}</a><a href="#faq">${dict.navFaq}</a></nav>
-      <a class="tg-top" href="https://t.me/d2_outdraft" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21.9 4.6 18.7 19.7c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5l18.5-7.1c.9-.3 1.6.2 1.4 1.3Z"/></svg></a>
+      <a class="community-top" href="${COMMUNITY_URL}" target="_blank" rel="noopener" aria-label="Discord" title="Discord">${COMMUNITY_SVG}</a>
       <nav class="lang" role="group" aria-label="Language"><a href="/en/">EN</a><a href="/ru/">RU</a><a href="/uk/">UA</a></nav>
     </div>
   </header>
@@ -570,7 +567,7 @@ ${generateJsonLd('en')}
           <a class="btn download-btn" data-platform="windows" href="${WINDOWS_DOWNLOAD}">${dict.downloadWindows}</a>
           <a class="btn download-btn linux" data-platform="linux" href="${LINUX_DOWNLOAD}">${dict.downloadLinux}</a>
         </div>
-        <a class="telegram-note" href="https://t.me/d2_outdraft" target="_blank" rel="noopener">${dict.tgJoin}</a>
+        <a class="community-note" href="${COMMUNITY_URL}" target="_blank" rel="noopener">${dict.communityJoin}</a>
       </div>
     </div>
     <div class="shot" aria-hidden="true">
@@ -661,7 +658,7 @@ ${generateJsonLd('en')}
 
 <div class="wrap">
   <footer><span>${dict.foot}</span>
-    <nav class="links"><a href="https://t.me/d2_outdraft" target="_blank" rel="noopener">Telegram</a><a href="https://tally.so/r/D4lK4E">${dict.feedback}</a><a href="#privacy">${dict.privTitle}</a><a href="https://github.com/vshtykhnov/outdraft-releases/releases">${dict.releases}</a></nav>
+    <nav class="links"><a href="${COMMUNITY_URL}" target="_blank" rel="noopener">Discord</a><a href="https://tally.so/r/D4lK4E">${dict.feedback}</a><a href="#privacy">${dict.privTitle}</a><a href="https://github.com/vshtykhnov/outdraft-releases/releases">${dict.releases}</a></nav>
   </footer>
 </div>
 
