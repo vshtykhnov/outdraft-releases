@@ -181,7 +181,7 @@ ${alts}
   <meta property="og:url" content="${url(lang, slug)}">
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(description)}">
-  <meta property="og:image" content="${DOMAIN}/media/og-image.png">
+  <meta property="og:image" content="${DOMAIN}/media/og-image.png?v=2">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="${LOCALE[lang]}">
@@ -189,7 +189,7 @@ ${altLoc}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)}">
   <meta name="twitter:description" content="${esc(description)}">
-  <meta name="twitter:image" content="${DOMAIN}/media/og-image.png">
+  <meta name="twitter:image" content="${DOMAIN}/media/og-image.png?v=2">
 ${jsonld.map(j => `  <script type="application/ld+json">${JSON.stringify(j)}</script>`).join('\n')}
   <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <style>${CSS}
@@ -256,7 +256,7 @@ function buildArticle(lang, id) {
 
   const jsonld = [
     { '@context': 'https://schema.org', '@type': 'Article', headline: strip(a.h1), description: a.description, inLanguage: lang,
-      datePublished: PUBLISHED, dateModified: PUBLISHED, mainEntityOfPage: url(lang, id), image: `${DOMAIN}/media/og-image.png`,
+      datePublished: PUBLISHED, dateModified: PUBLISHED, mainEntityOfPage: url(lang, id), image: `${DOMAIN}/media/og-image.png?v=2`,
       author: { '@type': 'Organization', name: 'Outdraft', url: DOMAIN }, publisher: { '@type': 'Organization', name: 'Outdraft', logo: { '@type': 'ImageObject', url: `${DOMAIN}/apple-touch-icon.png` } },
       citation: srcs.map(s => s[1]) },
     { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: a.faq.map(([q, ans]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: strip(ans) } })) },

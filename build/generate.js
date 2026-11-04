@@ -50,7 +50,7 @@ function generateOpenGraphTags(lang) {
   <meta property="og:url" content="${DOMAIN}/${lang}/">
   <meta property="og:title" content="${escapeHtml(meta.title)}">
   <meta property="og:description" content="${escapeHtml(meta.description)}">
-  <meta property="og:image" content="${DOMAIN}/media/og-image.png">
+  <meta property="og:image" content="${DOMAIN}/media/og-image.png?v=2">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="${locale}">`;
@@ -67,7 +67,7 @@ function generateTwitterCardTags(lang) {
   return `  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(meta.title)}">
   <meta name="twitter:description" content="${escapeHtml(meta.description)}">
-  <meta name="twitter:image" content="${DOMAIN}/media/og-image.png">`;
+  <meta name="twitter:image" content="${DOMAIN}/media/og-image.png?v=2">`;
 }
 
 function generateJsonLd(lang) {
