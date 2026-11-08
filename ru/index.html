@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Outdraft — помощник по драфту в Dota 2</title>
   <link rel="canonical" href="https://outdraft.org/ru/">
-  <meta name="description" content="Бесплатный помощник для Dota 2: пики, линии, тайминги, билды, навыки, личные баны и сравнение GPM/XPM в матче.">
+  <meta name="description" content="Бесплатный помощник для Dota 2: пики, линии и шанс после каждого выбора, Агент, который подсказывает, что купить дальше, билды по винрейтам, навыки, личные баны и GPM/XPM в матче.">
   <link rel="alternate" hreflang="en" href="https://outdraft.org/en/">
   <link rel="alternate" hreflang="ru" href="https://outdraft.org/ru/">
   <link rel="alternate" hreflang="uk" href="https://outdraft.org/uk/">
@@ -17,7 +17,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://outdraft.org/ru/">
   <meta property="og:title" content="Outdraft — помощник по драфту в Dota 2">
-  <meta property="og:description" content="Бесплатный помощник для Dota 2: пики, линии, тайминги, билды, навыки, личные баны и сравнение GPM/XPM в матче.">
+  <meta property="og:description" content="Бесплатный помощник для Dota 2: пики, линии и шанс после каждого выбора, Агент, который подсказывает, что купить дальше, билды по винрейтам, навыки, личные баны и GPM/XPM в матче.">
   <meta property="og:image" content="https://outdraft.org/media/og-image.png?v=2">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -26,10 +26,10 @@
   <meta property="og:locale:alternate" content="uk_UA">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Outdraft — помощник по драфту в Dota 2">
-  <meta name="twitter:description" content="Бесплатный помощник для Dota 2: пики, линии, тайминги, билды, навыки, личные баны и сравнение GPM/XPM в матче.">
+  <meta name="twitter:description" content="Бесплатный помощник для Dota 2: пики, линии и шанс после каждого выбора, Агент, который подсказывает, что купить дальше, билды по винрейтам, навыки, личные баны и GPM/XPM в матче.">
   <meta name="twitter:image" content="https://outdraft.org/media/og-image.png?v=2">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Outdraft","applicationCategory":"GameApplication","operatingSystem":"Windows, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Бесплатный помощник для Dota 2: пики, линии, тайминги, билды, навыки, личные баны и сравнение GPM/XPM в матче.","downloadUrl":"https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.exe","softwareVersion":"0.3.1","author":{"@type":"Organization","name":"Outdraft"}}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Как это выглядит в матче","description":"Бесплатный помощник для Dota 2: пики, линии, тайминги, билды, навыки, личные баны и сравнение GPM/XPM в матче.","thumbnailUrl":"https://outdraft.org/media/demo.jpg","contentUrl":"https://outdraft.org/media/demo.mp4","uploadDate":"2026-01-01","duration":"PT1M7S"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Outdraft","applicationCategory":"GameApplication","operatingSystem":"Windows, Linux","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Бесплатный помощник для Dota 2: пики, линии и шанс после каждого выбора, Агент, который подсказывает, что купить дальше, билды по винрейтам, навыки, личные баны и GPM/XPM в матче.","downloadUrl":"https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.exe","softwareVersion":"0.5.0","author":{"@type":"Organization","name":"Outdraft"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Как это выглядит в матче","description":"Бесплатный помощник для Dota 2: пики, линии и шанс после каждого выбора, Агент, который подсказывает, что купить дальше, билды по винрейтам, навыки, личные баны и GPM/XPM в матче.","thumbnailUrl":"https://outdraft.org/media/demo.jpg","contentUrl":"https://outdraft.org/media/demo.mp4","uploadDate":"2026-01-01","duration":"PT1M7S"}</script>
   <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <style>
     @font-face {
@@ -83,6 +83,10 @@
             radial-gradient(120% 90% at 0% 0%, #17322a 0%, transparent 55%),
             radial-gradient(120% 90% at 100% 100%, #3a1a1a 0%, transparent 55%), var(--panel);
             border: 1px solid var(--line); }
+    .hero-slides { display: grid; }
+    .hero-slides .ov-img { grid-area: 1 / 1; opacity: 0; transition: opacity .7s ease; }
+    .hero-slides .ov-img.is-on { opacity: 1; }
+    @media (prefers-reduced-motion: reduce) { .hero-slides .ov-img { transition: none; } }
     .ov-img { display: block; width: 100%; height: auto; border-radius: 10px;
              -webkit-mask-image: linear-gradient(#000 82%, transparent); mask-image: linear-gradient(#000 82%, transparent); }
     .float { position: absolute; right: -14px; bottom: -18px; background: var(--card); border: 1px solid var(--line);
@@ -176,7 +180,7 @@
     <div>
       <span class="tag">Бесплатная бета · Windows и Linux</span>
       <h1>Драфт <span class="r">в реальном</span> <span class="d">времени</span></h1>
-      <p class="lead">Лучшие пики, баны и шанс на победу — после каждого выбора.</p>
+      <p class="lead">Лучшие пики, баны и шанс на победу — после каждого выбора. А в матче Агент подскажет, что покупать и когда.</p>
       <div class="cta">
         <div class="downloads">
           <a class="btn download-btn" data-platform="windows" href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.exe">⬇ Скачать для Windows</a>
@@ -186,7 +190,11 @@
       </div>
     </div>
     <div class="shot" aria-hidden="true">
-      <img class="ov-img" src="/media/hero-partial.png" alt="Outdraft during a Dota 2 draft" width="621" height="473" loading="eager">
+      <div class="hero-slides">
+        <img class="ov-img is-on" src="/media/hero-agent.png" alt="Outdraft Agent tips during a Dota 2 match" width="620" height="472" loading="eager">
+        <img class="ov-img" src="/media/hero-picks.png" alt="Outdraft hero suggestions during a Dota 2 draft" width="620" height="472" loading="lazy">
+        <img class="ov-img" src="/media/hero-build.png" alt="Outdraft item build for the match" width="620" height="472" loading="lazy">
+      </div>
     </div>
   </div>
 </div>
@@ -218,9 +226,21 @@
     </div>
   </div>
   <div class="feature-group">
+    <h3>Агент Кома</h3>
+    <p class="sub">Короткий чат рядом с игрой: одна подсказка за раз и вовремя.</p>
+    <div class="grid3">
+      <div class="card"><h4>Твой пик из твоего пула</h4><p>Герои на твою роль из тех, на которых ты играешь.</p></div>
+      <div class="card"><h4>Драфт в трёх строках</h4><p>Шанс, сильные и слабые стороны и твоя линия.</p></div>
+      <div class="card"><h4>Что купить дальше</h4><p>Следующий предмет сразу после каждой покупки.</p></div>
+      <div class="card"><h4>Ответы на этих врагов</h4><p>Предметы против вражеских героев.</p></div>
+      <div class="card"><h4>Навыки, таланты и фарм</h4><p>Какой навык и талант брать и как идёт твой фарм.</p></div>
+      <div class="card"><h4>Когда игра меняется</h4><p>Когда держаться, а когда дожимать игру.</p></div>
+    </div>
+  </div>
+  <div class="feature-group">
     <h3>В матче</h3>
     <div class="grid3">
-      <div class="card"><h4>Предметы для этого матча</h4><p>Старт, линия, мидгейм и лейт — с поправкой на этих врагов.</p></div>
+      <div class="card"><h4>Предметы, которые выигрывают</h4><p>Билд в том порядке, который чаще выигрывает, с поправкой на врагов.</p></div>
       <div class="card"><h4>Навыки и таланты</h4><p>Порядок прокачки, лучшие таланты и что качать следующим.</p></div>
       <div class="card"><h4>Темп и шанс в реальном времени</h4><p>Твой фарм против среднего на этой роли и шанс по ходу игры.</p></div>
     </div>
@@ -257,7 +277,7 @@
   <details><summary>За это могут забанить?</summary>
     <p>Нет. Outdraft не читает и не меняет память и файлы игры. Он только смотрит на пики на экране и анализирует их, а героя и предметы получает через официальную Game State Integration от Valve. Работает так же, как подсказки героев в Dota Plus, оверлеи Overwolf и подсветка через GSI в приложениях SteelSeries и Logitech.</p></details>
   <details><summary>Как пользоваться?</summary>
-    <p>Запусти Outdraft, затем Dota 2 в окне без рамки. На выборе героев программа распознаёт каждый пик и пересчитывает рекомендации, шанс на победу, линии и тайминги. После начала матча она переключается на предметы, навыки и Live, где твой темп сравнивается с обычными значениями героя на этой роли. Аккаунт не нужен; Steam можно подключить только для личного пула и банов.</p></details>
+    <p>Запусти Outdraft, затем Dota 2 в окне без рамки. На выборе героев программа распознаёт каждый пик и пересчитывает рекомендации, шанс на победу, линии и тайминги. В матче Агент подсказывает, что купить дальше и когда, что брать против вражеских героев, навыки, таланты и как идёт твой фарм, а вкладки «Предметы», «Навыки» и Live показывают весь билд и твой темп. Аккаунт не нужен: Steam-аккаунт программа узнаёт из самой Dota — только чтобы советовать героев из твоего пула и баны против него.</p></details>
   <details><summary>Это бесплатно?</summary>
     <p>Да, пока идёт бета. Взамен нам нужна твоя обратная связь: что ломается, что неудобно, что исправить и что хотелось бы добавить. <a href="https://tally.so/r/D4lK4E" target="_blank" rel="noopener">Оставить отзыв</a>.</p></details>
 </div></section>
@@ -281,13 +301,15 @@
   document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked", { platform: a.dataset.platform })));
   document.querySelector('#model')?.after(document.querySelector('#demo'));
   (() => {
-    const slides = [['/media/hero-draft.png', 'Outdraft during a Dota 2 draft'], ['/media/tour/03-suggestions.png', 'Outdraft hero suggestions'], ['/media/tour/08-items.png', 'Outdraft item suggestions'], ['/media/tour/10-live.png', 'Outdraft live match statistics']];
-    const image = document.querySelector('#hero-slide'), previous = document.querySelector('.hero-prev'), next = document.querySelector('.hero-next');
-    if (!image || !previous || !next) return;
+    // Agent, then the draft, then the build: a new screen every few seconds; with motion turned down, no fade.
+    const slides = [...document.querySelectorAll('.hero-slides .ov-img')];
+    if (slides.length < 2) return;
     let current = 0;
-    const show = index => { current = (index + slides.length) % slides.length; image.src = slides[current][0]; image.alt = slides[current][1]; };
-    previous.addEventListener('click', () => show(current - 1));
-    next.addEventListener('click', () => show(current + 1));
+    setInterval(() => {
+      slides[current].classList.remove('is-on');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('is-on');
+    }, 3500);
   })();
 </script>
 </body>
