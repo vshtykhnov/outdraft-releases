@@ -14,7 +14,7 @@ const { COMMUNITY_URL, COMMUNITY_SVG } = require('./community');
 const LANGS = ['en', 'ru', 'uk'];
 const DICTS = { en: EN, ru: RU, uk: UK };
 const DOMAIN = 'https://outdraft.org';
-const SOFTWARE_VERSION = '0.3.1';
+const SOFTWARE_VERSION = '0.5.0';
 const WINDOWS_DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.exe';
 const LINUX_DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-linux-x86_64.AppImage';
 const GUIDE_PATHS = ['guides', 'why-i-keep-losing', 'can-you-win-in-draft', 'last-pick-counter-math', 'cant-kill-this-hero'];
@@ -187,6 +187,10 @@ ${generateJsonLd(lang)}
             radial-gradient(120% 90% at 0% 0%, #17322a 0%, transparent 55%),
             radial-gradient(120% 90% at 100% 100%, #3a1a1a 0%, transparent 55%), var(--panel);
             border: 1px solid var(--line); }
+    .hero-slides { display: grid; }
+    .hero-slides .ov-img { grid-area: 1 / 1; opacity: 0; transition: opacity .7s ease; }
+    .hero-slides .ov-img.is-on { opacity: 1; }
+    @media (prefers-reduced-motion: reduce) { .hero-slides .ov-img { transition: none; } }
     .ov-img { display: block; width: 100%; height: auto; border-radius: 10px;
              -webkit-mask-image: linear-gradient(#000 82%, transparent); mask-image: linear-gradient(#000 82%, transparent); }
     .float { position: absolute; right: -14px; bottom: -18px; background: var(--card); border: 1px solid var(--line);
@@ -290,7 +294,11 @@ ${generateJsonLd(lang)}
       </div>
     </div>
     <div class="shot" aria-hidden="true">
-      <img class="ov-img" src="/media/hero-partial.png" alt="Outdraft during a Dota 2 draft" width="621" height="473" loading="eager">
+      <div class="hero-slides">
+        <img class="ov-img is-on" src="/media/hero-agent.png" alt="Outdraft Agent tips during a Dota 2 match" width="620" height="472" loading="eager">
+        <img class="ov-img" src="/media/hero-picks.png" alt="Outdraft hero suggestions during a Dota 2 draft" width="620" height="472" loading="lazy">
+        <img class="ov-img" src="/media/hero-build.png" alt="Outdraft item build for the match" width="620" height="472" loading="lazy">
+      </div>
     </div>
   </div>
 </div>
@@ -319,6 +327,18 @@ ${generateJsonLd(lang)}
       <div class="card"><h4>${dict.d4t}</h4><p>${dict.d4}</p></div>
       <div class="card"><h4>${dict.d5t}</h4><p>${dict.d5}</p></div>
       <div class="card"><h4>${dict.d6t}</h4><p>${dict.d6}</p></div>
+    </div>
+  </div>
+  <div class="feature-group">
+    <h3>${dict.agentTitle}</h3>
+    <p class="sub">${dict.agentLead}</p>
+    <div class="grid3">
+      <div class="card"><h4>${dict.k1t}</h4><p>${dict.k1}</p></div>
+      <div class="card"><h4>${dict.k2t}</h4><p>${dict.k2}</p></div>
+      <div class="card"><h4>${dict.k3t}</h4><p>${dict.k3}</p></div>
+      <div class="card"><h4>${dict.k4t}</h4><p>${dict.k4}</p></div>
+      <div class="card"><h4>${dict.k5t}</h4><p>${dict.k5}</p></div>
+      <div class="card"><h4>${dict.k6t}</h4><p>${dict.k6}</p></div>
     </div>
   </div>
   <div class="feature-group">
@@ -385,13 +405,15 @@ ${generateJsonLd(lang)}
   document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked", { platform: a.dataset.platform })));
   document.querySelector('#model')?.after(document.querySelector('#demo'));
   (() => {
-    const slides = [['/media/hero-draft.png', 'Outdraft during a Dota 2 draft'], ['/media/tour/03-suggestions.png', 'Outdraft hero suggestions'], ['/media/tour/08-items.png', 'Outdraft item suggestions'], ['/media/tour/10-live.png', 'Outdraft live match statistics']];
-    const image = document.querySelector('#hero-slide'), previous = document.querySelector('.hero-prev'), next = document.querySelector('.hero-next');
-    if (!image || !previous || !next) return;
+    // Agent, then the draft, then the build: a new screen every few seconds; with motion turned down, no fade.
+    const slides = [...document.querySelectorAll('.hero-slides .ov-img')];
+    if (slides.length < 2) return;
     let current = 0;
-    const show = index => { current = (index + slides.length) % slides.length; image.src = slides[current][0]; image.alt = slides[current][1]; };
-    previous.addEventListener('click', () => show(current - 1));
-    next.addEventListener('click', () => show(current + 1));
+    setInterval(() => {
+      slides[current].classList.remove('is-on');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('is-on');
+    }, 3500);
   })();
 </script>
 </body>
@@ -468,6 +490,10 @@ ${generateJsonLd('en')}
             radial-gradient(120% 90% at 0% 0%, #17322a 0%, transparent 55%),
             radial-gradient(120% 90% at 100% 100%, #3a1a1a 0%, transparent 55%), var(--panel);
             border: 1px solid var(--line); }
+    .hero-slides { display: grid; }
+    .hero-slides .ov-img { grid-area: 1 / 1; opacity: 0; transition: opacity .7s ease; }
+    .hero-slides .ov-img.is-on { opacity: 1; }
+    @media (prefers-reduced-motion: reduce) { .hero-slides .ov-img { transition: none; } }
     .ov-img { display: block; width: 100%; height: auto; border-radius: 10px;
              -webkit-mask-image: linear-gradient(#000 82%, transparent); mask-image: linear-gradient(#000 82%, transparent); }
     .float { position: absolute; right: -14px; bottom: -18px; background: var(--card); border: 1px solid var(--line);
@@ -571,7 +597,11 @@ ${generateJsonLd('en')}
       </div>
     </div>
     <div class="shot" aria-hidden="true">
-      <img class="ov-img" src="/media/hero-partial.png" alt="Outdraft during a Dota 2 draft" width="621" height="473" loading="eager">
+      <div class="hero-slides">
+        <img class="ov-img is-on" src="/media/hero-agent.png" alt="Outdraft Agent tips during a Dota 2 match" width="620" height="472" loading="eager">
+        <img class="ov-img" src="/media/hero-picks.png" alt="Outdraft hero suggestions during a Dota 2 draft" width="620" height="472" loading="lazy">
+        <img class="ov-img" src="/media/hero-build.png" alt="Outdraft item build for the match" width="620" height="472" loading="lazy">
+      </div>
     </div>
   </div>
 </div>
@@ -600,6 +630,18 @@ ${generateJsonLd('en')}
       <div class="card"><h4>${dict.d4t}</h4><p>${dict.d4}</p></div>
       <div class="card"><h4>${dict.d5t}</h4><p>${dict.d5}</p></div>
       <div class="card"><h4>${dict.d6t}</h4><p>${dict.d6}</p></div>
+    </div>
+  </div>
+  <div class="feature-group">
+    <h3>${dict.agentTitle}</h3>
+    <p class="sub">${dict.agentLead}</p>
+    <div class="grid3">
+      <div class="card"><h4>${dict.k1t}</h4><p>${dict.k1}</p></div>
+      <div class="card"><h4>${dict.k2t}</h4><p>${dict.k2}</p></div>
+      <div class="card"><h4>${dict.k3t}</h4><p>${dict.k3}</p></div>
+      <div class="card"><h4>${dict.k4t}</h4><p>${dict.k4}</p></div>
+      <div class="card"><h4>${dict.k5t}</h4><p>${dict.k5}</p></div>
+      <div class="card"><h4>${dict.k6t}</h4><p>${dict.k6}</p></div>
     </div>
   </div>
   <div class="feature-group">
@@ -666,13 +708,15 @@ ${generateJsonLd('en')}
   document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked", { platform: a.dataset.platform })));
   document.querySelector('#model')?.after(document.querySelector('#demo'));
   (() => {
-    const slides = [['/media/hero-draft.png', 'Outdraft during a Dota 2 draft'], ['/media/tour/03-suggestions.png', 'Outdraft hero suggestions'], ['/media/tour/08-items.png', 'Outdraft item suggestions'], ['/media/tour/10-live.png', 'Outdraft live match statistics']];
-    const image = document.querySelector('#hero-slide'), previous = document.querySelector('.hero-prev'), next = document.querySelector('.hero-next');
-    if (!image || !previous || !next) return;
+    // Agent, then the draft, then the build: a new screen every few seconds; with motion turned down, no fade.
+    const slides = [...document.querySelectorAll('.hero-slides .ov-img')];
+    if (slides.length < 2) return;
     let current = 0;
-    const show = index => { current = (index + slides.length) % slides.length; image.src = slides[current][0]; image.alt = slides[current][1]; };
-    previous.addEventListener('click', () => show(current - 1));
-    next.addEventListener('click', () => show(current + 1));
+    setInterval(() => {
+      slides[current].classList.remove('is-on');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('is-on');
+    }, 3500);
   })();
   
   // Handle legacy ?lang= URLs - redirect to proper language path
