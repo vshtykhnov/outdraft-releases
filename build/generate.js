@@ -10,11 +10,13 @@ const fs = require('fs');
 const path = require('path');
 const { EN, RU, UK, META } = require('./translations');
 const { COMMUNITY_URL, COMMUNITY_SVG } = require('./community');
+// The narrated tour, also shown in the landing's "see it in a match" block (build/make-tour-video.py).
+const TOUR_VIDEOS = require('./tour-videos.json');
 
 const LANGS = ['en', 'ru', 'uk'];
 const DICTS = { en: EN, ru: RU, uk: UK };
 const DOMAIN = 'https://outdraft.org';
-const SOFTWARE_VERSION = '0.5.0';
+const SOFTWARE_VERSION = '0.6.0';
 const WINDOWS_DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.exe';
 const LINUX_DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-linux-x86_64.AppImage';
 const GUIDE_PATHS = ['guides', 'why-i-keep-losing', 'can-you-win-in-draft', 'last-pick-counter-math', 'cant-kill-this-hero'];
@@ -26,6 +28,13 @@ const LANG_NAMES = { en: 'en', ru: 'ru', uk: 'uk' };
 
 function getLastMod() {
   return new Date().toISOString().split('T')[0];
+}
+
+// FAQ order on the page, by translation key number.
+const FAQ_KEYS = [1, 2, 3, 5, 6, 4];
+
+function stripTags(str) {
+  return str.replace(/<[^>]+>/g, '');
 }
 
 function escapeHtml(str) {
@@ -94,19 +103,33 @@ function generateJsonLd(lang) {
     }
   };
 
+  const video = TOUR_VIDEOS[lang];
   const videoObject = {
     "@context": "https://schema.org",
     "@type": "VideoObject",
     "name": dict.demoTitle,
     "description": meta.description,
-    "thumbnailUrl": `${DOMAIN}/media/demo.jpg`,
-    "contentUrl": `${DOMAIN}/media/demo.mp4`,
-    "uploadDate": "2026-01-01",
-    "duration": "PT1M7S"
+    "thumbnailUrl": `${DOMAIN}/media/tour/03-suggestions.png`,
+    "contentUrl": `${DOMAIN}/media/tour/${video.file}`,
+    "uploadDate": video.date,
+    "duration": `PT${Math.floor(video.seconds / 60)}M${Math.round(video.seconds % 60)}S`,
+    "inLanguage": lang
+  };
+
+  // The same questions as the FAQ section, so search can show them as answers.
+  const faqPage = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": FAQ_KEYS.map(n => ({
+      "@type": "Question",
+      "name": dict[`q${n}`],
+      "acceptedAnswer": { "@type": "Answer", "text": stripTags(dict[`a${n}`]) }
+    }))
   };
 
   return `  <script type="application/ld+json">${JSON.stringify(softwareApp)}</script>
-  <script type="application/ld+json">${JSON.stringify(videoObject)}</script>`;
+  <script type="application/ld+json">${JSON.stringify(videoObject)}</script>
+  <script type="application/ld+json">${JSON.stringify(faqPage)}</script>`;
 }
 
 function generateFaviconTags() {
@@ -116,10 +139,12 @@ function generateFaviconTags() {
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">`;
 }
 
-function generateLanguagePage(lang) {
+function generateLanguagePage(lang, { root = false } = {}) {
   const dict = DICTS[lang];
   const meta = META[lang];
-  const brandHref = `/${lang}/`;
+  const pageUrl = root ? `${DOMAIN}/` : `${DOMAIN}/${lang}/`;
+  const brandHref = root ? '/' : `/${lang}/`;
+  const current = (l) => (!root && lang === l ? ' aria-current="page"' : '');
 
   return `<!doctype html>
 <html lang="${lang}">
@@ -127,11 +152,11 @@ function generateLanguagePage(lang) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(meta.title)}</title>
-  <link rel="canonical" href="${DOMAIN}/${lang}/">
+  <link rel="canonical" href="${pageUrl}">
   <meta name="description" content="${escapeHtml(meta.description)}">
 ${generateHreflangTags(lang)}
 ${generateFaviconTags()}
-${generateOpenGraphTags(lang)}
+${generateOpenGraphTags(lang).replace(`${DOMAIN}/${lang}/`, pageUrl)}
 ${generateTwitterCardTags(lang)}
 ${generateJsonLd(lang)}
   <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
@@ -166,8 +191,9 @@ ${generateJsonLd(lang)}
     .lang a:hover { color: var(--text); }
     .lang a[aria-current="page"] { background: #1c2430; color: var(--text); }
     .hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; padding: 56px 0 72px; }
+    .tags { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 18px; }
     .tag { display: inline-block; font-size: 13px; color: var(--r); border: 1px solid #2c4a40;
-           background: #10221c; padding: 4px 10px; border-radius: 999px; margin-bottom: 18px; }
+           background: #10221c; padding: 4px 10px; border-radius: 999px; }
     h1 { font-size: 52px; line-height: 1.05; margin: 0 0 18px; letter-spacing: -1.5px; font-weight: 800; }
     h1 .r { color: var(--r); } h1 .d { color: var(--d); }
     .lead { color: var(--muted); font-size: 18px; margin: 0 0 28px; max-width: 30em; }
@@ -179,8 +205,18 @@ ${generateJsonLd(lang)}
     .btn.linux { background: transparent; border: 1px solid var(--line); color: var(--muted); font-weight: 600; }
     .btn.linux:hover { border-color: var(--r); color: var(--text); filter: none; }
     .sub { font-size: 13px; color: var(--muted); }
-    .community-note { font-size: 13px; color: var(--muted); text-decoration: none; }
-    .community-note:hover { color: #5865F2; }
+    /* Discord in the hero: a soft glow that breathes, so it is seen without shouting. */
+    .community-note { display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px 4px 9px; border-radius: 999px;
+                      font-size: 13px; font-weight: 600; line-height: 1.6; color: #c9cdfb; text-decoration: none;
+                      border: 1px solid rgba(88,101,242,.45); background: rgba(88,101,242,.10);
+                      animation: discord-glow 2.8s ease-in-out infinite; }
+    .community-note svg { width: 16px; height: 16px; color: #8c96ff; }
+    .community-note:hover { color: #fff; background: rgba(88,101,242,.22); border-color: #5865F2; animation-play-state: paused; }
+    @keyframes discord-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(88,101,242,0); text-shadow: none; }
+      50% { box-shadow: 0 0 18px 2px rgba(88,101,242,.45); text-shadow: 0 0 10px rgba(140,150,255,.7); }
+    }
+    @media (prefers-reduced-motion: reduce) { .community-note { animation: none; box-shadow: 0 0 12px rgba(88,101,242,.35); } }
     .community-top { display: inline-flex; align-items: center; color: var(--muted); }
     .community-top:hover { color: #5865F2; }
     .shot { position: relative; border-radius: 16px; padding: 18px; background:
@@ -193,16 +229,24 @@ ${generateJsonLd(lang)}
     @media (prefers-reduced-motion: reduce) { .hero-slides .ov-img { transition: none; } }
     .ov-img { display: block; width: 100%; height: auto; border-radius: 10px;
              -webkit-mask-image: linear-gradient(#000 82%, transparent); mask-image: linear-gradient(#000 82%, transparent); }
-    .float { position: absolute; right: -14px; bottom: -18px; background: var(--card); border: 1px solid var(--line);
-             border-radius: 10px; padding: 10px 14px; font-size: 13px; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
-    .float b { color: var(--r); }
-    .demo { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: 1px solid var(--line); background: #000; }
+    .demo-box { padding: 0; overflow: hidden; }
+    .demo-box summary { padding: 20px 22px; display: flex; align-items: center; gap: 14px; }
+    .demo-play { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #10221c; color: var(--r); font-size: 15px; }
+    .demo-kicker { display: block; color: var(--r); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .demo-title { display: block; font-size: 20px; margin-top: 1px; }
+    .demo-body { padding: 0 22px 22px; }
+    .demo-tour { margin-top: 18px; display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .demo-tour p { margin: 0; color: var(--muted); }
+    .demo-tour a { display: inline-flex; padding: 9px 13px; border: 1px solid #2c4a40; border-radius: 8px; background: #10221c;
+                   color: var(--r); font-weight: 700; text-decoration: none; }
+    .demo { display: block; width: 100%; max-width: 560px; margin: 0 auto; aspect-ratio: 380 / 350; border-radius: 12px; border: 1px solid var(--line); background: #000; }
     section { padding: 64px 0; border-top: 1px solid #141b24; scroll-margin-top: 8px; }
     h2 { font-size: 30px; margin: 0 0 24px; letter-spacing: -.5px; }
     h2.title { font-size: 40px; font-weight: 800; letter-spacing: -1px; text-align: center; margin-bottom: 32px; }
     h2.title .r { color: var(--r); }
-    .muted { color: var(--muted); margin: 0 0 32px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    @media (max-width: 980px) { .grid4 { grid-template-columns: repeat(2, 1fr); } }
     .model-flow { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .model-factor { position: relative; padding: 22px 26px; }
     .model-factor:first-child { padding-left: 0; }
@@ -222,8 +266,6 @@ ${generateJsonLd(lang)}
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
     .card h3 { margin: 10px 0 6px; font-size: 17px; }
     .card p { margin: 0; color: var(--muted); font-size: 15px; }
-    .ic { width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; font-weight: 800; }
-    .ic.g { background: #10221c; color: var(--r); } .ic.rd { background: #2a1414; color: var(--d); } .ic.b { background: #151d2a; color: #8fb3ff; }
     .steps { counter-reset: s; }
     .steps .card h3::before { counter-increment: s; content: counter(s); display: inline-grid; place-items: center;
            width: 26px; height: 26px; margin-right: 10px; border-radius: 50%; background: #1c2430; color: var(--r); font-size: 14px; }
@@ -232,13 +274,13 @@ ${generateJsonLd(lang)}
     summary::-webkit-details-marker { display: none; }
     summary::after { content: "+"; float: right; color: var(--muted); }
     details[open] summary::after { content: "–"; }
+    .demo-box summary::after { margin-left: auto; }
     details p { color: var(--muted); margin: 10px 0 0; }
     .ss { margin-top: 12px; border: 1px solid #2a4f7a; background: #0e2240; border-radius: 8px; padding: 14px; font-size: 13px; color: #c8dcf5; }
     .ss b { display: block; font-size: 15px; margin-bottom: 4px; color: #fff; }
     .privacy ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
     .privacy li { color: var(--muted); padding-left: 22px; position: relative; }
     .privacy li::before { content: "✓"; position: absolute; left: 0; color: var(--r); font-weight: 700; }
-    .privacy li b { color: var(--text); font-weight: 600; }
     footer { padding: 32px 0 48px; border-top: 1px solid #141b24; color: var(--muted); font-size: 14px;
              display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
     footer .links { display: flex; flex-wrap: wrap; row-gap: 8px; }
@@ -250,7 +292,6 @@ ${generateJsonLd(lang)}
       .cta { align-items: stretch; text-align: center; }
       .downloads { flex-direction: column; }
       .shot { padding: 12px; }
-      .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
       .model-flow { grid-template-columns: 1fr; }
       .model-factor, .model-factor:first-child { padding: 16px 0; }
       .model-factor + .model-factor { border-left: 0; border-top: 1px solid var(--line); }
@@ -258,7 +299,7 @@ ${generateJsonLd(lang)}
       section { padding: 44px 0; }
       h2 { font-size: 24px; margin-bottom: 20px; }
       h2.title { font-size: 28px; margin-bottom: 22px; }
-      .grid3 { grid-template-columns: 1fr; gap: 10px; }
+      .grid3, .grid4 { grid-template-columns: 1fr; gap: 10px; }
       .card { padding: 16px; }
       .top .links { display: none; }
       footer { flex-direction: column; }
@@ -274,15 +315,15 @@ ${generateJsonLd(lang)}
   <header class="top">
     <a class="brand" href="${brandHref}"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#141414"/><g fill="none" stroke-width="7"><circle cx="32" cy="32" r="17" stroke="#5DCAA5" stroke-dasharray="48 59" transform="rotate(-90 32 32)"/><circle cx="32" cy="32" r="17" stroke="#E24B4A" stroke-dasharray="48 59" transform="rotate(90 32 32)"/></g></svg>Outdraft</a>
     <div class="right">
-      <nav class="links"><a href="/${lang}/how-to-use/windows/">${dict.navHowTo}</a><a href="/${lang}/guides/">${dict.navGuides}</a><a href="#features">${dict.navFeatures}</a><a href="#start">${dict.navStart}</a><a href="#faq">${dict.navFaq}</a></nav>
+      <nav class="links"><a href="/${lang}/how-to-use/windows/">${dict.navHowTo}</a><a href="/${lang}/tour/">${dict.navTour}</a><a href="/${lang}/guides/">${dict.navGuides}</a><a href="#features">${dict.navFeatures}</a><a href="#start">${dict.navStart}</a><a href="#faq">${dict.navFaq}</a></nav>
       <a class="community-top" href="${COMMUNITY_URL}" target="_blank" rel="noopener" aria-label="Discord" title="Discord">${COMMUNITY_SVG}</a>
-      <nav class="lang" role="group" aria-label="Language"><a href="/en/"${lang === 'en' ? ' aria-current="page"' : ''}>EN</a><a href="/ru/"${lang === 'ru' ? ' aria-current="page"' : ''}>RU</a><a href="/uk/"${lang === 'uk' ? ' aria-current="page"' : ''}>UA</a></nav>
+      <nav class="lang" role="group" aria-label="Language"><a href="/en/"${current('en')}>EN</a><a href="/ru/"${current('ru')}>RU</a><a href="/uk/"${current('uk')}>UA</a></nav>
     </div>
   </header>
 
   <div class="hero">
     <div>
-      <span class="tag">${dict.tag}</span>
+      <div class="tags"><span class="tag">${dict.tag}</span><a class="community-note" href="${COMMUNITY_URL}" target="_blank" rel="noopener">${COMMUNITY_SVG}<span>${dict.communityJoin}</span></a></div>
       <h1>${dict.title}</h1>
       <p class="lead">${dict.lead}</p>
       <div class="cta">
@@ -290,28 +331,25 @@ ${generateJsonLd(lang)}
           <a class="btn download-btn" data-platform="windows" href="${WINDOWS_DOWNLOAD}">${dict.downloadWindows}</a>
           <a class="btn download-btn linux" data-platform="linux" href="${LINUX_DOWNLOAD}">${dict.downloadLinux}</a>
         </div>
-        <a class="community-note" href="${COMMUNITY_URL}" target="_blank" rel="noopener">${dict.communityJoin}</a>
       </div>
     </div>
     <div class="shot" aria-hidden="true">
       <div class="hero-slides">
-        <img class="ov-img is-on" src="/media/hero-agent.png" alt="Outdraft Agent tips during a Dota 2 match" width="620" height="472" loading="eager">
-        <img class="ov-img" src="/media/hero-picks.png" alt="Outdraft hero suggestions during a Dota 2 draft" width="620" height="472" loading="lazy">
-        <img class="ov-img" src="/media/hero-build.png" alt="Outdraft item build for the match" width="620" height="472" loading="lazy">
+        <img class="ov-img is-on" src="/media/hero-agent.png?v=6" alt="Outdraft Agent tips during a Dota 2 match" width="380" height="350" loading="eager">
+        <img class="ov-img" src="/media/hero-picks.png?v=6" alt="Outdraft hero suggestions during a Dota 2 draft" width="380" height="350" loading="lazy">
+        <img class="ov-img" src="/media/hero-build.png?v=6" alt="Outdraft item build for the match" width="380" height="350" loading="lazy">
+        <img class="ov-img" src="/media/hero-live.png?v=6" alt="Outdraft farm pace against the average during the match" width="380" height="350" loading="lazy">
       </div>
     </div>
   </div>
 </div>
 
-<section id="demo"><div class="wrap">
-  <details style="padding:0;overflow:hidden"><summary style="padding:20px 22px;display:flex;align-items:center;gap:14px"><span style="display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#10221c;color:#5DCAA5;font-size:15px">▶</span><span><span style="display:block;color:#5DCAA5;font-size:12px;font-weight:800;letter-spacing:.08em">WATCH IN ACTION</span><span style="display:block;font-size:20px;margin-top:1px">${lang === 'ru' ? 'Outdraft в настоящем матче' : lang === 'uk' ? 'Outdraft у справжньому матчі' : 'See Outdraft in a real match'}</span></span></summary><div style="padding:0 22px 22px"><video class="demo" src="/media/demo.mp4?v=ca53b81a" poster="/media/demo.jpg?v=b0fd0783" controls playsinline preload="none"></video><div style="margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap"><p style="margin:0;color:#8b95a5">${lang === 'ru' ? 'Все экраны и полный разбор — на одной странице.' : lang === 'uk' ? 'Усі екрани та повний огляд — на одній сторінці.' : 'Every screen and the full walkthrough — on one page.'}</p><a href="/${lang}/tour/" style="display:inline-flex;padding:9px 13px;border:1px solid #2c4a40;border-radius:8px;background:#10221c;color:#5DCAA5;font-weight:700;text-decoration:none">${lang === 'ru' ? 'Открыть полный тур →' : lang === 'uk' ? 'Відкрити повний тур →' : 'Explore the full tour →'}</a></div></div></details>
-</div></section>
-
 <section id="playable"><div class="wrap">
   <h2 class="title">${dict.whyTitle}</h2>
-  <div class="grid3">
+  <div class="grid4">
     <div class="card"><h3>${dict.playableTitle}</h3><p>${dict.playableFirst}</p></div>
     <div class="card"><h3>${dict.metaTitle}</h3><p>${dict.metaText}</p></div>
+    <div class="card"><h3>${dict.buildTitle}</h3><p>${dict.buildText}</p></div>
     <div class="card"><h3>${dict.clearTitle}</h3><p>${dict.clearText}</p></div>
   </div>
 </div></section>
@@ -347,6 +385,9 @@ ${generateJsonLd(lang)}
       <div class="card"><h4>${dict.g1t}</h4><p>${dict.g1}</p></div>
       <div class="card"><h4>${dict.g2t}</h4><p>${dict.g2}</p></div>
       <div class="card"><h4>${dict.g3t}</h4><p>${dict.g3}</p></div>
+      <div class="card"><h4>${dict.g4t}</h4><p>${dict.g4}</p></div>
+      <div class="card"><h4>${dict.g5t}</h4><p>${dict.g5}</p></div>
+      <div class="card"><h4>${dict.g6t}</h4><p>${dict.g6}</p></div>
     </div>
   </div>
 </div></section>
@@ -360,6 +401,12 @@ ${generateJsonLd(lang)}
     <div class="model-factor"><span>03</span><h3>${dict.m3t}</h3><p>${dict.m3}</p></div>
   </div>
   <div class="model-result"><span>=</span><p>${dict.modelResult}</p></div>
+</div></section>
+
+<section id="demo"><div class="wrap">
+  <details class="demo-box"><summary><span class="demo-play">▶</span><span><span class="demo-kicker">${dict.demoKicker}</span><span class="demo-title">${dict.demoTitle}</span></span></summary>
+    <div class="demo-body"><video class="demo" src="/media/tour/${TOUR_VIDEOS[lang].file}?v=${TOUR_VIDEOS[lang].version}" poster="/media/tour/03-suggestions.png" controls playsinline preload="none"></video>
+      <div class="demo-tour"><p>${dict.tourText}</p><a href="/${lang}/tour/">${dict.tourLink}</a></div></div></details>
 </div></section>
 
 <section id="start"><div class="wrap">
@@ -376,14 +423,10 @@ ${generateJsonLd(lang)}
   <h2>FAQ</h2>
   <details open><summary>${dict.q1}</summary>
     <p>${dict.a1}</p>
-    <div class="ss"><b>Windows protected your PC</b>Microsoft Defender SmartScreen prevented an unrecognized app from starting… <u>More info</u></div>
+    <div class="ss"><b>${dict.ssTitle}</b>${dict.ssText} <u>${dict.ssMore}</u></div>
   </details>
-  <details><summary>${dict.q2}</summary>
-    <p>${dict.a2}</p></details>
-  <details><summary>${dict.q3}</summary>
-    <p>${dict.a3}</p></details>
-  <details><summary>${dict.q5}</summary>
-    <p>${dict.a5}</p></details>
+${FAQ_KEYS.slice(1).map(n => `  <details><summary>${dict[`q${n}`]}</summary>
+    <p>${dict[`a${n}`]}</p></details>`).join('\n')}
 </div></section>
 
 <section id="privacy"><div class="wrap">
@@ -397,15 +440,14 @@ ${generateJsonLd(lang)}
 
 <div class="wrap">
   <footer><span>${dict.foot}</span>
-    <nav class="links"><a href="${COMMUNITY_URL}" target="_blank" rel="noopener">Discord</a><a href="https://tally.so/r/D4lK4E">${dict.feedback}</a><a href="#privacy">${dict.privTitle}</a><a href="https://github.com/vshtykhnov/outdraft-releases/releases">${dict.releases}</a></nav>
+    <nav class="links"><a href="/${lang}/tour/">${dict.navTour}</a><a href="${COMMUNITY_URL}" target="_blank" rel="noopener">Discord</a><a href="https://tally.so/r/D4lK4E">${dict.feedback}</a><a href="#privacy">${dict.privTitle}</a><a href="https://github.com/vshtykhnov/outdraft-releases/releases">${dict.releases}</a></nav>
   </footer>
 </div>
 
 <script>
   document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked", { platform: a.dataset.platform })));
-  document.querySelector('#model')?.after(document.querySelector('#demo'));
   (() => {
-    // Agent, then the draft, then the build: a new screen every few seconds; with motion turned down, no fade.
+    // Agent, the draft, the build, then the pace: a new screen every few seconds; with motion turned down, no fade.
     const slides = [...document.querySelectorAll('.hero-slides .ov-img')];
     if (slides.length < 2) return;
     let current = 0;
@@ -414,322 +456,20 @@ ${generateJsonLd(lang)}
       current = (current + 1) % slides.length;
       slides[current].classList.add('is-on');
     }, 3500);
-  })();
+  })();${root ? `
+  // Old links used ?lang=; send them to the language path.
+  (() => {
+    const lang = new URLSearchParams(location.search).get('lang');
+    if (['en', 'ru', 'uk'].includes(lang)) location.replace('/' + lang + '/');
+  })();` : ''}
 </script>
 </body>
 </html>`;
 }
 
+// The root page is the English page under "/", plus a redirect for old ?lang= links.
 function generateRootPage() {
-  const meta = META.en;
-  const dict = EN;
-
-  return `<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${escapeHtml(meta.title)}</title>
-  <link rel="canonical" href="${DOMAIN}/">
-  <meta name="description" content="${escapeHtml(meta.description)}">
-${generateHreflangTags('en')}
-${generateFaviconTags()}
-${generateOpenGraphTags('en').replace(`${DOMAIN}/en/`, `${DOMAIN}/`)}
-${generateTwitterCardTags('en')}
-${generateJsonLd('en')}
-  <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
-  <style>
-    @font-face {
-      font-family: 'Inter';
-      src: url('/fonts/inter-var.woff2') format('woff2');
-      font-weight: 100 900;
-      font-style: normal;
-      font-display: swap;
-    }
-    :root {
-      --bg: #0a0d12; --panel: #10151c; --card: #141a22; --line: #222b37;
-      --text: #e8edf4; --muted: #8b95a5; --r: #5DCAA5; --d: #E24B4A;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; background: var(--bg); color: var(--text);
-           font: 16px/1.6 Inter, system-ui, sans-serif; }
-    a { color: inherit; }
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-    .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; text-decoration: none; }
-    .brand svg { width: 32px; height: 32px; }
-    .right { display: flex; align-items: center; gap: 22px; }
-    .links { display: flex; gap: 22px; font-size: 14px; color: var(--muted); }
-    .links a { text-decoration: none; }
-    .links a:hover { color: var(--text); }
-    .lang { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
-    .lang a { background: none; border: 0; color: var(--muted); font: 600 13px Inter, sans-serif;
-              padding: 6px 10px; text-decoration: none; }
-    .lang a:hover { color: var(--text); }
-    .lang a[aria-current="page"] { background: #1c2430; color: var(--text); }
-    .hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; padding: 56px 0 72px; }
-    .tag { display: inline-block; font-size: 13px; color: var(--r); border: 1px solid #2c4a40;
-           background: #10221c; padding: 4px 10px; border-radius: 999px; margin-bottom: 18px; }
-    h1 { font-size: 52px; line-height: 1.05; margin: 0 0 18px; letter-spacing: -1.5px; font-weight: 800; }
-    h1 .r { color: var(--r); } h1 .d { color: var(--d); }
-    .lead { color: var(--muted); font-size: 18px; margin: 0 0 28px; max-width: 30em; }
-    .cta { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
-    .downloads { display: flex; gap: 10px; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 184px; padding: 12px 18px; border-radius: 9px;
-           background: var(--r); color: #05140e; font-weight: 700; text-decoration: none; }
-    .btn:hover { filter: brightness(1.08); }
-    .btn.linux { background: transparent; border: 1px solid var(--line); color: var(--muted); font-weight: 600; }
-    .btn.linux:hover { border-color: var(--r); color: var(--text); filter: none; }
-    .sub { font-size: 13px; color: var(--muted); }
-    .community-note { font-size: 13px; color: var(--muted); text-decoration: none; }
-    .community-note:hover { color: #5865F2; }
-    .community-top { display: inline-flex; align-items: center; color: var(--muted); }
-    .community-top:hover { color: #5865F2; }
-    .shot { position: relative; border-radius: 16px; padding: 18px; background:
-            radial-gradient(120% 90% at 0% 0%, #17322a 0%, transparent 55%),
-            radial-gradient(120% 90% at 100% 100%, #3a1a1a 0%, transparent 55%), var(--panel);
-            border: 1px solid var(--line); }
-    .hero-slides { display: grid; }
-    .hero-slides .ov-img { grid-area: 1 / 1; opacity: 0; transition: opacity .7s ease; }
-    .hero-slides .ov-img.is-on { opacity: 1; }
-    @media (prefers-reduced-motion: reduce) { .hero-slides .ov-img { transition: none; } }
-    .ov-img { display: block; width: 100%; height: auto; border-radius: 10px;
-             -webkit-mask-image: linear-gradient(#000 82%, transparent); mask-image: linear-gradient(#000 82%, transparent); }
-    .float { position: absolute; right: -14px; bottom: -18px; background: var(--card); border: 1px solid var(--line);
-             border-radius: 10px; padding: 10px 14px; font-size: 13px; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
-    .float b { color: var(--r); }
-    .demo { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; border: 1px solid var(--line); background: #000; }
-    section { padding: 64px 0; border-top: 1px solid #141b24; scroll-margin-top: 8px; }
-    h2 { font-size: 30px; margin: 0 0 24px; letter-spacing: -.5px; }
-    h2.title { font-size: 40px; font-weight: 800; letter-spacing: -1px; text-align: center; margin-bottom: 32px; }
-    h2.title .r { color: var(--r); }
-    .muted { color: var(--muted); margin: 0 0 32px; }
-    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .model-flow { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .model-factor { position: relative; padding: 22px 26px; }
-    .model-factor:first-child { padding-left: 0; }
-    .model-factor + .model-factor { border-left: 1px solid var(--line); }
-    .model-factor + .model-factor::before { content: "+"; position: absolute; left: -12px; top: 50%; transform: translateY(-50%);
-                                           width: 23px; height: 23px; display: grid; place-items: center; border-radius: 50%;
-                                           background: var(--bg); color: var(--muted); font-weight: 700; }
-    .model-factor span { color: var(--r); font-size: 12px; font-weight: 800; letter-spacing: .08em; }
-    .model-factor h3 { margin: 5px 0 4px; font-size: 17px; }
-    .model-factor p { margin: 0; color: var(--muted); font-size: 14px; }
-    .model-result { display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; margin-top: 20px; max-width: 820px; }
-    .model-result span { color: var(--r); font-size: 24px; font-weight: 800; line-height: 1.2; }
-    .model-result p { margin: 0; color: var(--muted); }
-    .feature-group + .feature-group { margin-top: 40px; }
-    .feature-group > h3 { margin: 0 0 14px; font-size: 21px; }
-    .card h4 { margin: 0 0 6px; font-size: 16px; }
-    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
-    .card h3 { margin: 10px 0 6px; font-size: 17px; }
-    .card p { margin: 0; color: var(--muted); font-size: 15px; }
-    .ic { width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; font-weight: 800; }
-    .ic.g { background: #10221c; color: var(--r); } .ic.rd { background: #2a1414; color: var(--d); } .ic.b { background: #151d2a; color: #8fb3ff; }
-    .steps { counter-reset: s; }
-    .steps .card h3::before { counter-increment: s; content: counter(s); display: inline-grid; place-items: center;
-           width: 26px; height: 26px; margin-right: 10px; border-radius: 50%; background: #1c2430; color: var(--r); font-size: 14px; }
-    details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
-    summary { cursor: pointer; font-weight: 700; list-style: none; }
-    summary::-webkit-details-marker { display: none; }
-    summary::after { content: "+"; float: right; color: var(--muted); }
-    details[open] summary::after { content: "–"; }
-    details p { color: var(--muted); margin: 10px 0 0; }
-    .ss { margin-top: 12px; border: 1px solid #2a4f7a; background: #0e2240; border-radius: 8px; padding: 14px; font-size: 13px; color: #c8dcf5; }
-    .ss b { display: block; font-size: 15px; margin-bottom: 4px; color: #fff; }
-    .privacy ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
-    .privacy li { color: var(--muted); padding-left: 22px; position: relative; }
-    .privacy li::before { content: "✓"; position: absolute; left: 0; color: var(--r); font-weight: 700; }
-    .privacy li b { color: var(--text); font-weight: 600; }
-    footer { padding: 32px 0 48px; border-top: 1px solid #141b24; color: var(--muted); font-size: 14px;
-             display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    footer .links { display: flex; flex-wrap: wrap; row-gap: 8px; }
-    @media (max-width: 820px) {
-      .wrap { padding: 0 16px; }
-      .hero { grid-template-columns: 1fr; gap: 32px; padding: 16px 0 48px; }
-      h1 { font-size: 34px; letter-spacing: -1px; }
-      .lead { font-size: 16px; margin-bottom: 22px; }
-      .cta { align-items: stretch; text-align: center; }
-      .downloads { flex-direction: column; }
-      .shot { padding: 12px; }
-      .float { position: static; margin-top: 10px; box-shadow: none; text-align: center; }
-      .model-flow { grid-template-columns: 1fr; }
-      .model-factor, .model-factor:first-child { padding: 16px 0; }
-      .model-factor + .model-factor { border-left: 0; border-top: 1px solid var(--line); }
-      .model-factor + .model-factor::before { display: none; }
-      section { padding: 44px 0; }
-      h2 { font-size: 24px; margin-bottom: 20px; }
-      h2.title { font-size: 28px; margin-bottom: 22px; }
-      .grid3 { grid-template-columns: 1fr; gap: 10px; }
-      .card { padding: 16px; }
-      .top .links { display: none; }
-      footer { flex-direction: column; }
-    }
-  </style>
-  <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once unregister identify alias set_config reset opt_in_capturing opt_out_capturing has_opted_out_capturing get_distinct_id get_property".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init("phc_tXqHeZPMF6h8Ls2ETXPWwyt8392FjHPi3TkW8wiMrmcf", {api_host: "https://eu.i.posthog.com", persistence: "localStorage", person_profiles: "never"});
-  </script>
-</head>
-<body>
-<div class="wrap">
-  <header class="top">
-    <a class="brand" href="/"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#141414"/><g fill="none" stroke-width="7"><circle cx="32" cy="32" r="17" stroke="#5DCAA5" stroke-dasharray="48 59" transform="rotate(-90 32 32)"/><circle cx="32" cy="32" r="17" stroke="#E24B4A" stroke-dasharray="48 59" transform="rotate(90 32 32)"/></g></svg>Outdraft</a>
-    <div class="right">
-      <nav class="links"><a href="/en/how-to-use/windows/">${dict.navHowTo}</a><a href="/en/guides/">${dict.navGuides}</a><a href="#features">${dict.navFeatures}</a><a href="#start">${dict.navStart}</a><a href="#faq">${dict.navFaq}</a></nav>
-      <a class="community-top" href="${COMMUNITY_URL}" target="_blank" rel="noopener" aria-label="Discord" title="Discord">${COMMUNITY_SVG}</a>
-      <nav class="lang" role="group" aria-label="Language"><a href="/en/">EN</a><a href="/ru/">RU</a><a href="/uk/">UA</a></nav>
-    </div>
-  </header>
-
-  <div class="hero">
-    <div>
-      <span class="tag">${dict.tag}</span>
-      <h1>${dict.title}</h1>
-      <p class="lead">${dict.lead}</p>
-      <div class="cta">
-        <div class="downloads">
-          <a class="btn download-btn" data-platform="windows" href="${WINDOWS_DOWNLOAD}">${dict.downloadWindows}</a>
-          <a class="btn download-btn linux" data-platform="linux" href="${LINUX_DOWNLOAD}">${dict.downloadLinux}</a>
-        </div>
-        <a class="community-note" href="${COMMUNITY_URL}" target="_blank" rel="noopener">${dict.communityJoin}</a>
-      </div>
-    </div>
-    <div class="shot" aria-hidden="true">
-      <div class="hero-slides">
-        <img class="ov-img is-on" src="/media/hero-agent.png" alt="Outdraft Agent tips during a Dota 2 match" width="620" height="472" loading="eager">
-        <img class="ov-img" src="/media/hero-picks.png" alt="Outdraft hero suggestions during a Dota 2 draft" width="620" height="472" loading="lazy">
-        <img class="ov-img" src="/media/hero-build.png" alt="Outdraft item build for the match" width="620" height="472" loading="lazy">
-      </div>
-    </div>
-  </div>
-</div>
-
-<section id="demo"><div class="wrap">
-  <details style="padding:0;overflow:hidden"><summary style="padding:20px 22px;display:flex;align-items:center;gap:14px"><span style="display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#10221c;color:#5DCAA5;font-size:15px">▶</span><span><span style="display:block;color:#5DCAA5;font-size:12px;font-weight:800;letter-spacing:.08em">WATCH IN ACTION</span><span style="display:block;font-size:20px;margin-top:1px">See Outdraft in a real match</span></span></summary><div style="padding:0 22px 22px"><video class="demo" src="/media/demo.mp4?v=ca53b81a" poster="/media/demo.jpg?v=b0fd0783" controls playsinline preload="none"></video><div style="margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap"><p style="margin:0;color:#8b95a5">Every screen and the full walkthrough — on one page.</p><a href="/en/tour/" style="display:inline-flex;padding:9px 13px;border:1px solid #2c4a40;border-radius:8px;background:#10221c;color:#5DCAA5;font-weight:700;text-decoration:none">Explore the full tour →</a></div></div></details>
-</div></section>
-
-<section id="playable"><div class="wrap">
-  <h2 class="title">${dict.whyTitle}</h2>
-  <div class="grid3">
-    <div class="card"><h3>${dict.playableTitle}</h3><p>${dict.playableFirst}</p></div>
-    <div class="card"><h3>${dict.metaTitle}</h3><p>${dict.metaText}</p></div>
-    <div class="card"><h3>${dict.clearTitle}</h3><p>${dict.clearText}</p></div>
-  </div>
-</div></section>
-
-<section id="features"><div class="wrap">
-  <h2 class="title">${dict.featTitle}</h2>
-  <div class="feature-group">
-    <h3>${dict.draftTitle}</h3>
-    <div class="grid3">
-      <div class="card"><h4>${dict.d1t}</h4><p>${dict.d1}</p></div>
-      <div class="card"><h4>${dict.d2t}</h4><p>${dict.d2}</p></div>
-      <div class="card"><h4>${dict.d3t}</h4><p>${dict.d3}</p></div>
-      <div class="card"><h4>${dict.d4t}</h4><p>${dict.d4}</p></div>
-      <div class="card"><h4>${dict.d5t}</h4><p>${dict.d5}</p></div>
-      <div class="card"><h4>${dict.d6t}</h4><p>${dict.d6}</p></div>
-    </div>
-  </div>
-  <div class="feature-group">
-    <h3>${dict.agentTitle}</h3>
-    <p class="sub">${dict.agentLead}</p>
-    <div class="grid3">
-      <div class="card"><h4>${dict.k1t}</h4><p>${dict.k1}</p></div>
-      <div class="card"><h4>${dict.k2t}</h4><p>${dict.k2}</p></div>
-      <div class="card"><h4>${dict.k3t}</h4><p>${dict.k3}</p></div>
-      <div class="card"><h4>${dict.k4t}</h4><p>${dict.k4}</p></div>
-      <div class="card"><h4>${dict.k5t}</h4><p>${dict.k5}</p></div>
-      <div class="card"><h4>${dict.k6t}</h4><p>${dict.k6}</p></div>
-    </div>
-  </div>
-  <div class="feature-group">
-    <h3>${dict.gameTitle}</h3>
-    <div class="grid3">
-      <div class="card"><h4>${dict.g1t}</h4><p>${dict.g1}</p></div>
-      <div class="card"><h4>${dict.g2t}</h4><p>${dict.g2}</p></div>
-      <div class="card"><h4>${dict.g3t}</h4><p>${dict.g3}</p></div>
-    </div>
-  </div>
-</div></section>
-
-<section id="model"><div class="wrap">
-  <h2>${dict.modelTitle}</h2>
-  <p class="lead">${dict.modelLead}</p>
-  <div class="model-flow">
-    <div class="model-factor"><span>01</span><h3>${dict.m1t}</h3><p>${dict.m1}</p></div>
-    <div class="model-factor"><span>02</span><h3>${dict.m2t}</h3><p>${dict.m2}</p></div>
-    <div class="model-factor"><span>03</span><h3>${dict.m3t}</h3><p>${dict.m3}</p></div>
-  </div>
-  <div class="model-result"><span>=</span><p>${dict.modelResult}</p></div>
-</div></section>
-
-<section id="start"><div class="wrap">
-  <h2>${dict.startTitle}</h2>
-  <div class="grid3 steps">
-    <div class="card"><h3>${dict.s1t}</h3><p>${dict.s1}</p></div>
-    <div class="card"><h3>${dict.s2t}</h3><p>${dict.s2}</p></div>
-    <div class="card"><h3>${dict.s3t}</h3><p>${dict.s3}</p></div>
-  </div>
-  <p class="sub" style="margin-top:18px">${dict.howToMore} <a href="/en/how-to-use/windows/">Windows</a> · <a href="/en/how-to-use/linux/">Linux</a></p>
-</div></section>
-
-<section id="faq"><div class="wrap">
-  <h2>FAQ</h2>
-  <details open><summary>${dict.q1}</summary>
-    <p>${dict.a1}</p>
-    <div class="ss"><b>Windows protected your PC</b>Microsoft Defender SmartScreen prevented an unrecognized app from starting… <u>More info</u></div>
-  </details>
-  <details><summary>${dict.q2}</summary>
-    <p>${dict.a2}</p></details>
-  <details><summary>${dict.q3}</summary>
-    <p>${dict.a3}</p></details>
-  <details><summary>${dict.q5}</summary>
-    <p>${dict.a5}</p></details>
-</div></section>
-
-<section id="privacy"><div class="wrap">
-  <h2>${dict.privTitle}</h2>
-  <div class="card privacy"><ul>
-    <li>${dict.p1}</li>
-    <li>${dict.p2}</li>
-    <li>${dict.p3}</li>
-  </ul></div>
-</div></section>
-
-<div class="wrap">
-  <footer><span>${dict.foot}</span>
-    <nav class="links"><a href="${COMMUNITY_URL}" target="_blank" rel="noopener">Discord</a><a href="https://tally.so/r/D4lK4E">${dict.feedback}</a><a href="#privacy">${dict.privTitle}</a><a href="https://github.com/vshtykhnov/outdraft-releases/releases">${dict.releases}</a></nav>
-  </footer>
-</div>
-
-<script>
-  document.querySelectorAll('.download-btn').forEach(a => a.addEventListener("click", () => posthog.capture("download_clicked", { platform: a.dataset.platform })));
-  document.querySelector('#model')?.after(document.querySelector('#demo'));
-  (() => {
-    // Agent, then the draft, then the build: a new screen every few seconds; with motion turned down, no fade.
-    const slides = [...document.querySelectorAll('.hero-slides .ov-img')];
-    if (slides.length < 2) return;
-    let current = 0;
-    setInterval(() => {
-      slides[current].classList.remove('is-on');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('is-on');
-    }, 3500);
-  })();
-  
-  // Handle legacy ?lang= URLs - redirect to proper language path
-  (function() {
-    const params = new URLSearchParams(location.search);
-    const lang = params.get('lang');
-    if (lang && ['en', 'ru', 'uk'].includes(lang)) {
-      location.replace('/' + lang + '/');
-    }
-  })();
-</script>
-</body>
-</html>`;
+  return generateLanguagePage('en', { root: true });
 }
 
 function generateSitemap() {
