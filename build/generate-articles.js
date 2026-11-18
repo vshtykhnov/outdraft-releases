@@ -56,7 +56,9 @@ const UI = {
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const strip = s => String(s).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
-const url = (lang, slug) => `${DOMAIN}/${lang}/${slug ? slug + '/' : ''}`;
+// The English home page lives at "/" (/en/ points its canonical there), so link home to it directly.
+const url = (lang, slug) => (!slug && lang === 'en') ? `${DOMAIN}/` : `${DOMAIN}/${lang}/${slug ? slug + '/' : ''}`;
+const homeHref = (lang) => lang === 'en' ? '/' : `/${lang}/`;
 const words = s => strip(s).split(' ').filter(w => /[\p{L}\p{N}]/u.test(w)).length;
 
 const LOGO = '<svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#141414"/><g fill="none" stroke-width="7"><circle cx="32" cy="32" r="17" stroke="#5DCAA5" stroke-dasharray="48 59" transform="rotate(-90 32 32)"/><circle cx="32" cy="32" r="17" stroke="#E24B4A" stroke-dasharray="48 59" transform="rotate(90 32 32)"/></g></svg>';
@@ -204,9 +206,9 @@ function header(lang, slug, current) {
   const sw = LANGS.map(l => `<a href="/${l}/${slug ? slug + '/' : ''}" hreflang="${l}"${l === lang ? ' aria-current="page"' : ''}>${l === 'uk' ? 'UA' : l.toUpperCase()}</a>`).join('');
   return `<div class="wrap">
   <header class="top">
-    <a class="brand" href="/${lang}/">${LOGO}Outdraft</a>
+    <a class="brand" href="${homeHref(lang)}">${LOGO}Outdraft</a>
     <div class="right">
-      <nav class="links"><a href="/${lang}/how-to-use/windows/"${current === 'how-to' ? ' aria-current="page"' : ''}>${u.howTo}</a><a href="/${lang}/tour/"${current === 'tour' ? ' aria-current="page"' : ''}>${u.tour}</a><a href="/${lang}/guides/"${current === 'guides' ? ' aria-current="page"' : ''}>${u.guides}</a><a href="/${lang}/#features">${u.features}</a><a href="/${lang}/#faq">${u.faq}</a></nav>
+      <nav class="links"><a href="/${lang}/how-to-use/windows/"${current === 'how-to' ? ' aria-current="page"' : ''}>${u.howTo}</a><a href="/${lang}/tour/"${current === 'tour' ? ' aria-current="page"' : ''}>${u.tour}</a><a href="/${lang}/guides/"${current === 'guides' ? ' aria-current="page"' : ''}>${u.guides}</a><a href="${homeHref(lang)}#features">${u.features}</a><a href="${homeHref(lang)}#faq">${u.faq}</a></nav>
       <a class="community-top" href="${COMMUNITY_URL}" target="_blank" rel="noopener" aria-label="Discord" title="Discord">${COMMUNITY_SVG}</a>
       <nav class="lang" role="group" aria-label="Language">${sw}</nav>
     </div>
@@ -234,7 +236,7 @@ function cta(lang) {
   <div class="ctabox">
     <div class="row"><img src="/media/overlay.png" alt="Outdraft overlay" width="488" height="468">
       <div><h2>${u.ctaTitle}</h2><p>${u.ctaText}</p></div></div>
-    <div class="acts"><a class="btn download-btn" href="${DOWNLOAD}">${u.download}</a><a class="btn ghost" href="/${lang}/#start">${u.how}</a></div>
+    <div class="acts"><a class="btn download-btn" href="${DOWNLOAD}">${u.download}</a><a class="btn ghost" href="${homeHref(lang)}#start">${u.how}</a></div>
   </div>
 </div></section>`;
 }
@@ -270,7 +272,7 @@ function buildArticle(lang, id) {
 ${header(lang, id, 'article')}
 
 <div class="ahead"><div class="wrap">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/${lang}/">${u.home}</a><span>/</span><a href="/${lang}/guides/">${u.guides}</a><span>/</span>${a.crumb}</nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="${homeHref(lang)}">${u.home}</a><span>/</span><a href="/${lang}/guides/">${u.guides}</a><span>/</span>${a.crumb}</nav>
   <span class="tag">${a.tag}</span>
   <h1>${a.h1}</h1>
   <p class="lead">${a.lead}</p>
@@ -328,7 +330,7 @@ function buildGuides(lang) {
   return `${head(lang, { title: u.guidesMeta, description: u.guidesDesc, slug: 'guides', ogType: 'website', jsonld })}
 ${header(lang, 'guides', 'guides')}
 <div class="ahead"><div class="wrap">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/${lang}/">${u.home}</a><span>/</span>${u.guides}</nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="${homeHref(lang)}">${u.home}</a><span>/</span>${u.guides}</nav>
   <h1>${u.guidesTitle}</h1>
   <p class="lead">${u.guidesLead}</p>
 </div></div>
@@ -375,4 +377,4 @@ function main() {
 }
 if (require.main === module) main();
 
-module.exports = { DOMAIN, LANGS, UI, esc, strip, url, head, header, footer };
+module.exports = { DOMAIN, LANGS, UI, esc, strip, url, homeHref, head, header, footer };

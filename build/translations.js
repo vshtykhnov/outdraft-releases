@@ -8,6 +8,12 @@ const EN = {
   navFaq: "FAQ",
   tag: "Free beta · Windows & Linux",
   title: 'Win the draft <span class="r">before</span> the game <span class="d">starts</span>',
+  // The page's <h1>: what people search for. The headline below it stays as it was.
+  h1: "A Dota 2 draft helper overlay that updates after every pick",
+  heroAlt1: "Outdraft Agent tips during a Dota 2 match",
+  heroAlt2: "Outdraft hero suggestions during a Dota 2 draft",
+  heroAlt3: "Outdraft item build for the match",
+  heroAlt4: "Outdraft farm pace against the average during the match",
   lead: "Outdraft recalculates its recommendations after every pick, and its Agent tells you what to buy and when once the match starts.",
   downloadWindows: "⬇ Download for Windows",
   downloadLinux: "⬇ Download for Linux",
@@ -116,7 +122,13 @@ const RU = {
   navFaq: "Вопросы",
   tag: "Бесплатная бета · Windows и Linux",
   title: 'Драфт Dota 2 <span class="r">в реальном</span> <span class="d">времени</span>',
-  lead: "Лучшие пики, баны и шанс на победу — после каждого выбора. А в матче Агент подскажет, что покупать и когда.",
+  // The page's <h1>: what people search for. The headline below it stays as it was.
+  h1: "Оверлей-помощник для драфта Dota 2 прямо в игре",
+  heroAlt1: "Подсказки Агента Outdraft во время матча Dota 2",
+  heroAlt2: "Рекомендации героев Outdraft на драфте Dota 2",
+  heroAlt3: "Билд предметов Outdraft на матч",
+  heroAlt4: "Темп фарма в Outdraft в сравнении со средним по ходу матча",
+  lead: "Бесплатный оверлей поверх игры: лучшие пики, контрпики, баны и шанс на победу — после каждого выбора. А в матче Агент подскажет, что покупать и когда.",
   downloadWindows: "⬇ Скачать для Windows",
   downloadLinux: "⬇ Скачать для Linux",
   communityJoin: "Наш Discord",
@@ -224,7 +236,13 @@ const UK = {
   navFaq: "Питання",
   tag: "Безкоштовна бета · Windows і Linux",
   title: 'Виграй драфт <span class="r">до</span> початку <span class="d">гри</span>',
-  lead: "Outdraft перераховує рекомендації після кожного піку, а в матчі Агент підкаже, що купувати і коли.",
+  // The page's <h1>: what people search for. The headline below it stays as it was.
+  h1: "Помічник для драфту Dota 2 просто під час гри",
+  heroAlt1: "Підказки Агента Outdraft під час матчу Dota 2",
+  heroAlt2: "Рекомендації героїв Outdraft на драфті Dota 2",
+  heroAlt3: "Білд предметів Outdraft на матч",
+  heroAlt4: "Темп фарму в Outdraft порівняно із середнім під час матчу",
+  lead: "Безкоштовний оверлей поверх гри: Outdraft перераховує піки, контрпіки й шанс на перемогу після кожного вибору, а в матчі Агент підкаже, що купувати і коли.",
   downloadWindows: "⬇ Завантажити для Windows",
   downloadLinux: "⬇ Завантажити для Linux",
   communityJoin: "Наш Discord",
@@ -324,16 +342,16 @@ const UK = {
 
 const META = {
   en: {
-    title: "Outdraft — Dota 2 counter picks, draft and builds",
-    description: "Free Dota 2 helper: counter picks and win chance after every pick, then an Agent that tells you, by voice, what to buy and when. Windows and Linux.",
+    title: "Outdraft — free Dota 2 draft helper overlay",
+    description: "Free Dota 2 draft helper overlay: live picks, counters and win chance after every pick, plus in-game item and skill advice once the match starts.",
   },
   ru: {
-    title: "Outdraft — контрпики, драфт и билды в Dota 2",
-    description: "Бесплатный помощник для Dota 2: контрпики и шанс на победу после каждого пика, а в матче Агент голосом подскажет, что и когда покупать.",
+    title: "Outdraft — помощник для драфта и предметов в Dota 2",
+    description: "Бесплатный оверлей для Dota 2: помощник по драфту считает пики, контрпики и шанс после каждого выбора, а в матче подсказывает, что купить дальше.",
   },
   uk: {
-    title: "Outdraft — контрпіки, драфт і білди в Dota 2",
-    description: "Безкоштовний помічник для Dota 2: контрпіки й шанс на перемогу після кожного піку, а в матчі Агент голосом підкаже, що й коли купувати.",
+    title: "Outdraft — безкоштовний оверлей-помічник для драфту Dota 2",
+    description: "Безкоштовний оверлей для Dota 2: піки, контрпіки й шанс після кожного вибору, а в матчі підказки, що купити далі.",
   },
 };
 

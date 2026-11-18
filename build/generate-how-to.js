@@ -8,7 +8,7 @@
  */
 const fs = require('fs');
 const path = require('path');
-const { DOMAIN, LANGS, UI, esc, strip, url, head, header, footer } = require('./generate-articles');
+const { DOMAIN, LANGS, UI, esc, strip, url, homeHref, head, header, footer } = require('./generate-articles');
 const CONTENT = require('./how-to-content');
 
 const OSES = ['windows', 'linux'];
@@ -53,7 +53,7 @@ ${CSS}
 ${header(lang, slug, 'how-to')}
 
 <div class="ahead"><div class="wrap">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/${lang}/">${u.home}</a><span>/</span>${c.crumb}<span>/</span>${OS_NAMES[os]}</nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="${homeHref(lang)}">${u.home}</a><span>/</span>${c.crumb}<span>/</span>${OS_NAMES[os]}</nav>
   <span class="tag">${c.tag}</span>
   <h1>${esc(page.title)}</h1>
   <p class="lead">${page.lead}</p>
