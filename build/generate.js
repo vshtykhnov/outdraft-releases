@@ -25,6 +25,13 @@ const HOW_TO_PATHS = ['how-to-use/windows', 'how-to-use/linux'];
 const HOW_TO_LAST_MOD = '2026-10-31';
 
 const LANG_NAMES = { en: 'en', ru: 'ru', uk: 'uk' };
+// Hero slides in order: media/hero-<name>.png, with a .webp next to each.
+const HERO_SLIDES = ['agent', 'picks', 'build', 'live'];
+
+// English is served at "/"; /en/ is the same page, so it points its canonical and hreflang there.
+function homeUrl(lang) {
+  return lang === 'en' ? `${DOMAIN}/` : `${DOMAIN}/${lang}/`;
+}
 
 function getLastMod() {
   return new Date().toISOString().split('T')[0];
@@ -32,6 +39,8 @@ function getLastMod() {
 
 // FAQ order on the page, by translation key number.
 const FAQ_KEYS = [1, 2, 3, 5, 6, 4];
+// Questions left out of the FAQPage markup (they stay on the page): 2 is the one about bans.
+const FAQ_SCHEMA_SKIP = [2];
 
 function stripTags(str) {
   return str.replace(/<[^>]+>/g, '');
@@ -44,7 +53,7 @@ function escapeHtml(str) {
 function generateHreflangTags(currentLang) {
   let tags = '';
   for (const lang of LANGS) {
-    tags += `  <link rel="alternate" hreflang="${lang}" href="${DOMAIN}/${lang}/">\n`;
+    tags += `  <link rel="alternate" hreflang="${lang}" href="${homeUrl(lang)}">\n`;
   }
   tags += `  <link rel="alternate" hreflang="x-default" href="${DOMAIN}/">`;
   return tags;
@@ -120,7 +129,7 @@ function generateJsonLd(lang) {
   const faqPage = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": FAQ_KEYS.map(n => ({
+    "mainEntity": FAQ_KEYS.filter(n => !FAQ_SCHEMA_SKIP.includes(n)).map(n => ({
       "@type": "Question",
       "name": dict[`q${n}`],
       "acceptedAnswer": { "@type": "Answer", "text": stripTags(dict[`a${n}`]) }
@@ -142,9 +151,9 @@ function generateFaviconTags() {
 function generateLanguagePage(lang, { root = false } = {}) {
   const dict = DICTS[lang];
   const meta = META[lang];
-  const pageUrl = root ? `${DOMAIN}/` : `${DOMAIN}/${lang}/`;
-  const brandHref = root ? '/' : `/${lang}/`;
-  const current = (l) => (!root && lang === l ? ' aria-current="page"' : '');
+  const pageUrl = homeUrl(lang);
+  const brandHref = lang === 'en' ? '/' : `/${lang}/`;
+  const current = (l) => (lang === l ? ' aria-current="page"' : '');
 
   return `<!doctype html>
 <html lang="${lang}">
@@ -194,8 +203,9 @@ ${generateJsonLd(lang)}
     .tags { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 18px; }
     .tag { display: inline-block; font-size: 13px; color: var(--r); border: 1px solid #2c4a40;
            background: #10221c; padding: 4px 10px; border-radius: 999px; }
-    h1 { font-size: 52px; line-height: 1.05; margin: 0 0 18px; letter-spacing: -1.5px; font-weight: 800; }
-    h1 .r { color: var(--r); } h1 .d { color: var(--d); }
+    h1 { font-size: 15px; line-height: 1.4; margin: 0 0 10px; font-weight: 700; color: var(--muted); }
+    .headline { font-size: 52px; line-height: 1.05; margin: 0 0 18px; letter-spacing: -1.5px; font-weight: 800; }
+    .headline .r { color: var(--r); } .headline .d { color: var(--d); }
     .lead { color: var(--muted); font-size: 18px; margin: 0 0 28px; max-width: 30em; }
     .cta { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
     .downloads { display: flex; gap: 10px; }
@@ -224,6 +234,7 @@ ${generateJsonLd(lang)}
             radial-gradient(120% 90% at 100% 100%, #3a1a1a 0%, transparent 55%), var(--panel);
             border: 1px solid var(--line); }
     .hero-slides { display: grid; }
+    .hero-slides picture { display: contents; }
     .hero-slides .ov-img { grid-area: 1 / 1; opacity: 0; transition: opacity .7s ease; }
     .hero-slides .ov-img.is-on { opacity: 1; }
     @media (prefers-reduced-motion: reduce) { .hero-slides .ov-img { transition: none; } }
@@ -287,7 +298,7 @@ ${generateJsonLd(lang)}
     @media (max-width: 820px) {
       .wrap { padding: 0 16px; }
       .hero { grid-template-columns: 1fr; gap: 32px; padding: 16px 0 48px; }
-      h1 { font-size: 34px; letter-spacing: -1px; }
+      .headline { font-size: 34px; letter-spacing: -1px; }
       .lead { font-size: 16px; margin-bottom: 22px; }
       .cta { align-items: stretch; text-align: center; }
       .downloads { flex-direction: column; }
@@ -317,14 +328,15 @@ ${generateJsonLd(lang)}
     <div class="right">
       <nav class="links"><a href="/${lang}/how-to-use/windows/">${dict.navHowTo}</a><a href="/${lang}/tour/">${dict.navTour}</a><a href="/${lang}/guides/">${dict.navGuides}</a><a href="#features">${dict.navFeatures}</a><a href="#start">${dict.navStart}</a><a href="#faq">${dict.navFaq}</a></nav>
       <a class="community-top" href="${COMMUNITY_URL}" target="_blank" rel="noopener" aria-label="Discord" title="Discord">${COMMUNITY_SVG}</a>
-      <nav class="lang" role="group" aria-label="Language"><a href="/en/"${current('en')}>EN</a><a href="/ru/"${current('ru')}>RU</a><a href="/uk/"${current('uk')}>UA</a></nav>
+      <nav class="lang" role="group" aria-label="Language"><a href="/"${current('en')}>EN</a><a href="/ru/"${current('ru')}>RU</a><a href="/uk/"${current('uk')}>UA</a></nav>
     </div>
   </header>
 
   <div class="hero">
     <div>
       <div class="tags"><span class="tag">${dict.tag}</span><a class="community-note" href="${COMMUNITY_URL}" target="_blank" rel="noopener">${COMMUNITY_SVG}<span>${dict.communityJoin}</span></a></div>
-      <h1>${dict.title}</h1>
+      <h1>${dict.h1}</h1>
+      <p class="headline">${dict.title}</p>
       <p class="lead">${dict.lead}</p>
       <div class="cta">
         <div class="downloads">
@@ -335,10 +347,7 @@ ${generateJsonLd(lang)}
     </div>
     <div class="shot" aria-hidden="true">
       <div class="hero-slides">
-        <img class="ov-img is-on" src="/media/hero-agent.png?v=6" alt="Outdraft Agent tips during a Dota 2 match" width="380" height="350" loading="eager">
-        <img class="ov-img" src="/media/hero-picks.png?v=6" alt="Outdraft hero suggestions during a Dota 2 draft" width="380" height="350" loading="lazy">
-        <img class="ov-img" src="/media/hero-build.png?v=6" alt="Outdraft item build for the match" width="380" height="350" loading="lazy">
-        <img class="ov-img" src="/media/hero-live.png?v=6" alt="Outdraft farm pace against the average during the match" width="380" height="350" loading="lazy">
+${HERO_SLIDES.map((name, i) => `        <picture><source srcset="/media/hero-${name}.webp?v=6" type="image/webp"><img class="ov-img${i === 0 ? ' is-on' : ''}" src="/media/hero-${name}.png?v=6" alt="${escapeHtml(dict[`heroAlt${i + 1}`])}" width="380" height="350" loading="${i === 0 ? 'eager' : 'lazy'}"></picture>`).join('\n')}
       </div>
     </div>
   </div>
@@ -405,7 +414,7 @@ ${generateJsonLd(lang)}
 
 <section id="demo"><div class="wrap">
   <details class="demo-box"><summary><span class="demo-play">▶</span><span><span class="demo-kicker">${dict.demoKicker}</span><span class="demo-title">${dict.demoTitle}</span></span></summary>
-    <div class="demo-body"><video class="demo" src="/media/tour/${TOUR_VIDEOS[lang].file}?v=${TOUR_VIDEOS[lang].version}" poster="/media/tour/03-suggestions.png" controls playsinline preload="none"></video>
+    <div class="demo-body"><video class="demo" src="/media/tour/${TOUR_VIDEOS[lang].file}?v=${TOUR_VIDEOS[lang].version}" poster="/media/tour/03-suggestions.webp" controls playsinline preload="none"></video>
       <div class="demo-tour"><p>${dict.tourText}</p><a href="/${lang}/tour/">${dict.tourLink}</a></div></div></details>
 </div></section>
 
@@ -480,18 +489,18 @@ function generateSitemap() {
   <url>
     <loc>${DOMAIN}/</loc>
     <lastmod>${lastMod}</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="${DOMAIN}/en/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${DOMAIN}/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="${DOMAIN}/ru/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="${DOMAIN}/uk/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="${DOMAIN}/"/>
   </url>`;
   
-  for (const lang of LANGS) {
+  for (const lang of LANGS.filter(l => l !== 'en')) {
     sitemap += `
   <url>
     <loc>${DOMAIN}/${lang}/</loc>
     <lastmod>${lastMod}</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="${DOMAIN}/en/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${DOMAIN}/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="${DOMAIN}/ru/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="${DOMAIN}/uk/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="${DOMAIN}/"/>
