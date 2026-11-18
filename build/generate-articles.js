@@ -308,15 +308,20 @@ ${footer(lang)}`;
   return { html, wc };
 }
 
+// Patch pages (build/generate-patch.js) are listed first on the guides index.
+const PATCH = { slug: 'patch-7-42', content: { en: require('./patch/content-en'), ru: require('./patch/content-ru'), uk: require('./patch/content-uk') } };
+const GUIDES_MODIFIED = '2026-11-18';
+
 function buildGuides(lang) {
   const u = UI[lang];
-  const cards = ORDER.map((x, i) => {
+  const p = PATCH.content[lang];
+  const cards = [`<a class="card" href="/${lang}/${PATCH.slug}/"><span class="n">${p.tag}</span><h3>${p.h1}</h3><p>${p.card}</p></a>`, ...ORDER.map((x, i) => {
     const r = CONTENT[lang][x];
     return `<a class="card" href="/${lang}/${x}/"><span class="n">${String(i + 1).padStart(2, '0')} · ${r.tag}</span><h3>${r.h1}</h3><p>${r.card}</p></a>`;
-  }).join('\n    ');
+  })].join('\n    ');
   const jsonld = [
     { '@context': 'https://schema.org', '@type': 'CollectionPage', name: u.guidesTitle, description: u.guidesDesc, inLanguage: lang, url: url(lang, 'guides'),
-      hasPart: ORDER.map(x => ({ '@type': 'Article', headline: strip(CONTENT[lang][x].h1), url: url(lang, x) })) },
+      hasPart: [{ '@type': 'Article', headline: strip(PATCH.content[lang].h1), url: url(lang, PATCH.slug) }, ...ORDER.map(x => ({ '@type': 'Article', headline: strip(CONTENT[lang][x].h1), url: url(lang, x) }))] },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: u.home, item: url(lang) }, { '@type': 'ListItem', position: 2, name: u.guides, item: url(lang, 'guides') } ] },
   ];
@@ -342,7 +347,7 @@ function updateSitemap(outDir) {
   let xml = fs.readFileSync(p, 'utf8').replace(/\s*<!-- guides -->[\s\S]*<!-- \/guides -->/, '');
   let add = '\n  <!-- guides -->';
   for (const slug of ['guides', ...ORDER]) for (const lang of LANGS) {
-    add += `\n  <url>\n    <loc>${url(lang, slug)}</loc>\n    <lastmod>${PUBLISHED}</lastmod>\n` +
+    add += `\n  <url>\n    <loc>${url(lang, slug)}</loc>\n    <lastmod>${slug === 'guides' ? GUIDES_MODIFIED : PUBLISHED}</lastmod>\n` +
       LANGS.map(l => `    <xhtml:link rel="alternate" hreflang="${l}" href="${url(l, slug)}"/>\n`).join('') +
       `    <xhtml:link rel="alternate" hreflang="x-default" href="${url('en', slug)}"/>\n  </url>`;
   }
