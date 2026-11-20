@@ -8,7 +8,7 @@ module.exports = {
   description: 'Patch 7.42 is hundreds of changes. Here is only what matters for picks and builds: 6 new items, Khanda and Javelin gone, 4 neutral tiers, reworked heroes.',
   card: 'Six new items, removed Khanda and Javelin, four neutral tiers: only the 7.42 changes that touch picks and builds.',
   data: 'Source: official 7.42 patch notes, 18 Nov 2026',
-  lead: 'A patch like 7.42 arrives as hundreds of small edits to items, heroes, neutrals and the map. Reading them takes an evening, and the question that matters most, how they add up inside a draft, is not something the notes can answer. This page keeps only the changes that touch picks and item builds. What actually works will be decided by real matches: Outdraft builds its suggestions from match data, and the first 7.42 numbers will appear here in the next few days.',
+  lead: 'A patch like 7.42 arrives as hundreds of small edits to items, heroes, neutrals and the map. Reading them takes an evening, and the question that matters most, how they add up inside a draft, is not something the notes can answer. This page keeps only the changes that touch picks and item builds. What actually works is decided by real matches, and that is where Outdraft looks: it already works on 7.42, and its picks, counterpicks and item builds account for the new patch.',
   body: `
 <h2>Patch 7.42 at a glance</h2>
 <p>Valve released gameplay update 7.42 on 18 November 2026 [1]. It changes every one of the 127 heroes, rebuilds a good part of the shop and reshapes neutral items. For the draft and the item screen, these are the numbers to keep in mind:</p>
@@ -31,7 +31,7 @@ ${tbl(['Item', 'Recipe', 'Cost', 'What it brings'], [
   ['<b>Skypiercer</b>', 'Heaven’s Halberd, Sange, Talisman of Evasion, recipe 300', '6000', '+35 Strength, 25% evasion, 25% slow resistance. 3 s Disarm whose cooldown runs faster near enemy heroes'],
   ['<b>Starforge</b>', 'Meteor Hammer, Ultimate Orb, recipe 450', '6000', '+24 Strength, +24 Agility, +40 Intelligence. Stronger Meteor Hammer (+15% max health damage); enemies burn and slow after your disables end'],
 ], [2])}
-<p>Read on paper, Ristul’s Devotion and Caduceus are team items: one is an aura for a right-click lineup, the other turns the Phylactery path into something that also helps allies. Skypiercer and Sabatons are late, expensive answers for melee cores. Bloodslinger is a cheap early piece for Intelligence heroes and supports. Who should actually buy them, and when, is exactly what the first weeks of matches will show.</p>
+<p>Read on paper, Ristul’s Devotion and Caduceus are team items: one is an aura for a right-click lineup, the other turns the Phylactery path into something that also helps allies. Skypiercer and Sabatons are late, expensive answers for melee cores. Bloodslinger is a cheap early piece for Intelligence heroes and supports. Who should actually buy them, and when, is a question for real matches rather than for the patch notes.</p>
 
 <h2>Quarterstaff returns; Khanda, Javelin and Helm of the Overlord are gone</h2>
 <ul>
@@ -89,19 +89,18 @@ ${tbl(['Hero', 'Main change'], [
   <li><b>Objectives come earlier.</b> Tormentor at 15:00 with a mega creep wave and a Shard, plus a shrinking Roshan timer, favours lineups that can take objectives early.</li>
 </ul>
 
-<h2 class="soon">Outdraft stats for 7.42: coming soon</h2>
-${callout('od', 'In the next few days', `<p>Outdraft’s picks, counterpicks and item builds come from real match data, so after a patch the answer comes from fresh games rather than from reading notes. 7.42 matches are only starting to come in. As they accumulate, this page will get:</p>
-<ul><li>how the new items perform, and on which heroes;</li><li>which heroes rose and fell compared with 7.41;</li><li>counterpicks that changed with the patch.</li></ul>
-<p>The address stays the same, so it is worth saving.</p>`)}
+<h2>Outdraft on 7.42</h2>
+${callout('od', 'Already working', `<p>Outdraft already works on patch 7.42. Its picks, counterpicks and item builds account for the new patch and come from real match data, so you don’t have to work out on your own how hundreds of changes add up: the overlay shows it right in the draft and in the match.</p>
+<p><a href="https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.exe" class="download-btn">Download Outdraft for Windows</a>, it’s free.</p>`)}
 `,
   faq: [
     ['When was Dota 2 patch 7.42 released?', 'On 18 November 2026. The full notes are on the official Dota 2 site [1].'],
     ['Which items were removed in 7.42?', 'Khanda, Javelin and Helm of the Overlord are gone from the shop, and 13 neutral artifacts were cycled out. Quarterstaff returned.'],
     ['What are the new items in patch 7.42?', 'Bloodslinger (925), Ristul’s Devotion (3800), Caduceus (5400), Sabatons of Mordiggian (5950), Skypiercer (6000) and Starforge (6000). Tormentor also drops a new consumable, Greater Horn of Battle.'],
     ['How many neutral item tiers are there in 7.42?', 'Four, at 0:00, 15:00, 30:00 and 50:00. All artifact options for a game are fixed at the start and shown in the Neutrals tab of the shop.'],
-    ['Does Outdraft already have 7.42 statistics?', 'Not yet. Outdraft’s suggestions are built from real match data, and 7.42 matches are just starting to arrive. Numbers for the new patch will be added to this page in the coming days.'],
+    ['Does Outdraft work on patch 7.42?', 'Yes. Outdraft already works on 7.42: its picks, counterpicks and item builds account for the new patch and are built from real match data.'],
   ],
   ctaTitle: 'Let real matches read the patch',
-  ctaText: 'Outdraft is a free Dota 2 overlay. It recognizes the draft on your screen and suggests picks, counterpicks and item builds drawn from real match data, so after a big patch it leans on fresh games rather than guesswork.',
-  note: 'Every number on this page is taken from the official 7.42 patch notes. Statistics from real 7.42 matches will be added once there are enough games.',
+  ctaText: 'Outdraft is a free Dota 2 overlay. It recognizes the draft on your screen and suggests picks, counterpicks and item builds drawn from real match data, and it already works on patch 7.42.',
+  note: 'Every number on this page is taken from the official 7.42 patch notes.',
 };

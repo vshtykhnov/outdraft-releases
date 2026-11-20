@@ -16,7 +16,7 @@ const homeHref = A.homeHref || (lang => `/${lang}/`);
 
 const SLUG = 'patch-7-42';
 const PUBLISHED = '2026-11-18';
-const MODIFIED = '2026-11-18';
+const MODIFIED = '2026-11-20';
 const DOWNLOAD = 'https://github.com/vshtykhnov/outdraft-releases/releases/latest/download/Outdraft-windows-x86_64.exe';
 const GUIDES = ['why-i-keep-losing', 'can-you-win-in-draft', 'last-pick-counter-math', 'cant-kill-this-hero'];
 
@@ -84,7 +84,7 @@ ${header(lang, SLUG, 'article')}
   <span class="tag">${c.tag}</span>
   <h1>${c.h1}</h1>
   <p class="lead">${c.lead}</p>
-  <div class="meta"><span>${u.updated}: ${lang === 'en' ? '18 Nov 2026' : '18.11.2026'}</span><span>${mins} ${u.read}</span><span>${c.data}</span></div>
+  <div class="meta"><span>${u.updated}: ${lang === 'en' ? new Date(MODIFIED).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) : MODIFIED.split('-').reverse().join('.')}</span><span>${mins} ${u.read}</span><span>${c.data}</span></div>
 </div></div>
 
 <div class="wrap"><div class="layout">
