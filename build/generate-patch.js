@@ -10,7 +10,7 @@
 const fs = require('fs');
 const path = require('path');
 const A = require('./generate-articles');
-const { DOMAIN, LANGS, UI, strip, url, head, header, footer } = A;
+const { DOMAIN, LANGS, UI, strip, url, head, header, footer, breadcrumbList } = A;
 // After the landing SEO changes the English home lives at "/"; fall back to /<lang>/ until then.
 const homeHref = A.homeHref || (lang => `/${lang}/`);
 
@@ -69,10 +69,11 @@ function buildPage(lang) {
       author: { '@type': 'Organization', name: 'Outdraft', url: DOMAIN }, publisher: { '@type': 'Organization', name: 'Outdraft', logo: { '@type': 'ImageObject', url: `${DOMAIN}/apple-touch-icon.png` } },
       citation: SOURCES.map(s => s[1]) },
     { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: c.faq.map(([q, ans]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: strip(ans) } })) },
-    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-      { '@type': 'ListItem', position: 1, name: u.home, item: url(lang) },
-      { '@type': 'ListItem', position: 2, name: u.guides, item: url(lang, 'guides') },
-      { '@type': 'ListItem', position: 3, name: c.crumb, item: url(lang, SLUG) } ] },
+    breadcrumbList([
+      { name: u.home, item: url(lang) },
+      { name: u.guides, item: url(lang, 'guides') },
+      { name: c.crumb, item: url(lang, SLUG) },
+    ]),
   ];
 
   // Wide tables: let the article column shrink so they scroll inside .tbl instead of widening the page on phones.

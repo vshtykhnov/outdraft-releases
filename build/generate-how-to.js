@@ -8,7 +8,7 @@
  */
 const fs = require('fs');
 const path = require('path');
-const { DOMAIN, LANGS, UI, esc, strip, url, homeHref, head, header, footer } = require('./generate-articles');
+const { DOMAIN, LANGS, UI, esc, strip, url, homeHref, head, header, footer, breadcrumbList } = require('./generate-articles');
 const CONTENT = require('./how-to-content');
 
 const OSES = ['windows', 'linux'];
@@ -43,9 +43,10 @@ function buildPage(lang, os) {
     { '@context': 'https://schema.org', '@type': 'HowTo', name: page.title, description: page.description, inLanguage: lang,
       url: url(lang, slug), dateModified: UPDATED,
       step: steps.map(([h, html], i) => ({ '@type': 'HowToStep', position: i + 1, name: strip(h), text: strip(html) })) },
-    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-      { '@type': 'ListItem', position: 1, name: u.home, item: url(lang) },
-      { '@type': 'ListItem', position: 2, name: c.crumb, item: url(lang, slug) } ] },
+    breadcrumbList([
+      { name: u.home, item: url(lang) },
+      { name: c.crumb, item: url(lang, slug) },
+    ]),
   ];
 
   return `${head(lang, { title: page.metaTitle, description: page.description, slug, ogType: 'article', jsonld })}

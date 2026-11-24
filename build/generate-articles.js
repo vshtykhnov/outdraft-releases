@@ -56,6 +56,32 @@ const UI = {
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const strip = s => String(s).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+
+// A date-only value is an invalid uploadDate: Google requires ISO 8601 with a timezone.
+function uploadDate(date) {
+  if (typeof date === 'string' && /(?:Z|[+-]\d{2}:\d{2})$/.test(date) && date.includes('T')) return date;
+  if (typeof date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    throw new Error(`uploadDate must be YYYY-MM-DD, got ${JSON.stringify(date)}`);
+  }
+  return `${date}T12:00:00+01:00`;
+}
+
+// Search Console calls a BreadcrumbList with no name an "Unnamed item", and a ListItem
+// whose item is a bare URL an item with no name. Name the list, each ListItem, and the
+// item itself. The last crumb may omit its URL; Google then uses the page URL.
+function breadcrumbList(crumbs) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    name: crumbs.map(c => c.name).join(' / '),
+    itemListElement: crumbs.map((c, i) => {
+      const entry = { '@type': 'ListItem', position: i + 1, name: c.name };
+      if (c.item) entry.item = { '@id': c.item, name: c.name };
+      return entry;
+    }),
+  };
+}
+
 // The English home page lives at "/" (/en/ points its canonical there), so link home to it directly.
 const url = (lang, slug) => (!slug && lang === 'en') ? `${DOMAIN}/` : `${DOMAIN}/${lang}/${slug ? slug + '/' : ''}`;
 const homeHref = (lang) => lang === 'en' ? '/' : `/${lang}/`;
@@ -262,10 +288,11 @@ function buildArticle(lang, id) {
       author: { '@type': 'Organization', name: 'Outdraft', url: DOMAIN }, publisher: { '@type': 'Organization', name: 'Outdraft', logo: { '@type': 'ImageObject', url: `${DOMAIN}/apple-touch-icon.png` } },
       citation: srcs.map(s => s[1]) },
     { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: a.faq.map(([q, ans]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: strip(ans) } })) },
-    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-      { '@type': 'ListItem', position: 1, name: u.home, item: url(lang) },
-      { '@type': 'ListItem', position: 2, name: u.guides, item: url(lang, 'guides') },
-      { '@type': 'ListItem', position: 3, name: a.crumb, item: url(lang, id) } ] },
+    breadcrumbList([
+      { name: u.home, item: url(lang) },
+      { name: u.guides, item: url(lang, 'guides') },
+      { name: a.crumb, item: url(lang, id) },
+    ]),
   ];
 
   const html = `${head(lang, { title: a.metaTitle, description: a.description, slug: id, ogType: 'article', jsonld })}
@@ -324,8 +351,10 @@ function buildGuides(lang) {
   const jsonld = [
     { '@context': 'https://schema.org', '@type': 'CollectionPage', name: u.guidesTitle, description: u.guidesDesc, inLanguage: lang, url: url(lang, 'guides'),
       hasPart: [{ '@type': 'Article', headline: strip(PATCH.content[lang].h1), url: url(lang, PATCH.slug) }, ...ORDER.map(x => ({ '@type': 'Article', headline: strip(CONTENT[lang][x].h1), url: url(lang, x) }))] },
-    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-      { '@type': 'ListItem', position: 1, name: u.home, item: url(lang) }, { '@type': 'ListItem', position: 2, name: u.guides, item: url(lang, 'guides') } ] },
+    breadcrumbList([
+      { name: u.home, item: url(lang) },
+      { name: u.guides, item: url(lang, 'guides') },
+    ]),
   ];
   return `${head(lang, { title: u.guidesMeta, description: u.guidesDesc, slug: 'guides', ogType: 'website', jsonld })}
 ${header(lang, 'guides', 'guides')}
@@ -377,4 +406,4 @@ function main() {
 }
 if (require.main === module) main();
 
-module.exports = { DOMAIN, LANGS, UI, esc, strip, url, homeHref, head, header, footer };
+module.exports = { DOMAIN, LANGS, UI, esc, strip, url, homeHref, head, header, footer, uploadDate, breadcrumbList };

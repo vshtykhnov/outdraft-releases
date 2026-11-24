@@ -6,7 +6,7 @@
  */
 const fs = require('fs');
 const path = require('path');
-const { DOMAIN, LANGS, UI, esc, url, head, header, footer } = require('./generate-articles');
+const { DOMAIN, LANGS, UI, esc, url, head, header, footer, uploadDate, breadcrumbList } = require('./generate-articles');
 const { SCREENS, CONTENT } = require('./tour-content');
 
 const SLUG = 'tour';
@@ -61,11 +61,12 @@ function buildPage(lang) {
   const jsonld = [
     { '@context': 'https://schema.org', '@type': 'VideoObject', name: c.metaTitle, description: c.description,
       inLanguage: lang, thumbnailUrl: `${DOMAIN}/media/tour/${SCREENS[2]}.png`,
-      contentUrl: `${DOMAIN}/media/tour/${video.file}`, uploadDate: video.date,
+      contentUrl: `${DOMAIN}/media/tour/${video.file}`, uploadDate: uploadDate(video.date),
       duration: `PT${Math.floor(video.seconds / 60)}M${Math.round(video.seconds % 60)}S` },
-    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-      { '@type': 'ListItem', position: 1, name: u.home, item: url(lang) },
-      { '@type': 'ListItem', position: 2, name: u.tour, item: url(lang, SLUG) } ] },
+    breadcrumbList([
+      { name: u.home, item: url(lang) },
+      { name: u.tour, item: url(lang, SLUG) },
+    ]),
   ];
   const first = screens[0];
 
