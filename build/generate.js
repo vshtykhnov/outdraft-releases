@@ -10,6 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const { EN, RU, UK, META } = require('./translations');
 const { COMMUNITY_URL, COMMUNITY_SVG } = require('./community');
+const { uploadDate } = require('./generate-articles');
 // The narrated tour, also shown in the landing's "see it in a match" block (build/make-tour-video.py).
 const TOUR_VIDEOS = require('./tour-videos.json');
 
@@ -120,7 +121,7 @@ function generateJsonLd(lang) {
     "description": meta.description,
     "thumbnailUrl": `${DOMAIN}/media/tour/03-suggestions.png`,
     "contentUrl": `${DOMAIN}/media/tour/${video.file}`,
-    "uploadDate": video.date,
+    "uploadDate": uploadDate(video.date),
     "duration": `PT${Math.floor(video.seconds / 60)}M${Math.round(video.seconds % 60)}S`,
     "inLanguage": lang
   };
